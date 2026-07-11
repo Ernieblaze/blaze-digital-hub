@@ -33,6 +33,8 @@ export async function saveSettings(
     String(formData.get(name) ?? "").trim() || current[name];
 
   const next: SiteSettings = {
+    // Announcement may be cleared to hide the bar, so take it verbatim.
+    announcement: String(formData.get("announcement") ?? "").trim(),
     heroBadge: str("heroBadge"),
     heroHeadline: str("heroHeadline"),
     heroHighlight: str("heroHighlight"),

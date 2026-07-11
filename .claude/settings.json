@@ -55,7 +55,11 @@
       "PowerShell(npm run build 2>&1)",
       "PowerShell($sha=[System.Security.Cryptography.SHA256]::Create\\(\\); $token=\\([BitConverter]::ToString\\($sha.ComputeHash\\([Text.Encoding]::UTF8.GetBytes\\('blaze-admin-2026:blaze-admin-v1'\\)\\)\\) -replace '-',''\\).ToLower\\(\\); curl.exe -s -o \"$env:TEMP\\\\h2.html\" -w \"home:%{http_code} \" http://localhost:3000/; curl.exe -s -o \"$env:TEMP\\\\p2.html\" -w \"product:%{http_code} \" http://localhost:3000/products/crypto-starter-pack; curl.exe -s -X POST -d '{}' -o NUL -w \"webhook-unsigned:%{http_code} \" http://localhost:3000/api/paystack/webhook; curl.exe -s -H \"Cookie: blaze_admin_session=$token\" -o \"$env:TEMP\\\\a2.html\" -w \"admin:%{http_code}`n\" http://localhost:3000/admin; $a=Get-Content \"$env:TEMP\\\\a2.html\" -Raw; \"admin orders section: $\\($a -match 'Orders \\\\\\(recorded automatically\\\\\\)'\\)\"; \"admin catalog source: $\\($a -match 'from file'\\)\"; $h=Get-Content \"$env:TEMP\\\\h2.html\" -Raw; \"home shows products: $\\($h -match 'Crypto Starter Pack'\\)\")",
       "PowerShell(curl.exe -s -o \"$env:TEMP\\\\h3.html\" http://localhost:3000/; $c=Get-Content \"$env:TEMP\\\\h3.html\" -Raw; \"whatsapp 2348105640095: $\\($c -match 'wa.me/2348105640095'\\)\"; \"instagram ernieblazze: $\\($c -match 'instagram.com/ernieblazze'\\)\"; \"facebook honey.ernest: $\\($c -match 'facebook.com/honey.ernest.16'\\)\"; \"old X link gone: $\\(-not \\($c -match 'x.com/ernieblaze'\\)\\)\"; \"old YouTube gone: $\\(-not \\($c -match 'youtube.com/@ernieblaze'\\)\\)\")",
-      "PowerShell(git add src/lib/products-data.json)"
+      "PowerShell(git add src/lib/products-data.json)",
+      "Skill(dataviz)",
+      "Skill(dataviz:*)",
+      "PowerShell(node \"C:\\\\Users\\\\ERNIEB~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\bundled-skills\\\\2.1.206\\\\428ffdd1c2f9d0ff8855780106235453\\\\dataviz\\\\scripts\\\\validate_palette.js\" \"#ea580c\" --mode light)",
+      "PowerShell(node \"C:\\\\Users\\\\ERNIEB~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\bundled-skills\\\\2.1.206\\\\428ffdd1c2f9d0ff8855780106235453\\\\dataviz\\\\scripts\\\\validate_palette.js\" \"#ea580c\" --mode dark)"
     ]
   }
 }

@@ -24,6 +24,14 @@ export function SiteSettingsForm({ settings }: { settings: SiteSettings }) {
 
   return (
     <form action={action} className="space-y-4">
+      <Field label="Announcement bar (shown at the very top of the site — leave empty to hide)">
+        <input
+          name="announcement"
+          defaultValue={settings.announcement}
+          className={inputClass}
+          placeholder="🔥 JAMB Pack ₦5,000 this week only!"
+        />
+      </Field>
       <Field label="Hero badge (small pill above the headline)">
         <input name="heroBadge" defaultValue={settings.heroBadge} className={inputClass} />
       </Field>

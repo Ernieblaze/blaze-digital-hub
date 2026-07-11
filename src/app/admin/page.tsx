@@ -29,9 +29,11 @@ import { isDeliveryConfigured } from "@/lib/delivery";
 import { getPaystackStats, isPaystackConfigured } from "@/lib/paystack";
 import { isSupabaseConfigured, supabaseAdmin } from "@/lib/supabase";
 import { formatNaira } from "@/lib/products";
+import { siteSettings } from "@/lib/site-settings";
 import { logout } from "./actions";
 import { importCatalogToSupabase } from "./products/actions";
 import { DeleteProductButton } from "./products/delete-button";
+import { groupDailyRevenue, RevenueChart } from "./revenue-chart";
 
 export const metadata: Metadata = {
   title: "Owner Dashboard",
@@ -91,6 +93,20 @@ async function getOrders() {
   return { count: count ?? 0, recent: (data ?? []) as OrderRow[] };
 }
 
+async function getChartOrders() {
+  const supabase = supabaseAdmin();
+  if (!supabase) return [];
+  const since = new Date();
+  since.setDate(since.getDate() - 30);
+  const { data } = await supabase
+    .from("orders")
+    .select("amount_kobo, paid_at")
+    .eq("status", "success")
+    .gte("paid_at", since.toISOString())
+    .limit(2000);
+  return data ?? [];
+}
+
 async function getSubscribers() {
   const supabase = supabaseAdmin();
   if (!supabase) return null;
@@ -109,15 +125,46 @@ async function getSubscribers() {
 export default async function AdminDashboardPage() {
   if (!(await isAdmin())) redirect("/admin/login");
 
-  const [stats, subscribers, orders, catalog] = await Promise.all([
+  const [stats, subscribers, orders, catalog, chartOrders] = await Promise.all([
     getPaystackStats(),
     getSubscribers(),
     getOrders(),
     getCatalog(),
+    getChartOrders(),
   ]);
   const paystackReady = isPaystackConfigured();
   const supabaseReady = isSupabaseConfigured();
+  const deliveryReady = isDeliveryConfigured();
   const products = catalog.products;
+  const linksSet = products.filter((p) => !p.paystackUrl.includes("REPLACE")).length;
+  const downloadsSet = products.filter((p) => p.downloadUrl).length;
+
+  const checklist: { label: string; done: boolean; hint?: string }[] = [
+    { label: "Paystack connected", done: paystackReady },
+    { label: "Supabase connected", done: supabaseReady },
+    { label: "Catalog in Supabase (phone editing)", done: catalog.source === "supabase" },
+    { label: "First order recorded by webhook", done: (orders?.count ?? 0) > 0 },
+    {
+      label: `Checkout links set (${linksSet}/${products.length})`,
+      done: linksSet === products.length,
+      hint: "create Paystack payment pages, paste each link into its product",
+    },
+    {
+      label: "Delivery emails on (Resend)",
+      done: deliveryReady,
+      hint: "add RESEND_API_KEY on Vercel",
+    },
+    {
+      label: `Download links set (${downloadsSet}/${products.length})`,
+      done: downloadsSet === products.length,
+      hint: "add each product's file link in its edit form",
+    },
+    {
+      label: "Real WhatsApp number",
+      done: siteSettings.whatsappNumber !== "2340000000000",
+    },
+  ];
+  const remaining = checklist.filter((c) => !c.done).length;
   const productsWithLiveLink = products.filter((p) => !p.paystackUrl.includes("REPLACE"));
 
   return (
@@ -153,6 +200,37 @@ export default async function AdminDashboardPage() {
       </div>
 
       <Separator className="my-6" />
+
+      {/* Setup checklist — hidden once everything is done */}
+      {remaining > 0 && (
+        <Card className="mb-8 border-orange-500/30">
+          <CardHeader>
+            <CardTitle className="text-base">
+              Setup checklist — {checklist.length - remaining}/{checklist.length} done
+            </CardTitle>
+            <CardDescription>Finish these to fully automate the store.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {checklist.map((item) => (
+                <li key={item.label} className="flex items-start gap-2 text-sm">
+                  {item.done ? (
+                    <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-500" />
+                  ) : (
+                    <AlertTriangle className="mt-0.5 size-4 shrink-0 text-orange-500" />
+                  )}
+                  <span className={item.done ? "text-muted-foreground line-through" : ""}>
+                    {item.label}
+                    {!item.done && item.hint && (
+                      <span className="block text-xs text-muted-foreground">{item.hint}</span>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Sales stats */}
       <section>
@@ -271,9 +349,30 @@ export default async function AdminDashboardPage() {
 
       {/* Orders recorded by the Paystack webhook */}
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-          Orders (recorded automatically)
-        </h2>
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+            Orders (recorded automatically)
+          </h2>
+          {supabaseReady && (
+            <Button asChild size="sm" variant="outline">
+              <Link href="/admin/orders">All orders &amp; export</Link>
+            </Button>
+          )}
+        </div>
+        {supabaseReady && chartOrders.length > 0 && (
+          <Card className="mb-4">
+            <CardHeader>
+              <CardTitle className="text-base">Revenue — last 30 days</CardTitle>
+              <CardDescription>
+                {formatNaira(chartOrders.reduce((s, o) => s + o.amount_kobo, 0) / 100)} across{" "}
+                {chartOrders.length} order{chartOrders.length === 1 ? "" : "s"}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <RevenueChart data={groupDailyRevenue(chartOrders)} />
+            </CardContent>
+          </Card>
+        )}
         {!supabaseReady ? (
           <Card className="border-orange-500/40">
             <CardContent className="flex items-start gap-3 p-5">
@@ -355,9 +454,16 @@ export default async function AdminDashboardPage() {
 
       {/* Newsletter subscribers (Supabase) */}
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-          Newsletter (Supabase)
-        </h2>
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+            Newsletter (Supabase)
+          </h2>
+          {supabaseReady && (
+            <Button asChild size="sm" variant="outline">
+              <Link href="/admin/subscribers">All subscribers &amp; export</Link>
+            </Button>
+          )}
+        </div>
         {!supabaseReady ? (
           <Card className="border-orange-500/40">
             <CardContent className="flex items-start gap-3 p-5">

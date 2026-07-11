@@ -60,6 +60,17 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Blaze Digital Hub",
+              url: "https://blaze-digital-hub.vercel.app",
+            }),
+          }}
+        />
         {/* Dark by default for the premium feel; users can toggle from the navbar */}
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}

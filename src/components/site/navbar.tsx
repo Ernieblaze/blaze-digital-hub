@@ -13,6 +13,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { AnnouncementBar } from "@/components/site/announcement-bar";
 
 const links = [
   { href: "/", label: "Home" },
@@ -69,6 +70,7 @@ export function Navbar() {
           : "bg-transparent",
       )}
     >
+      <AnnouncementBar />
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-2" aria-label="Blaze Digital Hub — home">

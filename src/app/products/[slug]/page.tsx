@@ -47,8 +47,29 @@ export default async function ProductPage({ params }: PageProps) {
     .filter((p) => p.category === product.category && p.slug !== product.slug)
     .slice(0, 3);
 
+  // Structured data so Google can show price/availability in search results.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.tagline,
+    image: `https://blaze-digital-hub.vercel.app/products/${product.slug}/opengraph-image`,
+    brand: { "@type": "Brand", name: "Blaze Digital Hub" },
+    offers: {
+      "@type": "Offer",
+      price: product.price,
+      priceCurrency: "NGN",
+      availability: "https://schema.org/InStock",
+      url: `https://blaze-digital-hub.vercel.app/products/${product.slug}`,
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       <main className="flex-1 pt-24 pb-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -135,7 +156,16 @@ export default async function ProductPage({ params }: PageProps) {
                 <span className="inline-flex items-center gap-1.5">
                   <Download className="size-4 text-primary" /> Delivered to your email instantly
                 </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Check className="size-4 text-primary" /> Lifetime updates included
+                </span>
               </div>
+
+              <p className="mt-4 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-sm text-muted-foreground">
+                <strong className="text-foreground">Our promise:</strong> double-charged, not
+                delivered, or not as described? Tell us within 7 days and we make it right —
+                see the <Link href="/refund-policy" className="text-primary hover:underline">Refund Policy</Link>.
+              </p>
 
               <Separator className="my-8" />
 

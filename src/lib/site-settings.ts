@@ -6,6 +6,8 @@
 import settingsData from "./site-settings-data.json";
 
 export type SiteSettings = {
+  /** Top-of-site announcement strip. Empty string = hidden. */
+  announcement: string;
   heroBadge: string;
   heroHeadline: string;
   /** The orange-highlighted part of the headline. */

@@ -48,5 +48,14 @@ create table if not exists public.orders (
 );
 alter table public.orders enable row level security;
 
+-- ── Buyer portal login codes (passwordless email codes for /login) ─────────
+create table if not exists public.login_codes (
+  email text primary key,
+  code_hash text not null,
+  expires_at timestamptz not null,
+  created_at timestamptz not null default now()
+);
+alter table public.login_codes enable row level security;
+
 -- All tables are accessed only through the server-side service key, so RLS
 -- with no policies simply locks out the public/anon role entirely.

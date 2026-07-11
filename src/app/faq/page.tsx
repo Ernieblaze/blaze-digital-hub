@@ -5,7 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
+import { ProductCard } from "@/components/site/product-card";
+import { getProducts } from "@/lib/catalog";
 import { siteSettings, whatsappLink } from "@/lib/site-settings";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -48,7 +52,8 @@ const faqs = [
   },
 ];
 
-export default function FaqPage() {
+export default async function FaqPage() {
+  const featured = (await getProducts()).filter((p) => p.featured).slice(0, 3);
   return (
     <>
       <Navbar />
@@ -85,6 +90,17 @@ export default function FaqPage() {
               <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>.
             </p>
           </div>
+
+          {featured.length > 0 && (
+            <div className="mt-16">
+              <h2 className="mb-6 text-center text-xl font-bold">While you&apos;re here 🔥</h2>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {featured.map((p) => (
+                  <ProductCard key={p.slug} product={p} />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </main>
       <Footer />
