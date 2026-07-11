@@ -55,7 +55,7 @@ export function PortalForm() {
         name="email"
         required
         autoFocus
-        placeholder="Email you used at checkout"
+        placeholder="Your email address"
         className={inputClass}
       />
       {current?.error && <p className="text-sm text-red-500">{current.error}</p>}

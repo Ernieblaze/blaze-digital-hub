@@ -67,11 +67,13 @@ export default async function BuyerPortalPage() {
               <span className="mx-auto mb-2 flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-600">
                 <Flame className="size-6 text-white" />
               </span>
-              <CardTitle className="text-2xl">My Account</CardTitle>
+              <CardTitle className="text-2xl">
+                {email ? "My Account" : "Log in / Sign up"}
+              </CardTitle>
               <CardDescription>
                 {email
                   ? `Logged in as ${email}`
-                  : "Enter the email you used at checkout — we'll send you a login code. No password needed."}
+                  : "Enter your email and we'll send you a code — no password needed. New here? This creates your free account: re-download purchases and earn as an affiliate."}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -81,10 +83,11 @@ export default async function BuyerPortalPage() {
                 <div className="space-y-4">
                   {orders.length === 0 ? (
                     <div className="py-4 text-center text-sm text-muted-foreground">
-                      <p>No purchases found for this email yet.</p>
+                      <p>No purchases on this email yet.</p>
                       <p className="mt-1">
-                        Just bought something? Give it a minute and refresh. Wrong email?
-                        Log out below and use the one from your Paystack receipt.
+                        Bought with a different email? Log out and use the one from your
+                        Paystack receipt. Either way — your affiliate account below is active:
+                        share your links and start earning! 👇
                       </p>
                     </div>
                   ) : (
