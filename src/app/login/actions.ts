@@ -109,3 +109,49 @@ export async function buyerLogout() {
   cookieStore.delete(BUYER_COOKIE);
   revalidatePath("/login");
 }
+
+/* ── Affiliate withdrawals ──────────────────────────────────────────────── */
+
+export type WithdrawState = { ok?: boolean; error?: string } | null;
+
+export async function requestWithdrawal(
+  _prev: WithdrawState,
+  formData: FormData
+): Promise<WithdrawState> {
+  const { buyerEmail } = await import("@/lib/buyer-auth");
+  const { getAffiliateStats } = await import("@/lib/affiliate");
+  const { getConfigNumber } = await import("@/lib/app-config");
+
+  const email = await buyerEmail();
+  if (!email) return { error: "Log in first." };
+  if (!rateLimit(`withdraw:${email}`, 3)) return { error: "Too many requests — try later." };
+
+  const amount = Number(formData.get("amount"));
+  const stats = await getAffiliateStats(email);
+  const minWithdrawal = await getConfigNumber("min_withdrawal_naira");
+
+  if (!stats) return { error: "Affiliate account not available right now." };
+  if (!Number.isFinite(amount) || amount <= 0) return { error: "Enter a valid amount." };
+  if (amount < minWithdrawal) {
+    return { error: `Minimum withdrawal is ₦${minWithdrawal.toLocaleString("en-NG")}.` };
+  }
+  if (amount > stats.balance) {
+    return { error: `You can withdraw at most ₦${stats.balance.toLocaleString("en-NG")}.` };
+  }
+
+  const supabase = supabaseAdmin();
+  if (!supabase) return { error: "Not available right now — try again later." };
+
+  const { error } = await supabase.from("withdrawals").insert({
+    affiliate_email: email,
+    amount_kobo: Math.round(amount * 100),
+    status: "pending",
+  });
+  if (error) {
+    console.error("[withdrawal] insert failed:", error.message);
+    return { error: "Couldn't submit the request — try again." };
+  }
+
+  revalidatePath("/login");
+  return { ok: true };
+}

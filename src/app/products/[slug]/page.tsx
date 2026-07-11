@@ -131,11 +131,10 @@ export default async function ProductPage({ params }: PageProps) {
               {product.compareAtPrice ? <DealCountdown /> : null}
 
               {/*
-                ── PAYSTACK CHECKOUT ──────────────────────────────────────────
-                This button links to the product's Paystack Payment Page
-                (set in src/lib/products.ts). For an embedded experience later,
-                swap this for Paystack Inline (popup) using your public key:
-                https://paystack.com/docs/payments/accept-payments/#popup
+                ── CHECKOUT ───────────────────────────────────────────────────
+                Internal /checkout/[slug] collects the buyer's email, then
+                calls Paystack's initialize API with product + referral
+                metadata (exact attribution) and redirects to Paystack.
                 ───────────────────────────────────────────────────────────────
               */}
               <Button
@@ -143,10 +142,10 @@ export default async function ProductPage({ params }: PageProps) {
                 size="lg"
                 className="mt-7 h-13 w-full text-base font-semibold shadow-lg shadow-orange-500/25 sm:w-auto sm:px-10"
               >
-                <a href={product.paystackUrl} target="_blank" rel="noopener noreferrer">
+                <Link href={`/checkout/${product.slug}`}>
                   Buy Now — Instant Delivery
                   <ArrowUpRight className="size-4" />
-                </a>
+                </Link>
               </Button>
 
               <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">

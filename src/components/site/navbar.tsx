@@ -21,6 +21,7 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
+  { href: "/login", label: "Dashboard" },
 ];
 
 /** True after hydration — safe way to branch on client-only state like theme. */

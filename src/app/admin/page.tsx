@@ -208,6 +208,9 @@ export default async function AdminDashboardPage() {
           <Link href="/admin/subscribers">Subscribers</Link>
         </Button>
         <Button asChild size="sm" variant="secondary">
+          <Link href="/admin/affiliates">Affiliates</Link>
+        </Button>
+        <Button asChild size="sm" variant="secondary">
           <Link href="/admin/products/new">Add product</Link>
         </Button>
         <Button asChild size="sm" variant="secondary">

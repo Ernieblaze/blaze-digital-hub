@@ -57,5 +57,38 @@ create table if not exists public.login_codes (
 );
 alter table public.login_codes enable row level security;
 
+-- ── Affiliate program (Phase 1) ────────────────────────────────────────────
+create table if not exists public.affiliates (
+  email text primary key,
+  ref_code text not null unique,
+  created_at timestamptz not null default now()
+);
+alter table public.affiliates enable row level security;
+
+-- Referral attribution + commission live on the order itself.
+alter table public.orders add column if not exists ref_code text;
+alter table public.orders add column if not exists commission_kobo bigint not null default 0;
+
+create table if not exists public.withdrawals (
+  id uuid primary key default gen_random_uuid(),
+  affiliate_email text not null,
+  amount_kobo bigint not null,
+  status text not null default 'pending', -- pending | paid | rejected
+  note text,
+  requested_at timestamptz not null default now(),
+  paid_at timestamptz
+);
+alter table public.withdrawals enable row level security;
+
+-- Small key/value store for admin-editable settings that must work on the
+-- live site (the file system there is read-only): commission %, minimum
+-- withdrawal, etc.
+create table if not exists public.app_config (
+  key text primary key,
+  value text not null,
+  updated_at timestamptz not null default now()
+);
+alter table public.app_config enable row level security;
+
 -- All tables are accessed only through the server-side service key, so RLS
 -- with no policies simply locks out the public/anon role entirely.

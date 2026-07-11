@@ -5,17 +5,23 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
+import { getAffiliateStats } from "@/lib/affiliate";
+import { getConfigNumber } from "@/lib/app-config";
 import { buyerEmail } from "@/lib/buyer-auth";
 import { getProducts } from "@/lib/catalog";
 import { formatNaira } from "@/lib/products";
 import { supabaseAdmin } from "@/lib/supabase";
 import { buyerLogout } from "./actions";
+import { AffiliatePanel } from "./affiliate-panel";
 import { PortalForm } from "./portal-form";
 
 export const metadata: Metadata = {
-  title: "My Downloads",
-  description: "Log in with your purchase email to re-download your products.",
+  title: "My Account",
+  description:
+    "Re-download your products and earn commissions by sharing your referral links.",
 };
+
+const SITE = "https://blaze-digital-hub.vercel.app";
 
 type OrderRow = {
   product_slug: string | null;
@@ -41,9 +47,15 @@ async function ordersFor(email: string): Promise<OrderRow[]> {
 
 export default async function BuyerPortalPage() {
   const email = await buyerEmail();
-  const [orders, products] = email
-    ? await Promise.all([ordersFor(email), getProducts()])
-    : [[], []];
+  const [orders, products, stats, commissionPercent, minWithdrawal] = email
+    ? await Promise.all([
+        ordersFor(email),
+        getProducts(),
+        getAffiliateStats(email),
+        getConfigNumber("commission_percent"),
+        getConfigNumber("min_withdrawal_naira"),
+      ])
+    : [[], [], null, 50, 15000];
 
   return (
     <>
@@ -55,7 +67,7 @@ export default async function BuyerPortalPage() {
               <span className="mx-auto mb-2 flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-red-600">
                 <Flame className="size-6 text-white" />
               </span>
-              <CardTitle className="text-2xl">My Downloads</CardTitle>
+              <CardTitle className="text-2xl">My Account</CardTitle>
               <CardDescription>
                 {email
                   ? `Logged in as ${email}`
@@ -128,6 +140,35 @@ export default async function BuyerPortalPage() {
               )}
             </CardContent>
           </Card>
+
+          {/* Affiliate program — every logged-in user can earn */}
+          {email && stats && (
+            <Card className="mt-6">
+              <CardHeader>
+                <CardTitle className="text-xl">Earn with Blaze 💸</CardTitle>
+                <CardDescription>
+                  Share your links — when someone buys through them, you earn{" "}
+                  {commissionPercent}% of the sale. Paid to your bank account.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <AffiliatePanel
+                  refCode={stats.refCode}
+                  totalEarned={stats.totalEarned}
+                  balance={stats.balance}
+                  commissionPercent={commissionPercent}
+                  minWithdrawal={minWithdrawal}
+                  productLinks={products.map((p) => ({
+                    slug: p.slug,
+                    name: p.name,
+                    link: `${SITE}/r/${stats.refCode}?to=/products/${p.slug}`,
+                  }))}
+                  sales={stats.referredSales}
+                  withdrawals={stats.withdrawals}
+                />
+              </CardContent>
+            </Card>
+          )}
         </div>
       </main>
       <Footer />

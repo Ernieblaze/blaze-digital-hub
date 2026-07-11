@@ -51,15 +51,13 @@ export function ProductCard({ product }: { product: Product }) {
               </span>
             ) : null}
           </div>
-          {/*
-            PAYSTACK: this links straight to the product's Paystack Payment Page.
-            Swap `product.paystackUrl` in src/lib/products.ts with your real link.
-          */}
+          {/* Internal checkout: tracks the product + any referral code via
+              Paystack metadata, then redirects to Paystack's secure page. */}
           <Button asChild size="sm" className="font-semibold">
-            <a href={product.paystackUrl} target="_blank" rel="noopener noreferrer">
+            <Link href={`/checkout/${product.slug}`}>
               Buy Now
               <ArrowUpRight className="size-3.5" />
-            </a>
+            </Link>
           </Button>
         </CardFooter>
       </Card>

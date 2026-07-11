@@ -10,6 +10,8 @@
  */
 
 import { createHmac, timingSafeEqual } from "node:crypto";
+import { affiliateByCode } from "@/lib/affiliate";
+import { getConfigNumber } from "@/lib/app-config";
 import { getProducts } from "@/lib/catalog";
 import { sendDeliveryEmail, sendOrderConfirmationEmail } from "@/lib/delivery";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -22,7 +24,11 @@ type ChargeEvent = {
     status: string;
     paid_at?: string | null;
     customer?: { email?: string };
-    metadata?: { custom_fields?: { variable_name?: string; value?: string }[] } | null;
+    metadata?: {
+      product_slug?: string;
+      ref_code?: string;
+      custom_fields?: { variable_name?: string; value?: string }[];
+    } | null;
   };
 };
 
@@ -64,13 +70,27 @@ export async function POST(request: Request) {
 
   // Identify the product: explicit metadata first, else a unique price match.
   const products = await getProducts();
-  const metaSlug = metadata?.custom_fields?.find(
-    (f) => f.variable_name === "product_slug"
-  )?.value;
+  const metaSlug =
+    metadata?.product_slug ??
+    metadata?.custom_fields?.find((f) => f.variable_name === "product_slug")?.value;
   let product = metaSlug ? products.find((p) => p.slug === metaSlug) : undefined;
   if (!product) {
     const priceMatches = products.filter((p) => p.price === amount / 100);
     if (priceMatches.length === 1) product = priceMatches[0];
+  }
+
+  // AFFILIATE COMMISSION: the ref code arrived via server-set checkout
+  // metadata. Only credit it if it maps to a real affiliate who isn't the
+  // buyer themselves. Percentage is admin-editable (app_config).
+  let refCode: string | null = null;
+  let commissionKobo = 0;
+  if (metadata?.ref_code) {
+    const affiliate = await affiliateByCode(metadata.ref_code);
+    if (affiliate && affiliate.email !== email) {
+      const percent = Math.min(90, Math.max(0, await getConfigNumber("commission_percent")));
+      refCode = affiliate.ref_code;
+      commissionKobo = Math.round((amount * percent) / 100);
+    }
   }
 
   const supabase = supabaseAdmin();
@@ -83,6 +103,8 @@ export async function POST(request: Request) {
         amount_kobo: amount,
         status: "success",
         paid_at: paid_at ?? new Date().toISOString(),
+        ref_code: refCode,
+        commission_kobo: commissionKobo,
       },
       { onConflict: "paystack_reference", ignoreDuplicates: true }
     );

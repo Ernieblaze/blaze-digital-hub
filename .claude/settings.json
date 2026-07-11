@@ -59,7 +59,9 @@
       "Skill(dataviz)",
       "Skill(dataviz:*)",
       "PowerShell(node \"C:\\\\Users\\\\ERNIEB~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\bundled-skills\\\\2.1.206\\\\428ffdd1c2f9d0ff8855780106235453\\\\dataviz\\\\scripts\\\\validate_palette.js\" \"#ea580c\" --mode light)",
-      "PowerShell(node \"C:\\\\Users\\\\ERNIEB~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\bundled-skills\\\\2.1.206\\\\428ffdd1c2f9d0ff8855780106235453\\\\dataviz\\\\scripts\\\\validate_palette.js\" \"#ea580c\" --mode dark)"
+      "PowerShell(node \"C:\\\\Users\\\\ERNIEB~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\bundled-skills\\\\2.1.206\\\\428ffdd1c2f9d0ff8855780106235453\\\\dataviz\\\\scripts\\\\validate_palette.js\" \"#ea580c\" --mode dark)",
+      "PowerShell(curl.exe -s -o \"$env:TEMP\\\\lc.html\" -w \"live /contact: %{http_code}`n\" https://blaze-digital-hub.vercel.app/contact; $c=Get-Content \"$env:TEMP\\\\lc.html\" -Raw -ErrorAction SilentlyContinue; \"contact form live: $\\($c -match 'Send message'\\)\"; curl.exe -s -o \"$env:TEMP\\\\ll2.html\" -w \"live /login: %{http_code}`n\" https://blaze-digital-hub.vercel.app/login; $l=Get-Content \"$env:TEMP\\\\ll2.html\" -Raw; \"buyer portal live: $\\($l -match 'Email me a login code'\\)\")",
+      "PowerShell($deadline=\\(Get-Date\\).AddSeconds\\(40\\); $f=\"C:\\\\Users\\\\ERNIEB~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Ernie-Blaze-blaze-digital-hub\\\\08baeea7-64d9-4d2a-9886-9a639909314c\\\\tasks\\\\byfhtmco8.output\"; while\\(\\(Get-Date\\) -lt $deadline\\){ if\\(\\(Test-Path $f\\) -and \\(Select-String -Path $f -Pattern 'Ready' -Quiet\\)\\){ break }; Start-Sleep -Milliseconds 1500 }; Get-Content $f -Tail 4)"
     ]
   }
 }
