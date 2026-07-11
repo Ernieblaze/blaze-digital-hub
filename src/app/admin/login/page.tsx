@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Flame } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAdmin, isAdminConfigured } from "@/lib/admin-auth";
 import { LoginForm } from "./login-form";
@@ -27,7 +28,19 @@ export default async function AdminLoginPage() {
               : "Set ADMIN_PASSWORD in .env.local, restart the dev server, then log in here."}
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
+          {Boolean(process.env.GOOGLE_CLIENT_ID && process.env.ADMIN_EMAILS) && (
+            <>
+              <Button asChild variant="outline" className="w-full font-semibold">
+                <a href="/api/auth/google?next=/admin">Continue with Google (owner)</a>
+              </Button>
+              <div className="flex items-center gap-3">
+                <span className="h-px flex-1 bg-border" />
+                <span className="text-xs text-muted-foreground">or password</span>
+                <span className="h-px flex-1 bg-border" />
+              </div>
+            </>
+          )}
           <LoginForm />
         </CardContent>
       </Card>

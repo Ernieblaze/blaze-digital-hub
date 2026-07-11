@@ -69,6 +69,18 @@ alter table public.affiliates enable row level security;
 alter table public.orders add column if not exists ref_code text;
 alter table public.orders add column if not exists commission_kobo bigint not null default 0;
 
+-- Payout destination + click tracking (affiliate upgrade round 2)
+alter table public.affiliates add column if not exists bank_name text;
+alter table public.affiliates add column if not exists account_number text;
+alter table public.affiliates add column if not exists account_name text;
+
+create table if not exists public.ref_clicks (
+  id uuid primary key default gen_random_uuid(),
+  ref_code text not null,
+  created_at timestamptz not null default now()
+);
+alter table public.ref_clicks enable row level security;
+
 create table if not exists public.withdrawals (
   id uuid primary key default gen_random_uuid(),
   affiliate_email text not null,

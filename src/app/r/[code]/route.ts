@@ -8,6 +8,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { REF_COOKIE } from "@/lib/affiliate";
+import { supabaseAdmin } from "@/lib/supabase";
 
 export async function GET(
   request: Request,
@@ -21,6 +22,16 @@ export async function GET(
 
   const cookieStore = await cookies();
   if (/^[A-Z0-9]{4,16}$/i.test(code)) {
+    // Count the click (best-effort — never block the redirect).
+    const supabase = supabaseAdmin();
+    if (supabase) {
+      supabase
+        .from("ref_clicks")
+        .insert({ ref_code: code.toUpperCase() })
+        .then(({ error }) => {
+          if (error) console.error("[ref] click log failed:", error.message);
+        });
+    }
     cookieStore.set(REF_COOKIE, code.toUpperCase(), {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",

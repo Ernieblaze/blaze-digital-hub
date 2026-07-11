@@ -24,6 +24,15 @@ type WithdrawalRow = {
   requested_at: string;
 };
 
+type AffiliateRow = {
+  email: string;
+  ref_code: string;
+  bank_name: string | null;
+  account_number: string | null;
+  account_name: string | null;
+  created_at: string;
+};
+
 export default async function AdminAffiliatesPage() {
   if (!(await isAdmin())) redirect("/admin/login");
 
@@ -33,15 +42,24 @@ export default async function AdminAffiliatesPage() {
     getConfigNumber("min_withdrawal_naira"),
   ]);
 
-  let affiliateCount = 0;
   let totalCommissionKobo = 0;
+  let totalClicks = 0;
   let paidOutKobo = 0;
   let withdrawals: WithdrawalRow[] = [];
-  let topAffiliates: { ref_code: string; commission_kobo: number }[] = [];
+  let affiliates: AffiliateRow[] = [];
+  let overview: {
+    email: string;
+    ref_code: string;
+    clicks: number;
+    salesCount: number;
+    earnedKobo: number;
+    balanceKobo: number;
+    hasBank: boolean;
+  }[] = [];
 
   if (supabase) {
-    const [affiliatesRes, commissionsRes, withdrawalsRes] = await Promise.all([
-      supabase.from("affiliates").select("email", { count: "exact", head: true }),
+    const [affiliatesRes, commissionsRes, withdrawalsRes, clicksRes] = await Promise.all([
+      supabase.from("affiliates").select("*").order("created_at", { ascending: true }).limit(1000),
       supabase
         .from("orders")
         .select("ref_code, commission_kobo")
@@ -53,27 +71,65 @@ export default async function AdminAffiliatesPage() {
         .select("*")
         .order("requested_at", { ascending: false })
         .limit(100),
+      supabase.from("ref_clicks").select("ref_code").limit(20000),
     ]);
 
-    affiliateCount = affiliatesRes.count ?? 0;
+    affiliates = (affiliatesRes.data ?? []) as AffiliateRow[];
     withdrawals = (withdrawalsRes.data ?? []) as WithdrawalRow[];
     paidOutKobo = withdrawals
       .filter((w) => w.status === "paid")
       .reduce((sum, w) => sum + w.amount_kobo, 0);
 
-    const byCode = new Map<string, number>();
+    const earnedByCode = new Map<string, { total: number; count: number }>();
     for (const row of commissionsRes.data ?? []) {
       totalCommissionKobo += row.commission_kobo;
       if (row.ref_code) {
-        byCode.set(row.ref_code, (byCode.get(row.ref_code) ?? 0) + row.commission_kobo);
+        const entry = earnedByCode.get(row.ref_code) ?? { total: 0, count: 0 };
+        entry.total += row.commission_kobo;
+        entry.count += 1;
+        earnedByCode.set(row.ref_code, entry);
       }
     }
-    topAffiliates = [...byCode.entries()]
-      .map(([ref_code, commission_kobo]) => ({ ref_code, commission_kobo }))
-      .sort((a, b) => b.commission_kobo - a.commission_kobo)
-      .slice(0, 10);
+
+    const clicksByCode = new Map<string, number>();
+    for (const row of clicksRes.data ?? []) {
+      clicksByCode.set(row.ref_code, (clicksByCode.get(row.ref_code) ?? 0) + 1);
+      totalClicks += 1;
+    }
+
+    const withdrawnByEmail = new Map<string, number>();
+    for (const w of withdrawals) {
+      if (w.status !== "rejected") {
+        withdrawnByEmail.set(
+          w.affiliate_email,
+          (withdrawnByEmail.get(w.affiliate_email) ?? 0) + w.amount_kobo
+        );
+      }
+    }
+
+    overview = affiliates
+      .map((a) => {
+        const earned = earnedByCode.get(a.ref_code) ?? { total: 0, count: 0 };
+        return {
+          email: a.email,
+          ref_code: a.ref_code,
+          clicks: clicksByCode.get(a.ref_code) ?? 0,
+          salesCount: earned.count,
+          earnedKobo: earned.total,
+          balanceKobo: earned.total - (withdrawnByEmail.get(a.email) ?? 0),
+          hasBank: Boolean(a.bank_name && a.account_number),
+        };
+      })
+      .sort((a, b) => b.earnedKobo - a.earnedKobo);
   }
 
+  const affiliateCount = affiliates.length;
+  const bankByEmail = new Map(
+    affiliates.map((a) => [
+      a.email,
+      a.bank_name ? `${a.bank_name} · ${a.account_number} · ${a.account_name}` : null,
+    ])
+  );
   const pending = withdrawals.filter((w) => w.status === "pending");
 
   return (
@@ -86,7 +142,13 @@ export default async function AdminAffiliatesPage() {
       </Link>
 
       {/* Overview */}
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-4">
+        <Card>
+          <CardContent className="p-5">
+            <p className="text-sm text-muted-foreground">Link clicks</p>
+            <p className="mt-1 text-2xl font-bold">{totalClicks}</p>
+          </CardContent>
+        </Card>
         <Card>
           <CardContent className="p-5">
             <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
@@ -141,7 +203,12 @@ export default async function AdminAffiliatesPage() {
               <tbody>
                 {withdrawals.map((w) => (
                   <tr key={w.id} className="border-b last:border-0">
-                    <td className="py-2.5 pr-4">{w.affiliate_email}</td>
+                    <td className="py-2.5 pr-4">
+                      {w.affiliate_email}
+                      <span className="block text-xs text-muted-foreground">
+                        {bankByEmail.get(w.affiliate_email) ?? "⚠ no bank details yet"}
+                      </span>
+                    </td>
                     <td className="py-2.5 pr-4 font-semibold">{formatNaira(w.amount_kobo / 100)}</td>
                     <td className="py-2.5 pr-4 text-muted-foreground">
                       {new Date(w.requested_at).toLocaleString("en-NG", {
@@ -188,21 +255,54 @@ export default async function AdminAffiliatesPage() {
         </CardContent>
       </Card>
 
-      {/* Top affiliates */}
-      {topAffiliates.length > 0 && (
+      {/* All affiliates — full tracking */}
+      {overview.length > 0 && (
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle className="text-lg">Top affiliates</CardTitle>
+            <CardTitle className="text-lg">All affiliates ({affiliateCount})</CardTitle>
+            <CardDescription>
+              Clicks → sales → earnings per affiliate. Conversion tells you who actually sells.
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <ul className="space-y-1.5 text-sm">
-              {topAffiliates.map((a) => (
-                <li key={a.ref_code} className="flex items-center justify-between rounded-lg border px-3 py-2">
-                  <code className="font-semibold">{a.ref_code}</code>
-                  <span>{formatNaira(a.commission_kobo / 100)} earned</span>
-                </li>
-              ))}
-            </ul>
+          <CardContent className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b text-left text-muted-foreground">
+                  <th className="pb-2 pr-4 font-medium">Affiliate</th>
+                  <th className="pb-2 pr-4 font-medium">Code</th>
+                  <th className="pb-2 pr-4 font-medium">Clicks</th>
+                  <th className="pb-2 pr-4 font-medium">Sales</th>
+                  <th className="pb-2 pr-4 font-medium">Conv.</th>
+                  <th className="pb-2 pr-4 font-medium">Earned</th>
+                  <th className="pb-2 pr-4 font-medium">Balance</th>
+                  <th className="pb-2 font-medium">Bank</th>
+                </tr>
+              </thead>
+              <tbody>
+                {overview.map((a) => (
+                  <tr key={a.email} className="border-b last:border-0">
+                    <td className="py-2.5 pr-4">{a.email}</td>
+                    <td className="py-2.5 pr-4">
+                      <code className="rounded bg-muted px-1.5">{a.ref_code}</code>
+                    </td>
+                    <td className="py-2.5 pr-4">{a.clicks}</td>
+                    <td className="py-2.5 pr-4">{a.salesCount}</td>
+                    <td className="py-2.5 pr-4 text-muted-foreground">
+                      {a.clicks > 0 ? `${Math.round((a.salesCount / a.clicks) * 100)}%` : "—"}
+                    </td>
+                    <td className="py-2.5 pr-4 font-semibold">{formatNaira(a.earnedKobo / 100)}</td>
+                    <td className="py-2.5 pr-4 text-primary">{formatNaira(a.balanceKobo / 100)}</td>
+                    <td className="py-2.5">
+                      {a.hasBank ? (
+                        <CheckCircle2 className="size-4 text-emerald-500" />
+                      ) : (
+                        <span className="text-xs text-muted-foreground">not set</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </CardContent>
         </Card>
       )}

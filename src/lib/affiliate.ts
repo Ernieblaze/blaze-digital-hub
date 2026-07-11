@@ -30,7 +30,28 @@ function refCodeFor(email: string) {
     .toUpperCase();
 }
 
-export type Affiliate = { email: string; ref_code: string };
+export type Affiliate = {
+  email: string;
+  ref_code: string;
+  bank_name?: string | null;
+  account_number?: string | null;
+  account_name?: string | null;
+};
+
+export type BankDetails = {
+  bank_name: string;
+  account_number: string;
+  account_name: string;
+};
+
+export async function saveBankDetails(email: string, bank: BankDetails): Promise<boolean> {
+  const supabase = supabaseAdmin();
+  if (!supabase) return false;
+  await getOrCreateAffiliate(email);
+  const { error } = await supabase.from("affiliates").update(bank).eq("email", email);
+  if (error) console.error("[affiliate] bank save failed:", error.message);
+  return !error;
+}
 
 /** Activates the affiliate on first use; returns their record. */
 export async function getOrCreateAffiliate(email: string): Promise<Affiliate | null> {
@@ -39,7 +60,7 @@ export async function getOrCreateAffiliate(email: string): Promise<Affiliate | n
 
   const { data: existing } = await supabase
     .from("affiliates")
-    .select("email, ref_code")
+    .select("email, ref_code, bank_name, account_number, account_name")
     .eq("email", email)
     .single();
   if (existing) return existing as Affiliate;
@@ -66,6 +87,9 @@ export async function affiliateByCode(refCode: string): Promise<Affiliate | null
 
 export type AffiliateStats = {
   refCode: string;
+  /** Total clicks on the affiliate's links. */
+  clicks: number;
+  bank: BankDetails | null;
   /** Lifetime commission earned (₦). */
   totalEarned: number;
   /** Withdrawn or awaiting payout (₦). */
@@ -93,7 +117,7 @@ export async function getAffiliateStats(email: string): Promise<AffiliateStats |
   const affiliate = await getOrCreateAffiliate(email);
   if (!affiliate) return null;
 
-  const [{ data: sales }, { data: withdrawals }] = await Promise.all([
+  const [{ data: sales }, { data: withdrawals }, { count: clicks }] = await Promise.all([
     supabase
       .from("orders")
       .select("product_slug, amount_kobo, commission_kobo, paid_at")
@@ -108,6 +132,10 @@ export async function getAffiliateStats(email: string): Promise<AffiliateStats |
       .eq("affiliate_email", email)
       .order("requested_at", { ascending: false })
       .limit(50),
+    supabase
+      .from("ref_clicks")
+      .select("id", { count: "exact", head: true })
+      .eq("ref_code", affiliate.ref_code),
   ]);
 
   const totalEarnedKobo = (sales ?? []).reduce((sum, s) => sum + (s.commission_kobo ?? 0), 0);
@@ -117,6 +145,15 @@ export async function getAffiliateStats(email: string): Promise<AffiliateStats |
 
   return {
     refCode: affiliate.ref_code,
+    clicks: clicks ?? 0,
+    bank:
+      affiliate.bank_name && affiliate.account_number && affiliate.account_name
+        ? {
+            bank_name: affiliate.bank_name,
+            account_number: affiliate.account_number,
+            account_name: affiliate.account_name,
+          }
+        : null,
     totalEarned: totalEarnedKobo / 100,
     totalWithdrawn: totalWithdrawnKobo / 100,
     balance: (totalEarnedKobo - totalWithdrawnKobo) / 100,

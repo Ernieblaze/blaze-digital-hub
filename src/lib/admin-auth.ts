@@ -9,6 +9,7 @@
 
 import { createHash } from "node:crypto";
 import { cookies } from "next/headers";
+import { buyerEmail } from "@/lib/buyer-auth";
 
 export const ADMIN_COOKIE = "blaze_admin_session";
 
@@ -31,9 +32,26 @@ export function isAdminConfigured() {
   return Boolean(adminPassword());
 }
 
+/** Emails allowed to open /admin via Google sign-in (env ADMIN_EMAILS, comma-separated). */
+export function adminEmails(): string[] {
+  return (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+}
+
 export async function isAdmin(): Promise<boolean> {
+  // Door 1: the password session cookie.
   const token = adminSessionToken();
-  if (!token) return false;
-  const cookieStore = await cookies();
-  return cookieStore.get(ADMIN_COOKIE)?.value === token;
+  if (token) {
+    const cookieStore = await cookies();
+    if (cookieStore.get(ADMIN_COOKIE)?.value === token) return true;
+  }
+  // Door 2: a Google/buyer session whose email is on the ADMIN_EMAILS list.
+  const allowed = adminEmails();
+  if (allowed.length > 0) {
+    const email = await buyerEmail();
+    if (email && allowed.includes(email)) return true;
+  }
+  return false;
 }

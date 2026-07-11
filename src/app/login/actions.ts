@@ -131,6 +131,9 @@ export async function requestWithdrawal(
   const minWithdrawal = await getConfigNumber("min_withdrawal_naira");
 
   if (!stats) return { error: "Affiliate account not available right now." };
+  if (!stats.bank) {
+    return { error: "Add your bank details first, so we know where to send the money." };
+  }
   if (!Number.isFinite(amount) || amount <= 0) return { error: "Enter a valid amount." };
   if (amount < minWithdrawal) {
     return { error: `Minimum withdrawal is ₦${minWithdrawal.toLocaleString("en-NG")}.` };
@@ -151,6 +154,32 @@ export async function requestWithdrawal(
     console.error("[withdrawal] insert failed:", error.message);
     return { error: "Couldn't submit the request — try again." };
   }
+
+  revalidatePath("/login");
+  return { ok: true };
+}
+
+export type BankState = { ok?: boolean; error?: string } | null;
+
+export async function updateBankDetails(
+  _prev: BankState,
+  formData: FormData
+): Promise<BankState> {
+  const { buyerEmail } = await import("@/lib/buyer-auth");
+  const { saveBankDetails } = await import("@/lib/affiliate");
+
+  const email = await buyerEmail();
+  if (!email) return { error: "Log in first." };
+
+  const bank_name = String(formData.get("bank_name") ?? "").trim();
+  const account_number = String(formData.get("account_number") ?? "").trim();
+  const account_name = String(formData.get("account_name") ?? "").trim();
+
+  if (!bank_name || !account_name) return { error: "Fill in all three fields." };
+  if (!/^\d{10}$/.test(account_number)) return { error: "Account number must be 10 digits." };
+
+  const ok = await saveBankDetails(email, { bank_name, account_number, account_name });
+  if (!ok) return { error: "Couldn't save right now — try again." };
 
   revalidatePath("/login");
   return { ok: true };

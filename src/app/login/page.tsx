@@ -167,6 +167,8 @@ export default async function BuyerPortalPage({
               <CardContent>
                 <AffiliatePanel
                   refCode={stats.refCode}
+                  clicks={stats.clicks}
+                  bank={stats.bank}
                   totalEarned={stats.totalEarned}
                   balance={stats.balance}
                   commissionPercent={commissionPercent}

@@ -1,12 +1,28 @@
 "use client";
 
-import { useActionState, useState } from "react";
-import { Banknote, Check, Copy, Loader2, TrendingUp, Wallet } from "lucide-react";
+import { useActionState, useEffect, useState } from "react";
+import {
+  Banknote,
+  Check,
+  Copy,
+  Landmark,
+  Loader2,
+  MessageCircle,
+  MousePointerClick,
+  TrendingUp,
+  Wallet,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatNaira } from "@/lib/products";
-import { requestWithdrawal, type WithdrawState } from "./actions";
+import {
+  requestWithdrawal,
+  updateBankDetails,
+  type BankState,
+  type WithdrawState,
+} from "./actions";
 
 type ProductLink = { slug: string; name: string; link: string };
+type Bank = { bank_name: string; account_number: string; account_name: string } | null;
 type Sale = { product_slug: string | null; amount_kobo: number; commission_kobo: number; paid_at: string };
 type Withdrawal = { id: string; amount_kobo: number; status: string; requested_at: string };
 
@@ -32,6 +48,8 @@ function CopyButton({ text }: { text: string }) {
 
 export function AffiliatePanel({
   refCode,
+  clicks,
+  bank,
   totalEarned,
   balance,
   commissionPercent,
@@ -41,6 +59,8 @@ export function AffiliatePanel({
   withdrawals,
 }: {
   refCode: string;
+  clicks: number;
+  bank: Bank;
   totalEarned: number;
   balance: number;
   commissionPercent: number;
@@ -50,11 +70,27 @@ export function AffiliatePanel({
   withdrawals: Withdrawal[];
 }) {
   const [state, action, pending] = useActionState<WithdrawState, FormData>(requestWithdrawal, null);
+  const [bankState, bankAction, bankPending] = useActionState<BankState, FormData>(
+    updateBankDetails,
+    null
+  );
+  const [editingBank, setEditingBank] = useState(false);
+  useEffect(() => {
+    if (bankState?.ok) setEditingBank(false);
+  }, [bankState]);
+  const inputClass =
+    "w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
   return (
     <div className="space-y-5">
       {/* Stats */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-3 gap-3">
+        <div className="rounded-xl border p-4">
+          <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <MousePointerClick className="size-3.5" /> Link clicks
+          </p>
+          <p className="mt-1 text-xl font-bold">{clicks}</p>
+        </div>
         <div className="rounded-xl border p-4">
           <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <TrendingUp className="size-3.5" /> Total earned
@@ -63,7 +99,7 @@ export function AffiliatePanel({
         </div>
         <div className="rounded-xl border p-4">
           <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <Wallet className="size-3.5" /> Available balance
+            <Wallet className="size-3.5" /> Balance
           </p>
           <p className="mt-1 text-xl font-bold text-primary">{formatNaira(balance)}</p>
         </div>
@@ -84,7 +120,18 @@ export function AffiliatePanel({
                 <p className="truncate text-sm font-medium">{p.name}</p>
                 <p className="truncate text-xs text-muted-foreground">{p.link}</p>
               </div>
-              <CopyButton text={p.link} />
+              <div className="flex shrink-0 items-center gap-1.5">
+                <Button asChild size="sm" variant="outline" aria-label={`Share ${p.name} on WhatsApp`}>
+                  <a
+                    href={`https://wa.me/?text=${encodeURIComponent(`🔥 Check out ${p.name} on Blaze Digital Hub — instant delivery! ${p.link}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <MessageCircle className="size-3.5 text-[#25D366]" />
+                  </a>
+                </Button>
+                <CopyButton text={p.link} />
+              </div>
             </li>
           ))}
         </ul>
@@ -106,6 +153,39 @@ export function AffiliatePanel({
           </ul>
         </div>
       )}
+
+      {/* Bank details — required before withdrawals */}
+      <div className="rounded-xl border p-4">
+        <h3 className="mb-2 flex items-center gap-1.5 text-sm font-semibold">
+          <Landmark className="size-4 text-primary" /> Payout bank account
+        </h3>
+        {bank && !editingBank ? (
+          <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
+            <p className="text-muted-foreground">
+              {bank.bank_name} · {bank.account_number} ·{" "}
+              <span className="text-foreground">{bank.account_name}</span>
+            </p>
+            <Button size="sm" variant="outline" onClick={() => setEditingBank(true)}>
+              Edit
+            </Button>
+          </div>
+        ) : (
+          <form action={bankAction} className="space-y-2">
+            <div className="grid gap-2 sm:grid-cols-3">
+              <input name="bank_name" required placeholder="Bank (e.g. Opay, GTBank)" defaultValue={bank?.bank_name} className={inputClass} />
+              <input name="account_number" required inputMode="numeric" pattern="\d{10}" maxLength={10} placeholder="Account number" defaultValue={bank?.account_number} className={inputClass} />
+              <input name="account_name" required placeholder="Account name" defaultValue={bank?.account_name} className={inputClass} />
+            </div>
+            {bankState?.error && <p className="text-sm text-red-500">{bankState.error}</p>}
+            <Button type="submit" size="sm" disabled={bankPending} className="font-semibold">
+              {bankPending ? <Loader2 className="size-4 animate-spin" /> : null} Save bank details
+            </Button>
+          </form>
+        )}
+        {bankState?.ok && !editingBank && (
+          <p className="mt-2 text-sm text-emerald-500">Saved — withdrawals unlocked.</p>
+        )}
+      </div>
 
       {/* Withdrawal */}
       <div className="rounded-xl border p-4">
