@@ -144,11 +144,17 @@ export default async function AdminDashboardPage() {
     { label: "Supabase connected", done: supabaseReady },
     { label: "Catalog in Supabase (phone editing)", done: catalog.source === "supabase" },
     { label: "First order recorded by webhook", done: (orders?.count ?? 0) > 0 },
-    {
-      label: `Checkout links set (${linksSet}/${products.length})`,
-      done: linksSet === products.length,
-      hint: "create Paystack payment pages, paste each link into its product",
-    },
+    // With the internal /checkout flow, per-product payment pages are only a
+    // fallback for when the Paystack API key is missing.
+    ...(!paystackReady
+      ? [
+          {
+            label: `Fallback checkout links set (${linksSet}/${products.length})`,
+            done: linksSet === products.length,
+            hint: "or just add PAYSTACK_SECRET_KEY — the built-in checkout needs no payment pages",
+          },
+        ]
+      : []),
     {
       label: "Delivery emails on (Brevo)",
       done: deliveryReady,
