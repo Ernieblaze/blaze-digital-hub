@@ -3,34 +3,26 @@
  *
  * Sends the buyer their download link right after a successful payment
  * (triggered by the Paystack webhook). Requires:
- * - RESEND_API_KEY in env (free at resend.com — 100 emails/day, plenty to start)
+ * - BREVO_API_KEY in env (see src/lib/email.ts)
  * - the product's downloadUrl set in the admin product form
- *
- * Optional: RESEND_FROM to send from your own domain once verified in Resend,
- * e.g. "Blaze Digital Hub <hello@yourdomain.com>". Defaults to Resend's
- * shared onboarding sender so it works before any domain setup.
  */
 
-import { Resend } from "resend";
+import { sendEmail, isEmailConfigured } from "@/lib/email";
 import type { Product } from "@/lib/products";
 import { formatNaira } from "@/lib/products";
+import { whatsappLink } from "@/lib/site-settings";
 
 export function isDeliveryConfigured() {
-  return Boolean(process.env.RESEND_API_KEY);
+  return isEmailConfigured();
 }
 
 export async function sendDeliveryEmail(
   customerEmail: string,
   product: Product
 ): Promise<boolean> {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey || !product.downloadUrl) return false;
+  if (!isEmailConfigured() || !product.downloadUrl) return false;
 
-  const resend = new Resend(apiKey);
-  const from = process.env.RESEND_FROM || "Blaze Digital Hub <onboarding@resend.dev>";
-
-  const { error } = await resend.emails.send({
-    from,
+  return sendEmail({
     to: customerEmail,
     subject: `🔥 Your download: ${product.name}`,
     html: `
@@ -45,16 +37,14 @@ export async function sendDeliveryEmail(
         </p>
         <p style="font-size:13px;color:#666">
           Save this email — the link is yours for life, and you'll get free updates whenever
-          this product improves. Questions? Just reply to this email.
+          this product improves. You can also re-download anytime at
+          <a href="https://blaze-digital-hub.vercel.app/login" style="color:#ea580c">blaze-digital-hub.vercel.app/login</a>.
+        </p>
+        <p style="font-size:13px;color:#666">
+          Questions? <a href="${whatsappLink("Hi! I just bought " + product.name)}" style="color:#ea580c">Chat with us on WhatsApp</a>.
         </p>
         <p style="font-size:13px;color:#666">— Coach Ernest Favour (Ernie Blaze)</p>
       </div>
     `,
   });
-
-  if (error) {
-    console.error("[delivery] email failed:", error.message);
-    return false;
-  }
-  return true;
 }

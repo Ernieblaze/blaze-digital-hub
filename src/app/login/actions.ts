@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { Resend } from "resend";
+import { isEmailConfigured, sendEmail } from "@/lib/email";
 import {
   BUYER_COOKIE,
   buyerCookieValue,
@@ -24,8 +24,7 @@ export async function requestCode(_prev: PortalState, formData: FormData): Promi
   if (!EMAIL_RE.test(email)) return { step: "request", error: "Enter a valid email address." };
 
   const supabase = supabaseAdmin();
-  const resendKey = process.env.RESEND_API_KEY;
-  if (!supabase || !resendKey) {
+  if (!supabase || !isEmailConfigured()) {
     return {
       step: "request",
       error:
@@ -43,10 +42,7 @@ export async function requestCode(_prev: PortalState, formData: FormData): Promi
     return { step: "request", error: "Something went wrong — try again in a moment." };
   }
 
-  const resend = new Resend(resendKey);
-  const from = process.env.RESEND_FROM || "Blaze Digital Hub <onboarding@resend.dev>";
-  const { error: mailError } = await resend.emails.send({
-    from,
+  const sent = await sendEmail({
     to: email,
     subject: `${code} is your Blaze Digital Hub login code`,
     html: `
@@ -57,8 +53,7 @@ export async function requestCode(_prev: PortalState, formData: FormData): Promi
       </div>
     `,
   });
-  if (mailError) {
-    console.error("[portal] code email failed:", mailError.message);
+  if (!sent) {
     return { step: "request", error: "Couldn't send the email — try again in a moment." };
   }
 

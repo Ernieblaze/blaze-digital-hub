@@ -150,9 +150,9 @@ export default async function AdminDashboardPage() {
       hint: "create Paystack payment pages, paste each link into its product",
     },
     {
-      label: "Delivery emails on (Resend)",
+      label: "Delivery emails on (Brevo)",
       done: deliveryReady,
-      hint: "add RESEND_API_KEY on Vercel",
+      hint: "add BREVO_API_KEY on Vercel",
     },
     {
       label: `Download links set (${downloadsSet}/${products.length})`,
@@ -395,7 +395,7 @@ export default async function AdminDashboardPage() {
                   . From then on every successful payment lands here automatically
                   {isDeliveryConfigured()
                     ? " and the buyer gets their download email instantly."
-                    : ". Add RESEND_API_KEY to also send automatic delivery emails."}
+                    : ". Add BREVO_API_KEY to also send automatic delivery emails."}
                 </CardContent>
               </Card>
             )}

@@ -91,9 +91,12 @@ Subscriber count + latest signups appear in the owner dashboard. Phase 2 will ad
 - **Orders** — set the Paystack webhook URL to `/api/paystack/webhook` (Paystack
   Dashboard → Settings → API Keys & Webhooks). Every successful charge is recorded in
   the `orders` table and shown in /admin.
-- **Automatic delivery** — set `RESEND_API_KEY` (free at resend.com) and give each
-  product a Download link in the admin form. Buyers get their file by email seconds
-  after paying. `RESEND_FROM` optional once you verify a domain in Resend.
+- **Automatic delivery + buyer portal emails** — set `BREVO_API_KEY` (Brevo → SMTP &
+  API → API Keys; free tier is 300 emails/day) and give each product a Download link
+  in the admin form. Buyers get their file by email seconds after paying, and can
+  re-download anytime at `/login` via an emailed code. The sender defaults to the
+  site contact email — make sure it's a verified sender in Brevo, or set
+  `BREVO_FROM_EMAIL` / `BREVO_FROM_NAME`.
 
 ## Future: buyer dashboard
 
