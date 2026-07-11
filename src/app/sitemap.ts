@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { products } from "@/lib/products";
 
 // Keep in sync with metadataBase in layout.tsx — swap for your custom domain later.
-const BASE = "https://blazedigitalhub.vercel.app";
+const BASE = "https://blaze-digital-hub.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

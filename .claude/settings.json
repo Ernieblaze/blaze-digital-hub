@@ -38,7 +38,9 @@
       "PowerShell(git push -u origin master)",
       "PowerShell(git ls-remote origin)",
       "PowerShell(npm install @supabase/supabase-js)",
-      "PowerShell(git push)"
+      "PowerShell(git push)",
+      "PowerShell(foreach\\($u in 'https://blaze-digital-hub.vercel.app','https://blaze-digital-hub-ernieblaze.vercel.app'\\){ $code = curl.exe -s -o \"$env:TEMP\\\\live.html\" -w \"%{http_code}\" $u; \"$u -> $code\" }; $c=Get-Content \"$env:TEMP\\\\live.html\" -Raw -ErrorAction SilentlyContinue; \"is our site: $\\($c -match 'Blaze Digital Hub'\\)\")",
+      "PowerShell(curl.exe -s -o \"$env:TEMP\\\\live.html\" https://blaze-digital-hub.vercel.app; $c=Get-Content \"$env:TEMP\\\\live.html\" -Raw; \"is our site: $\\($c -match 'hustle into income'\\)\"; $admin = curl.exe -s -o \"$env:TEMP\\\\la.html\" -w \"%{http_code}\" https://blaze-digital-hub.vercel.app/admin/login; \"admin login page: $admin\"; $a=Get-Content \"$env:TEMP\\\\la.html\" -Raw; \"password configured on Vercel: $\\(-not \\($a -match 'ADMIN_PASSWORD'\\)\\)\")"
     ]
   }
 }

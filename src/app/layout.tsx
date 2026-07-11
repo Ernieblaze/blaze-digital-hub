@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://blazedigitalhub.vercel.app"), // TODO: swap for your custom domain
+  metadataBase: new URL("https://blaze-digital-hub.vercel.app"), // TODO: swap for your custom domain
   title: {
     default: "Blaze Digital Hub — Premium Digital Products by Ernie Blaze",
     template: "%s | Blaze Digital Hub",

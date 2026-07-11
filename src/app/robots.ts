@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 // Keep in sync with metadataBase in layout.tsx.
-const BASE = "https://blazedigitalhub.vercel.app";
+const BASE = "https://blaze-digital-hub.vercel.app";
 
 export default function robots(): MetadataRoute.Robots {
   return {
