@@ -33,8 +33,9 @@ export async function saveSettings(
     String(formData.get(name) ?? "").trim() || current[name];
 
   const next: SiteSettings = {
-    // Announcement may be cleared to hide the bar, so take it verbatim.
-    announcement: String(formData.get("announcement") ?? "").trim(),
+    // Hero/announcement moved to the DB-backed Homepage content form; the
+    // file keeps serving as their default/fallback.
+    announcement: str("announcement"),
     heroBadge: str("heroBadge"),
     heroHeadline: str("heroHeadline"),
     heroHighlight: str("heroHighlight"),
@@ -54,6 +55,37 @@ export async function saveSettings(
   }
 
   revalidateSite();
+  return { saved: true };
+}
+
+/** Saves the DB-backed homepage content — works on the live site. */
+export async function saveHomeContent(
+  _prev: SettingsFormState,
+  formData: FormData
+): Promise<SettingsFormState> {
+  if (!(await isAdmin())) redirect("/admin/login");
+
+  const { setConfig } = await import("@/lib/app-config");
+  const fields = [
+    "hero_badge",
+    "hero_headline",
+    "hero_highlight",
+    "hero_subline",
+    "announcement",
+  ] as const;
+
+  for (const key of fields) {
+    // Announcement may be cleared (hides the bar); other fields keep their
+    // previous value when submitted empty.
+    const raw = String(formData.get(key) ?? "").trim();
+    if (key === "announcement" || raw) {
+      const ok = await setConfig(key, raw);
+      if (!ok) return { error: "Couldn't save — is Supabase connected?" };
+    }
+  }
+
+  revalidatePath("/");
+  revalidatePath("/admin/settings");
   return { saved: true };
 }
 

@@ -159,6 +159,46 @@ export async function requestWithdrawal(
   return { ok: true };
 }
 
+export type ReviewFormState = { ok?: boolean; error?: string } | null;
+
+export async function submitReview(
+  _prev: ReviewFormState,
+  formData: FormData
+): Promise<ReviewFormState> {
+  const { buyerEmail } = await import("@/lib/buyer-auth");
+  const { hasPurchased } = await import("@/lib/reviews");
+
+  const email = await buyerEmail();
+  if (!email) return { error: "Log in first." };
+
+  const slug = String(formData.get("slug") ?? "");
+  const rating = Number(formData.get("rating"));
+  const comment = String(formData.get("comment") ?? "").trim().slice(0, 1000);
+
+  if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+    return { error: "Pick a star rating." };
+  }
+  // Only verified buyers — this is what makes the reviews trustworthy.
+  if (!(await hasPurchased(email, slug))) {
+    return { error: "Reviews are for verified buyers of this product." };
+  }
+
+  const supabase = supabaseAdmin();
+  if (!supabase) return { error: "Not available right now." };
+
+  const { error } = await supabase
+    .from("reviews")
+    .upsert({ product_slug: slug, email, rating, comment }, { onConflict: "product_slug,email" });
+  if (error) {
+    console.error("[review] save failed:", error.message);
+    return { error: "Couldn't save your review — try again." };
+  }
+
+  revalidatePath(`/products/${slug}`);
+  revalidatePath("/login");
+  return { ok: true };
+}
+
 export type BankState = { ok?: boolean; error?: string } | null;
 
 export async function updateBankDetails(

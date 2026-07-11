@@ -14,6 +14,9 @@ import { affiliateByCode } from "@/lib/affiliate";
 import { getConfigNumber } from "@/lib/app-config";
 import { getProducts } from "@/lib/catalog";
 import { sendDeliveryEmail, sendOrderConfirmationEmail } from "@/lib/delivery";
+import { sendEmail } from "@/lib/email";
+import { formatNaira } from "@/lib/products";
+import { siteSettings } from "@/lib/site-settings";
 import { supabaseAdmin } from "@/lib/supabase";
 
 type ChargeEvent = {
@@ -27,6 +30,7 @@ type ChargeEvent = {
     metadata?: {
       product_slug?: string;
       ref_code?: string;
+      coupon_code?: string;
       custom_fields?: { variable_name?: string; value?: string }[];
     } | null;
   };
@@ -110,6 +114,36 @@ export async function POST(request: Request) {
     );
     if (error) console.error("[webhook] order insert failed:", error.message);
   }
+
+  // Housekeeping (all best-effort): mark the checkout lead converted,
+  // count the coupon use, and alert the owner about the sale.
+  if (supabase) {
+    if (product && email) {
+      await supabase
+        .from("checkout_leads")
+        .update({ converted: true })
+        .eq("email", email)
+        .eq("product_slug", product.slug);
+    }
+    if (metadata?.coupon_code) {
+      const { data: coupon } = await supabase
+        .from("coupons")
+        .select("uses")
+        .eq("code", metadata.coupon_code)
+        .single();
+      if (coupon) {
+        await supabase
+          .from("coupons")
+          .update({ uses: coupon.uses + 1 })
+          .eq("code", metadata.coupon_code);
+      }
+    }
+  }
+  sendEmail({
+    to: siteSettings.contactEmail,
+    subject: `💰 Sale: ${product?.name ?? "a product"} — ${formatNaira(amount / 100)}`,
+    html: `<p><strong>${email}</strong> just paid <strong>${formatNaira(amount / 100)}</strong> for <strong>${product?.name ?? "unknown product"}</strong> (ref ${reference}).${metadata?.ref_code ? ` Referred by code ${metadata.ref_code}.` : ""}</p>`,
+  }).catch(() => {});
 
   // Fire the delivery email (best-effort — the order record above is the
   // source of truth either way). If the product has no download link yet,

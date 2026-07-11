@@ -5,7 +5,13 @@ import { Loader2, Plus, Save, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { SiteSettings } from "@/lib/site-settings";
-import { addCategory, deleteCategory, saveSettings, type SettingsFormState } from "./actions";
+import {
+  addCategory,
+  deleteCategory,
+  saveHomeContent,
+  saveSettings,
+  type SettingsFormState,
+} from "./actions";
 
 const inputClass =
   "w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring";
@@ -19,33 +25,52 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-export function SiteSettingsForm({ settings }: { settings: SiteSettings }) {
-  const [state, action, pending] = useActionState<SettingsFormState, FormData>(saveSettings, null);
+/** Homepage content — stored in the database, so edits work on the LIVE site. */
+export function HomeContentForm({ content }: { content: Record<string, string> }) {
+  const [state, action, pending] = useActionState<SettingsFormState, FormData>(
+    saveHomeContent,
+    null
+  );
 
   return (
     <form action={action} className="space-y-4">
-      <Field label="Announcement bar (shown at the very top of the site — leave empty to hide)">
+      <Field label="Announcement bar (top of the homepage — leave empty to hide)">
         <input
           name="announcement"
-          defaultValue={settings.announcement}
+          defaultValue={content.announcement}
           className={inputClass}
           placeholder="🔥 JAMB Pack ₦5,000 this week only!"
         />
       </Field>
       <Field label="Hero badge (small pill above the headline)">
-        <input name="heroBadge" defaultValue={settings.heroBadge} className={inputClass} />
+        <input name="hero_badge" defaultValue={content.hero_badge} className={inputClass} />
       </Field>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Headline — plain part">
-          <input name="heroHeadline" defaultValue={settings.heroHeadline} className={inputClass} />
+          <input name="hero_headline" defaultValue={content.hero_headline} className={inputClass} />
         </Field>
         <Field label="Headline — orange highlighted part">
-          <input name="heroHighlight" defaultValue={settings.heroHighlight} className={inputClass} />
+          <input name="hero_highlight" defaultValue={content.hero_highlight} className={inputClass} />
         </Field>
       </div>
       <Field label="Hero subline">
-        <textarea name="heroSubline" rows={2} defaultValue={settings.heroSubline} className={inputClass} />
+        <textarea name="hero_subline" rows={2} defaultValue={content.hero_subline} className={inputClass} />
       </Field>
+      {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
+      {state?.saved && <p className="text-sm text-emerald-500">Saved — homepage updates within a minute.</p>}
+      <Button type="submit" disabled={pending} className="font-semibold">
+        {pending ? <Loader2 className="size-4 animate-spin" /> : <Save className="size-4" />}
+        Save homepage content
+      </Button>
+    </form>
+  );
+}
+
+export function SiteSettingsForm({ settings }: { settings: SiteSettings }) {
+  const [state, action, pending] = useActionState<SettingsFormState, FormData>(saveSettings, null);
+
+  return (
+    <form action={action} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="WhatsApp number (international, no + — e.g. 2348012345678)">
           <input name="whatsappNumber" defaultValue={settings.whatsappNumber} className={inputClass} />

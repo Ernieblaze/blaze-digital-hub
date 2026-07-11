@@ -13,6 +13,7 @@ import { ProductCard } from "@/components/site/product-card";
 import { FadeIn, StaggerContainer } from "@/components/site/motion";
 import { formatNaira } from "@/lib/products";
 import { getProductBySlug, getProducts } from "@/lib/catalog";
+import { getProductReviews, maskEmail } from "@/lib/reviews";
 
 // Note: `params` is a Promise in Next.js 16 — always await it.
 type PageProps = { params: Promise<{ slug: string }> };
@@ -40,7 +41,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProductPage({ params }: PageProps) {
   const { slug } = await params;
-  const [product, products] = await Promise.all([getProductBySlug(slug), getProducts()]);
+  const [product, products, reviewData] = await Promise.all([
+    getProductBySlug(slug),
+    getProducts(),
+    getProductReviews(slug),
+  ]);
   if (!product) notFound();
 
   const related = products
@@ -103,14 +108,26 @@ export default async function ProductPage({ params }: PageProps) {
                 {product.name}
               </h1>
 
-              <div className="mt-3 flex items-center gap-2">
-                <div className="flex gap-0.5" aria-label="5 star rating">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="size-4 fill-amber-400 text-amber-400" />
-                  ))}
+              {reviewData.count > 0 && (
+                <div className="mt-3 flex items-center gap-2">
+                  <div className="flex gap-0.5" aria-label={`Rated ${reviewData.average.toFixed(1)} out of 5`}>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={
+                          i < Math.round(reviewData.average)
+                            ? "size-4 fill-amber-400 text-amber-400"
+                            : "size-4 text-muted-foreground/40"
+                        }
+                      />
+                    ))}
+                  </div>
+                  <span className="text-sm text-muted-foreground">
+                    {reviewData.average.toFixed(1)} · {reviewData.count} verified review
+                    {reviewData.count === 1 ? "" : "s"}
+                  </span>
                 </div>
-                <span className="text-sm text-muted-foreground">Loved by real customers</span>
-              </div>
+              )}
 
               <p className="mt-5 text-pretty text-muted-foreground">{product.description}</p>
 
@@ -192,6 +209,44 @@ export default async function ProductPage({ params }: PageProps) {
             <p className="mt-5 font-semibold">{product.testimonial.author}</p>
             <p className="text-sm text-muted-foreground">{product.testimonial.role}</p>
           </FadeIn>
+
+          {/* Verified-buyer reviews */}
+          {reviewData.count > 0 && (
+            <div className="mt-16">
+              <h2 className="mb-6 text-2xl font-bold tracking-tight">
+                Verified reviews ({reviewData.count})
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {reviewData.reviews.map((r) => (
+                  <div key={r.email} className="rounded-xl border bg-card p-5">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex gap-0.5" aria-label={`${r.rating} out of 5 stars`}>
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Star
+                            key={i}
+                            className={
+                              i < r.rating
+                                ? "size-3.5 fill-amber-400 text-amber-400"
+                                : "size-3.5 text-muted-foreground/40"
+                            }
+                          />
+                        ))}
+                      </div>
+                      <span className="text-xs text-muted-foreground">
+                        {new Date(r.created_at).toLocaleDateString("en-NG", { dateStyle: "medium" })}
+                      </span>
+                    </div>
+                    {r.comment && (
+                      <p className="mt-3 text-sm leading-relaxed text-pretty">{r.comment}</p>
+                    )}
+                    <p className="mt-3 text-xs font-medium text-muted-foreground">
+                      {maskEmail(r.email)} · ✓ verified purchase
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Related products */}
           {related.length > 0 ? (

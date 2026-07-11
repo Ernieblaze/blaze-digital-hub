@@ -19,6 +19,12 @@ export function CheckoutForm({ slug, buttonLabel }: { slug: string; buttonLabel:
         placeholder="Your email (product is delivered here)"
         className="w-full rounded-md border border-input bg-background px-3 py-2.5 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
       />
+      <input
+        type="text"
+        name="coupon"
+        placeholder="Coupon code (optional)"
+        className="w-full rounded-md border border-input bg-background px-3 py-2.5 text-sm uppercase outline-none placeholder:normal-case focus-visible:ring-2 focus-visible:ring-ring"
+      />
       {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
       <Button
         type="submit"

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { REF_COOKIE } from "@/lib/affiliate";
 import { getProductBySlug } from "@/lib/catalog";
 import { rateLimit } from "@/lib/rate-limit";
+import { supabaseAdmin } from "@/lib/supabase";
 
 export type CheckoutState = { error: string } | null;
 
@@ -39,6 +40,35 @@ export async function startCheckout(
 
   const cookieStore = await cookies();
   const refCode = cookieStore.get(REF_COOKIE)?.value ?? null;
+  const supabase = supabaseAdmin();
+
+  // Lead capture: they told us what they want and where to reach them.
+  // If they don't finish paying, this shows up in /admin/leads for follow-up
+  // (the webhook flips it to "converted" when payment succeeds).
+  if (supabase) {
+    await supabase.from("checkout_leads").insert({ email, product_slug: product.slug });
+  }
+
+  // Coupon (optional)
+  let amountNaira = product.price;
+  let couponCode: string | null = null;
+  const couponInput = String(formData.get("coupon") ?? "").trim().toUpperCase();
+  if (couponInput) {
+    if (!supabase) return { error: "Coupons aren't available right now — leave it empty." };
+    const { data: coupon } = await supabase
+      .from("coupons")
+      .select("code, percent_off, max_uses, uses, expires_at, active")
+      .eq("code", couponInput)
+      .single();
+    const valid =
+      coupon &&
+      coupon.active &&
+      (!coupon.expires_at || new Date(coupon.expires_at) > new Date()) &&
+      (coupon.max_uses == null || coupon.uses < coupon.max_uses);
+    if (!valid) return { error: "That coupon is invalid or expired." };
+    amountNaira = Math.max(100, Math.round((product.price * (100 - coupon.percent_off)) / 100));
+    couponCode = coupon.code;
+  }
 
   let authorizationUrl: string | null = null;
   try {
@@ -47,12 +77,13 @@ export async function startCheckout(
       headers: { Authorization: `Bearer ${secret}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         email,
-        amount: product.price * 100, // kobo
+        amount: amountNaira * 100, // kobo
         currency: "NGN",
         callback_url: "https://blaze-digital-hub.vercel.app/thank-you",
         metadata: {
           product_slug: product.slug,
           ...(refCode ? { ref_code: refCode } : {}),
+          ...(couponCode ? { coupon_code: couponCode } : {}),
           custom_fields: [
             {
               display_name: "Product",

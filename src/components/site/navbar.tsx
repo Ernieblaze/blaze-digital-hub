@@ -51,7 +51,7 @@ function ThemeToggle() {
   );
 }
 
-export function Navbar() {
+export function Navbar({ announcement }: { announcement?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -71,7 +71,7 @@ export function Navbar() {
           : "bg-transparent",
       )}
     >
-      <AnnouncementBar />
+      <AnnouncementBar override={announcement} />
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-2" aria-label="Blaze Digital Hub — home">

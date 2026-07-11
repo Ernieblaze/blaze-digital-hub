@@ -4,10 +4,11 @@ import { redirect } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAdmin } from "@/lib/admin-auth";
+import { getAllConfig } from "@/lib/app-config";
 import { productCategories } from "@/lib/products";
 import { getProducts } from "@/lib/catalog";
 import { siteSettings } from "@/lib/site-settings";
-import { CategoryManager, SiteSettingsForm } from "./settings-forms";
+import { CategoryManager, HomeContentForm, SiteSettingsForm } from "./settings-forms";
 
 export const metadata: Metadata = {
   title: "Site Settings",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default async function AdminSettingsPage() {
   if (!(await isAdmin())) redirect("/admin/login");
 
-  const products = await getProducts();
+  const [products, content] = await Promise.all([getProducts(), getAllConfig()]);
   const inUse = [...new Set(products.map((p) => p.category))];
 
   return (
@@ -30,6 +31,19 @@ export default async function AdminSettingsPage() {
       </Link>
 
       <Card>
+        <CardHeader>
+          <CardTitle className="text-xl">Homepage content</CardTitle>
+          <CardDescription>
+            Hero text and announcement bar — stored in the database, so edits made right here
+            on the live site apply within a minute. No deploy needed.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <HomeContentForm content={content} />
+        </CardContent>
+      </Card>
+
+      <Card className="mt-6">
         <CardHeader>
           <CardTitle className="text-xl">Site settings</CardTitle>
           <CardDescription>

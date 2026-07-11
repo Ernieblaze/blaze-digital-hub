@@ -14,6 +14,7 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { buyerLogout } from "./actions";
 import { AffiliatePanel } from "./affiliate-panel";
 import { PortalForm } from "./portal-form";
+import { ReviewForm } from "./review-form";
 
 export const metadata: Metadata = {
   title: "My Account",
@@ -52,6 +53,20 @@ export default async function BuyerPortalPage({
 }) {
   const { google_error } = await searchParams;
   const email = await buyerEmail();
+
+  // The buyer's own reviews, so the form shows their existing rating.
+  let myReviews = new Map<string, { rating: number; comment: string }>();
+  if (email) {
+    const supabase = supabaseAdmin();
+    if (supabase) {
+      const { data } = await supabase
+        .from("reviews")
+        .select("product_slug, rating, comment")
+        .eq("email", email);
+      myReviews = new Map((data ?? []).map((r) => [r.product_slug, r]));
+    }
+  }
+
   const [orders, products, stats, commissionPercent, minWithdrawal] = email
     ? await Promise.all([
         ordersFor(email),
@@ -104,32 +119,46 @@ export default async function BuyerPortalPage({
                     <ul className="space-y-3">
                       {orders.map((order) => {
                         const product = products.find((p) => p.slug === order.product_slug);
+                        const review = order.product_slug
+                          ? myReviews.get(order.product_slug)
+                          : undefined;
                         return (
                           <li
                             key={`${order.product_slug}-${order.paid_at}`}
-                            className="flex flex-col gap-3 rounded-xl border p-4 sm:flex-row sm:items-center sm:justify-between"
+                            className="rounded-xl border p-4"
                           >
-                            <div className="min-w-0">
-                              <p className="font-semibold">
-                                {product?.name ?? order.product_slug ?? "Product"}
-                              </p>
-                              <p className="text-xs text-muted-foreground">
-                                {formatNaira(order.amount_kobo / 100)} ·{" "}
-                                {new Date(order.paid_at).toLocaleDateString("en-NG", {
-                                  dateStyle: "medium",
-                                })}
-                              </p>
+                            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                              <div className="min-w-0">
+                                <p className="font-semibold">
+                                  {product?.name ?? order.product_slug ?? "Product"}
+                                </p>
+                                <p className="text-xs text-muted-foreground">
+                                  {formatNaira(order.amount_kobo / 100)} ·{" "}
+                                  {new Date(order.paid_at).toLocaleDateString("en-NG", {
+                                    dateStyle: "medium",
+                                  })}
+                                </p>
+                              </div>
+                              {product?.downloadUrl ? (
+                                <Button asChild size="sm" className="shrink-0 font-semibold">
+                                  <a href={product.downloadUrl} target="_blank" rel="noopener noreferrer">
+                                    <Download className="size-4" /> Download
+                                  </a>
+                                </Button>
+                              ) : (
+                                <span className="text-xs text-muted-foreground">
+                                  Link coming — WhatsApp us for instant delivery
+                                </span>
+                              )}
                             </div>
-                            {product?.downloadUrl ? (
-                              <Button asChild size="sm" className="shrink-0 font-semibold">
-                                <a href={product.downloadUrl} target="_blank" rel="noopener noreferrer">
-                                  <Download className="size-4" /> Download
-                                </a>
-                              </Button>
-                            ) : (
-                              <span className="text-xs text-muted-foreground">
-                                Link coming — WhatsApp us for instant delivery
-                              </span>
+                            {product && (
+                              <div className="mt-2">
+                                <ReviewForm
+                                  slug={product.slug}
+                                  existingRating={review?.rating}
+                                  existingComment={review?.comment}
+                                />
+                              </div>
                             )}
                           </li>
                         );

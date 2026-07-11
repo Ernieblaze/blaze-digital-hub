@@ -4,6 +4,7 @@
  * live server), these can be changed from the admin at any time.
  */
 
+import { siteSettings } from "@/lib/site-settings";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export const CONFIG_DEFAULTS = {
@@ -11,9 +12,29 @@ export const CONFIG_DEFAULTS = {
   commission_percent: "50",
   /** Minimum withdrawal in Naira (~$10). */
   min_withdrawal_naira: "15000",
-} as const;
+  /* Homepage content — DB-backed so it's editable on the live site.
+     Defaults come from the file-based site settings. */
+  hero_badge: siteSettings.heroBadge,
+  hero_headline: siteSettings.heroHeadline,
+  hero_highlight: siteSettings.heroHighlight,
+  hero_subline: siteSettings.heroSubline,
+  announcement: siteSettings.announcement,
+};
 
 export type ConfigKey = keyof typeof CONFIG_DEFAULTS;
+
+/** All config values in one query (DB overrides merged over defaults). */
+export async function getAllConfig(): Promise<Record<ConfigKey, string>> {
+  const merged = { ...CONFIG_DEFAULTS };
+  const supabase = supabaseAdmin();
+  if (supabase) {
+    const { data } = await supabase.from("app_config").select("key, value");
+    for (const row of data ?? []) {
+      if (row.key in merged) merged[row.key as ConfigKey] = row.value;
+    }
+  }
+  return merged;
+}
 
 export async function getConfig(key: ConfigKey): Promise<string> {
   const supabase = supabaseAdmin();

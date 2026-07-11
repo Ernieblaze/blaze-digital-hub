@@ -8,6 +8,28 @@ import { Footer } from "@/components/site/footer";
 import { getConfigNumber } from "@/lib/app-config";
 import { getProducts } from "@/lib/catalog";
 import { formatNaira } from "@/lib/products";
+import { supabaseAdmin } from "@/lib/supabase";
+
+export const revalidate = 300;
+
+async function getLeaderboard() {
+  const supabase = supabaseAdmin();
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from("orders")
+    .select("ref_code, commission_kobo")
+    .eq("status", "success")
+    .gt("commission_kobo", 0)
+    .limit(5000);
+  const byCode = new Map<string, number>();
+  for (const row of data ?? []) {
+    if (row.ref_code) byCode.set(row.ref_code, (byCode.get(row.ref_code) ?? 0) + row.commission_kobo);
+  }
+  return [...byCode.entries()]
+    .map(([code, kobo]) => ({ code, kobo }))
+    .sort((a, b) => b.kobo - a.kobo)
+    .slice(0, 5);
+}
 
 export const metadata: Metadata = {
   title: "Become an Affiliate",
@@ -16,10 +38,11 @@ export const metadata: Metadata = {
 };
 
 export default async function AffiliatesPage() {
-  const [commissionPercent, minWithdrawal, products] = await Promise.all([
+  const [commissionPercent, minWithdrawal, products, leaderboard] = await Promise.all([
     getConfigNumber("commission_percent"),
     getConfigNumber("min_withdrawal_naira"),
     getProducts(),
+    getLeaderboard(),
   ]);
 
   const topProduct = products.reduce((a, b) => (b.price > a.price ? b : a), products[0]);
@@ -89,6 +112,29 @@ export default async function AffiliatesPage() {
               </Card>
             ))}
           </div>
+
+          {leaderboard.length > 0 && (
+            <div className="mt-14">
+              <h2 className="mb-6 text-center text-2xl font-bold">🏆 Top earners</h2>
+              <div className="mx-auto max-w-md space-y-2">
+                {leaderboard.map((entry, i) => (
+                  <div
+                    key={entry.code}
+                    className="flex items-center justify-between rounded-xl border bg-card px-5 py-3"
+                  >
+                    <span className="flex items-center gap-3">
+                      <span className="text-lg">{["🥇", "🥈", "🥉", "🏅", "🏅"][i]}</span>
+                      <code className="font-semibold">{entry.code}</code>
+                    </span>
+                    <span className="font-bold text-primary">{formatNaira(entry.kobo / 100)}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 text-center text-xs text-muted-foreground">
+                Real commissions earned by real affiliates. Your code could be here.
+              </p>
+            </div>
+          )}
 
           <div className="mt-14 rounded-2xl border border-primary/20 bg-gradient-to-br from-orange-600/10 via-transparent to-transparent p-8 text-center sm:p-10">
             <h2 className="text-2xl font-bold">The fine print (short version)</h2>

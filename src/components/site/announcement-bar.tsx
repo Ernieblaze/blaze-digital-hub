@@ -9,8 +9,10 @@ import { siteSettings } from "@/lib/site-settings";
  * (/admin/settings); empty text hides it. Dismissal is remembered per
  * message, so a new announcement shows again.
  */
-export function AnnouncementBar() {
-  const message = siteSettings.announcement.trim();
+export function AnnouncementBar({ override }: { override?: string }) {
+  // Server pages can pass the DB-backed value; otherwise fall back to the
+  // build-time file value.
+  const message = (override ?? siteSettings.announcement).trim();
   const storageKey = `blaze-announcement-dismissed:${message}`;
   const [visible, setVisible] = useState(false);
 

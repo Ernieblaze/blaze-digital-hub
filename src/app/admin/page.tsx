@@ -107,6 +107,27 @@ async function getChartOrders() {
   return data ?? [];
 }
 
+async function getSalesByProduct() {
+  const supabase = supabaseAdmin();
+  if (!supabase) return [];
+  const { data } = await supabase
+    .from("orders")
+    .select("product_slug, amount_kobo")
+    .eq("status", "success")
+    .limit(5000);
+  const map = new Map<string, { units: number; revenueKobo: number }>();
+  for (const o of data ?? []) {
+    const key = o.product_slug ?? "(unmatched)";
+    const entry = map.get(key) ?? { units: 0, revenueKobo: 0 };
+    entry.units += 1;
+    entry.revenueKobo += o.amount_kobo;
+    map.set(key, entry);
+  }
+  return [...map.entries()]
+    .map(([slug, v]) => ({ slug, ...v }))
+    .sort((a, b) => b.revenueKobo - a.revenueKobo);
+}
+
 async function getSubscribers() {
   const supabase = supabaseAdmin();
   if (!supabase) return null;
@@ -125,12 +146,13 @@ async function getSubscribers() {
 export default async function AdminDashboardPage() {
   if (!(await isAdmin())) redirect("/admin/login");
 
-  const [stats, subscribers, orders, catalog, chartOrders] = await Promise.all([
+  const [stats, subscribers, orders, catalog, chartOrders, salesByProduct] = await Promise.all([
     getPaystackStats(),
     getSubscribers(),
     getOrders(),
     getCatalog(),
     getChartOrders(),
+    getSalesByProduct(),
   ]);
   const paystackReady = isPaystackConfigured();
   const supabaseReady = isSupabaseConfigured();
@@ -215,6 +237,12 @@ export default async function AdminDashboardPage() {
         </Button>
         <Button asChild size="sm" variant="secondary">
           <Link href="/admin/affiliates">Affiliates</Link>
+        </Button>
+        <Button asChild size="sm" variant="secondary">
+          <Link href="/admin/coupons">Coupons</Link>
+        </Button>
+        <Button asChild size="sm" variant="secondary">
+          <Link href="/admin/leads">Leads</Link>
         </Button>
         <Button asChild size="sm" variant="secondary">
           <Link href="/admin/products/new">Add product</Link>
@@ -424,7 +452,36 @@ export default async function AdminDashboardPage() {
                 </CardContent>
               </Card>
             )}
-            {orders && orders.count > 0 && (
+            {salesByProduct.length > 0 && (
+          <Card className="mb-4">
+            <CardHeader>
+              <CardTitle className="text-base">Sales by product (all time)</CardTitle>
+            </CardHeader>
+            <CardContent className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b text-left text-muted-foreground">
+                    <th className="pb-2 pr-4 font-medium">Product</th>
+                    <th className="pb-2 pr-4 font-medium">Units</th>
+                    <th className="pb-2 font-medium">Revenue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {salesByProduct.map((s) => (
+                    <tr key={s.slug} className="border-b last:border-0">
+                      <td className="py-2 pr-4">
+                        {products.find((p) => p.slug === s.slug)?.name ?? s.slug}
+                      </td>
+                      <td className="py-2 pr-4">{s.units}</td>
+                      <td className="py-2 font-semibold">{formatNaira(s.revenueKobo / 100)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </CardContent>
+          </Card>
+        )}
+        {orders && orders.count > 0 && (
               <Card>
                 <CardHeader>
                   <CardTitle className="text-base">

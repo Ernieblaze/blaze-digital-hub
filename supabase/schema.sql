@@ -102,5 +102,37 @@ create table if not exists public.app_config (
 );
 alter table public.app_config enable row level security;
 
+-- ── Growth round: reviews, checkout leads, coupons ─────────────────────────
+create table if not exists public.reviews (
+  id uuid primary key default gen_random_uuid(),
+  product_slug text not null,
+  email text not null,
+  rating integer not null check (rating between 1 and 5),
+  comment text not null default '',
+  created_at timestamptz not null default now(),
+  unique (product_slug, email)
+);
+alter table public.reviews enable row level security;
+
+create table if not exists public.checkout_leads (
+  id uuid primary key default gen_random_uuid(),
+  email text not null,
+  product_slug text not null,
+  converted boolean not null default false,
+  created_at timestamptz not null default now()
+);
+alter table public.checkout_leads enable row level security;
+
+create table if not exists public.coupons (
+  code text primary key,
+  percent_off integer not null check (percent_off between 1 and 90),
+  max_uses integer,
+  uses integer not null default 0,
+  expires_at timestamptz,
+  active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+alter table public.coupons enable row level security;
+
 -- All tables are accessed only through the server-side service key, so RLS
 -- with no policies simply locks out the public/anon role entirely.
