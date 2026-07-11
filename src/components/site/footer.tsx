@@ -20,6 +20,12 @@ const XIcon = (props: IconProps) => (
   </svg>
 );
 
+const FacebookIcon = (props: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
 const YoutubeIcon = (props: IconProps) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
     <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
@@ -47,13 +53,14 @@ const legalLinks = [
   { href: "/refund-policy", label: "Refund Policy" },
 ];
 
-/* Managed from /admin/settings */
+/* Managed from /admin/settings — icons with an empty link are hidden. */
 const socials = [
   { href: siteSettings.instagram, icon: InstagramIcon, label: "Instagram" },
+  { href: siteSettings.facebook, icon: FacebookIcon, label: "Facebook" },
   { href: siteSettings.twitter, icon: XIcon, label: "X (Twitter)" },
   { href: siteSettings.youtube, icon: YoutubeIcon, label: "YouTube" },
   { href: whatsappLink(), icon: MessageCircle, label: "WhatsApp" },
-];
+].filter((s) => s.href);
 
 export function Footer() {
   return (

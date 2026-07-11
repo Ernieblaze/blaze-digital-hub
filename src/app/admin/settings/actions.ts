@@ -40,6 +40,7 @@ export async function saveSettings(
     whatsappNumber: str("whatsappNumber").replace(/[^\d]/g, "") || current.whatsappNumber,
     contactEmail: str("contactEmail"),
     instagram: str("instagram"),
+    facebook: str("facebook"),
     twitter: str("twitter"),
     youtube: str("youtube"),
   };

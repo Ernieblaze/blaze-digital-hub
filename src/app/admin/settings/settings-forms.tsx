@@ -48,6 +48,9 @@ export function SiteSettingsForm({ settings }: { settings: SiteSettings }) {
         <Field label="Instagram URL">
           <input name="instagram" defaultValue={settings.instagram} className={inputClass} />
         </Field>
+        <Field label="Facebook URL">
+          <input name="facebook" defaultValue={settings.facebook} className={inputClass} />
+        </Field>
         <Field label="X (Twitter) URL">
           <input name="twitter" defaultValue={settings.twitter} className={inputClass} />
         </Field>

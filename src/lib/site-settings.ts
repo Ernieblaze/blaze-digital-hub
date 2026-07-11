@@ -15,6 +15,8 @@ export type SiteSettings = {
   whatsappNumber: string;
   contactEmail: string;
   instagram: string;
+  facebook: string;
+  /** Leave any social link empty ("") to hide its icon in the footer. */
   twitter: string;
   youtube: string;
 };
