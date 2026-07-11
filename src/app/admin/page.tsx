@@ -456,8 +456,9 @@ export default async function AdminDashboardPage() {
           <CardHeader>
             <CardTitle className="text-base">All products</CardTitle>
             <CardDescription>
-              Add, edit or delete products right here — changes hit the shop instantly. On the
-              live site, push your latest code to deploy product changes.
+              {catalog.source === "supabase"
+                ? "Add, edit or delete products right here — from any device. The shop updates within a minute."
+                : "Add, edit or delete products right here — changes hit the shop instantly. On the live site, connect Supabase to edit from anywhere."}
             </CardDescription>
           </CardHeader>
           <CardContent className="overflow-x-auto">
