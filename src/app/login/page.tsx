@@ -45,7 +45,12 @@ async function ordersFor(email: string): Promise<OrderRow[]> {
   return data ?? [];
 }
 
-export default async function BuyerPortalPage() {
+export default async function BuyerPortalPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ google_error?: string }>;
+}) {
+  const { google_error } = await searchParams;
   const email = await buyerEmail();
   const [orders, products, stats, commissionPercent, minWithdrawal] = email
     ? await Promise.all([
@@ -78,7 +83,12 @@ export default async function BuyerPortalPage() {
             </CardHeader>
             <CardContent>
               {!email ? (
-                <PortalForm />
+                <PortalForm
+                  googleEnabled={Boolean(
+                    process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+                  )}
+                  googleError={google_error}
+                />
               ) : (
                 <div className="space-y-4">
                   {orders.length === 0 ? (
