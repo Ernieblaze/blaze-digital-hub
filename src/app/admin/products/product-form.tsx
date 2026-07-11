@@ -109,6 +109,16 @@ export function ProductForm({ product }: { product?: Product }) {
         />
       </Field>
 
+      <Field label="Download link for buyers (Google Drive / Dropbox — used by the automatic delivery email)">
+        <input
+          name="downloadUrl"
+          type="url"
+          defaultValue={product?.downloadUrl}
+          className={inputClass}
+          placeholder="https://drive.google.com/…"
+        />
+      </Field>
+
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="sm:col-span-3">
           <span className={labelClass}>Testimonial</span>

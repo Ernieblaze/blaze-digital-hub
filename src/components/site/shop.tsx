@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { ProductCard } from "@/components/site/product-card";
 import { SectionHeading } from "@/components/site/motion";
-import { categories, products, type Product } from "@/lib/products";
+import { categories, type Product } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
 const sortOptions = [
@@ -31,7 +31,7 @@ function sortProducts(list: Product[], sort: SortValue) {
   }
 }
 
-export function Shop() {
+export function Shop({ products }: { products: Product[] }) {
   const [active, setActive] = useState<string>("All");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortValue>("featured");

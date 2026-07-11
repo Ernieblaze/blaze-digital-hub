@@ -68,6 +68,11 @@ export type Product = {
    * Every "Buy Now" button in the app links here.
    */
   paystackUrl: string;
+  /**
+   * Link to the actual file the buyer receives (Google Drive, Dropbox, etc.).
+   * Used by the automatic delivery email after a successful payment.
+   */
+  downloadUrl?: string;
   testimonial: { quote: string; author: string; role: string };
 };
 

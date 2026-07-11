@@ -5,12 +5,11 @@ import path from "node:path";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isAdmin } from "@/lib/admin-auth";
+import { getProducts } from "@/lib/catalog";
 import type { SiteSettings } from "@/lib/site-settings";
-import type { Product } from "@/lib/products";
 
 const SETTINGS_FILE = path.join(process.cwd(), "src", "lib", "site-settings-data.json");
 const CATEGORIES_FILE = path.join(process.cwd(), "src", "lib", "categories-data.json");
-const PRODUCTS_FILE = path.join(process.cwd(), "src", "lib", "products-data.json");
 
 const READONLY_HINT =
   "Couldn't write the data file. On the live site the file system is read-only — make changes locally, then push to deploy.";
@@ -83,7 +82,7 @@ export async function deleteCategory(formData: FormData): Promise<void> {
   if (!(await isAdmin())) redirect("/admin/login");
 
   const name = String(formData.get("name") ?? "");
-  const products = JSON.parse(await readFile(PRODUCTS_FILE, "utf8")) as Product[];
+  const products = await getProducts();
   // Never orphan products — the UI disables the button, this guards direct POSTs.
   if (products.some((p) => p.category === name)) return;
 

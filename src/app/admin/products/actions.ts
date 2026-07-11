@@ -5,10 +5,13 @@ import path from "node:path";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isAdmin } from "@/lib/admin-auth";
+import { getProducts, productToRow } from "@/lib/catalog";
+import { supabaseAdmin } from "@/lib/supabase";
 import {
   coverPresets,
   productCategories,
   productIcons,
+  products as fileProducts,
   type Category,
   type Product,
 } from "@/lib/products";
@@ -16,20 +19,6 @@ import {
 const DATA_FILE = path.join(process.cwd(), "src", "lib", "products-data.json");
 
 export type ProductFormState = { error: string } | null;
-
-async function loadProducts(): Promise<Product[]> {
-  return JSON.parse(await readFile(DATA_FILE, "utf8")) as Product[];
-}
-
-async function saveProducts(list: Product[]) {
-  try {
-    await writeFile(DATA_FILE, JSON.stringify(list, null, 2) + "\n", "utf8");
-  } catch {
-    throw new Error(
-      "Couldn't write products-data.json. On the live site the file system is read-only — make product changes locally, then push to deploy them."
-    );
-  }
-}
 
 function revalidateShop(slug: string) {
   revalidatePath("/");
@@ -46,7 +35,24 @@ function slugify(text: string) {
     .replace(/-+/g, "-");
 }
 
-/** Adds a new product or updates the one matching `originalSlug`. */
+/* ── JSON-file fallback (used when Supabase isn't configured, e.g. local dev) ── */
+
+async function loadFileProducts(): Promise<Product[]> {
+  return JSON.parse(await readFile(DATA_FILE, "utf8")) as Product[];
+}
+
+async function saveFileProducts(list: Product[]) {
+  try {
+    await writeFile(DATA_FILE, JSON.stringify(list, null, 2) + "\n", "utf8");
+  } catch {
+    throw new Error(
+      "Couldn't save. Supabase isn't connected and the live file system is read-only — connect Supabase (see /admin) to manage products from anywhere."
+    );
+  }
+}
+
+/* ── Create / update ─────────────────────────────────────────────────────── */
+
 export async function saveProduct(
   _prev: ProductFormState,
   formData: FormData
@@ -91,10 +97,13 @@ export async function saveProduct(
     cover: coverPresets.includes(str("cover") as (typeof coverPresets)[number])
       ? str("cover")
       : coverPresets[0],
-    ...(str("image").startsWith("/") ? { image: str("image") } : {}),
+    ...(str("image").startsWith("/") || str("image").startsWith("http")
+      ? { image: str("image") }
+      : {}),
     ...(badge === "Bestseller" || badge === "New" || badge === "Hot Deal" ? { badge } : {}),
     ...(formData.get("featured") ? { featured: true } : {}),
     paystackUrl: str("paystackUrl") || `https://paystack.shop/pay/REPLACE-${slug}`,
+    ...(str("downloadUrl").startsWith("http") ? { downloadUrl: str("downloadUrl") } : {}),
     testimonial: {
       quote: str("testimonialQuote") || "Loved it — instant delivery and pure value.",
       author: str("testimonialAuthor") || "Happy Customer",
@@ -102,38 +111,86 @@ export async function saveProduct(
     },
   };
 
-  const list = await loadProducts();
-  const existingIndex = originalSlug ? list.findIndex((p) => p.slug === originalSlug) : -1;
-
-  if (existingIndex === -1 && list.some((p) => p.slug === slug)) {
+  // Duplicate-slug guard against the current catalog (whichever source is live)
+  const existing = await getProducts();
+  const slugTaken = existing.some((p) => p.slug === slug);
+  const isRename = originalSlug && originalSlug !== slug;
+  if (slugTaken && (!originalSlug || isRename)) {
     return { error: `A product with the slug “${slug}” already exists.` };
   }
-  if (existingIndex !== -1 && slug !== originalSlug && list.some((p) => p.slug === slug)) {
-    return { error: `A product with the slug “${slug}” already exists.` };
-  }
 
-  if (existingIndex === -1) list.push(product);
-  else list[existingIndex] = product;
-
-  try {
-    await saveProducts(list);
-  } catch (error) {
-    return { error: error instanceof Error ? error.message : "Failed to save." };
+  const supabase = supabaseAdmin();
+  if (supabase) {
+    // If the table is still empty, seed it first so one edit doesn't strand
+    // the rest of the catalog in the JSON file.
+    const { count } = await supabase.from("products").select("slug", { count: "exact", head: true });
+    if ((count ?? 0) === 0) {
+      await supabase.from("products").upsert(fileProducts.map(productToRow), { onConflict: "slug" });
+    }
+    if (isRename) {
+      const { error } = await supabase.from("products").delete().eq("slug", originalSlug);
+      if (error) return { error: `Rename failed: ${error.message}` };
+    }
+    const { error } = await supabase
+      .from("products")
+      .upsert(productToRow(product), { onConflict: "slug" });
+    if (error) return { error: `Save failed: ${error.message}` };
+  } else {
+    const list = await loadFileProducts();
+    const index = originalSlug ? list.findIndex((p) => p.slug === originalSlug) : -1;
+    if (index === -1) list.push(product);
+    else list[index] = product;
+    try {
+      await saveFileProducts(list);
+    } catch (error) {
+      return { error: error instanceof Error ? error.message : "Failed to save." };
+    }
   }
 
   revalidateShop(slug);
-  if (originalSlug && originalSlug !== slug) revalidatePath(`/products/${originalSlug}`);
+  if (isRename) revalidatePath(`/products/${originalSlug}`);
   redirect("/admin");
 }
+
+/* ── Delete ──────────────────────────────────────────────────────────────── */
 
 export async function deleteProduct(formData: FormData) {
   if (!(await isAdmin())) redirect("/admin/login");
 
   const slug = String(formData.get("slug") ?? "");
-  const list = await loadProducts();
-  const next = list.filter((p) => p.slug !== slug);
-  if (next.length === list.length) return;
+  if (!slug) return;
 
-  await saveProducts(next);
+  const supabase = supabaseAdmin();
+  if (supabase) {
+    // Seed first if empty (same reasoning as saveProduct), then delete.
+    const { count } = await supabase.from("products").select("slug", { count: "exact", head: true });
+    if ((count ?? 0) === 0) {
+      await supabase.from("products").upsert(fileProducts.map(productToRow), { onConflict: "slug" });
+    }
+    await supabase.from("products").delete().eq("slug", slug);
+  } else {
+    const list = await loadFileProducts();
+    const next = list.filter((p) => p.slug !== slug);
+    if (next.length === list.length) return;
+    await saveFileProducts(next);
+  }
+
   revalidateShop(slug);
+}
+
+/* ── One-click import: copy the JSON catalog into Supabase ──────────────── */
+
+export async function importCatalogToSupabase() {
+  if (!(await isAdmin())) redirect("/admin/login");
+
+  const supabase = supabaseAdmin();
+  if (!supabase) return;
+
+  const { error } = await supabase
+    .from("products")
+    .upsert(fileProducts.map(productToRow), { onConflict: "slug" });
+  if (error) console.error("[catalog] import failed:", error.message);
+
+  revalidatePath("/");
+  revalidatePath("/admin");
 }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAdmin } from "@/lib/admin-auth";
-import { getProduct } from "@/lib/products";
+import { getProductBySlug } from "@/lib/catalog";
 import { ProductForm } from "../product-form";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default async function EditProductPage({
   if (!(await isAdmin())) redirect("/admin/login");
 
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProductBySlug(slug);
   if (!product) notFound();
 
   return (

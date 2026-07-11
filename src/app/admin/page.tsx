@@ -24,10 +24,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { isAdmin } from "@/lib/admin-auth";
+import { getCatalog } from "@/lib/catalog";
+import { isDeliveryConfigured } from "@/lib/delivery";
 import { getPaystackStats, isPaystackConfigured } from "@/lib/paystack";
 import { isSupabaseConfigured, supabaseAdmin } from "@/lib/supabase";
-import { formatNaira, products } from "@/lib/products";
+import { formatNaira } from "@/lib/products";
 import { logout } from "./actions";
+import { importCatalogToSupabase } from "./products/actions";
 import { DeleteProductButton } from "./products/delete-button";
 
 export const metadata: Metadata = {
@@ -62,6 +65,32 @@ function StatCard({
   );
 }
 
+type OrderRow = {
+  paystack_reference: string;
+  product_slug: string | null;
+  customer_email: string;
+  amount_kobo: number;
+  paid_at: string;
+  delivered_at: string | null;
+};
+
+async function getOrders() {
+  const supabase = supabaseAdmin();
+  if (!supabase) return null;
+  const { data, count, error } = await supabase
+    .from("orders")
+    .select("paystack_reference, product_slug, customer_email, amount_kobo, paid_at, delivered_at", {
+      count: "exact",
+    })
+    .order("paid_at", { ascending: false })
+    .limit(10);
+  if (error) {
+    console.error("[admin] orders query failed:", error.message);
+    return null;
+  }
+  return { count: count ?? 0, recent: (data ?? []) as OrderRow[] };
+}
+
 async function getSubscribers() {
   const supabase = supabaseAdmin();
   if (!supabase) return null;
@@ -80,9 +109,15 @@ async function getSubscribers() {
 export default async function AdminDashboardPage() {
   if (!(await isAdmin())) redirect("/admin/login");
 
-  const [stats, subscribers] = await Promise.all([getPaystackStats(), getSubscribers()]);
+  const [stats, subscribers, orders, catalog] = await Promise.all([
+    getPaystackStats(),
+    getSubscribers(),
+    getOrders(),
+    getCatalog(),
+  ]);
   const paystackReady = isPaystackConfigured();
   const supabaseReady = isSupabaseConfigured();
+  const products = catalog.products;
   const productsWithLiveLink = products.filter((p) => !p.paystackUrl.includes("REPLACE"));
 
   return (
@@ -234,6 +269,90 @@ export default async function AdminDashboardPage() {
 
       <Separator className="my-8" />
 
+      {/* Orders recorded by the Paystack webhook */}
+      <section>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          Orders (recorded automatically)
+        </h2>
+        {!supabaseReady ? (
+          <Card className="border-orange-500/40">
+            <CardContent className="flex items-start gap-3 p-5">
+              <AlertTriangle className="mt-0.5 size-5 shrink-0 text-orange-500" />
+              <p className="text-sm text-muted-foreground">
+                Connect Supabase to start recording orders permanently.
+              </p>
+            </CardContent>
+          </Card>
+        ) : (
+          <>
+            {orders && orders.count === 0 && (
+              <Card>
+                <CardContent className="p-5 text-sm text-muted-foreground">
+                  No orders recorded yet. One-time setup: in your Paystack Dashboard →
+                  Settings → API Keys &amp; Webhooks, set the Webhook URL to{" "}
+                  <code className="rounded bg-muted px-1">
+                    https://blaze-digital-hub.vercel.app/api/paystack/webhook
+                  </code>
+                  . From then on every successful payment lands here automatically
+                  {isDeliveryConfigured()
+                    ? " and the buyer gets their download email instantly."
+                    : ". Add RESEND_API_KEY to also send automatic delivery emails."}
+                </CardContent>
+              </Card>
+            )}
+            {orders && orders.count > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">
+                    {orders.count} order{orders.count === 1 ? "" : "s"} recorded
+                  </CardTitle>
+                  <CardDescription>Latest {orders.recent.length}, newest first.</CardDescription>
+                </CardHeader>
+                <CardContent className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b text-left text-muted-foreground">
+                        <th className="pb-2 pr-4 font-medium">Customer</th>
+                        <th className="pb-2 pr-4 font-medium">Product</th>
+                        <th className="pb-2 pr-4 font-medium">Amount</th>
+                        <th className="pb-2 pr-4 font-medium">Delivered</th>
+                        <th className="pb-2 font-medium">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {orders.recent.map((o) => (
+                        <tr key={o.paystack_reference} className="border-b last:border-0">
+                          <td className="py-2 pr-4">{o.customer_email}</td>
+                          <td className="py-2 pr-4">{o.product_slug ?? "—"}</td>
+                          <td className="py-2 pr-4 font-medium">{formatNaira(o.amount_kobo / 100)}</td>
+                          <td className="py-2 pr-4">
+                            {o.delivered_at ? (
+                              <span className="inline-flex items-center gap-1 text-emerald-500">
+                                <CheckCircle2 className="size-3.5" /> emailed
+                              </span>
+                            ) : (
+                              <span className="text-muted-foreground">manual</span>
+                            )}
+                          </td>
+                          <td className="py-2 text-muted-foreground">
+                            {new Date(o.paid_at).toLocaleString("en-NG", {
+                              dateStyle: "medium",
+                              timeStyle: "short",
+                            })}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </CardContent>
+              </Card>
+            )}
+          </>
+        )}
+      </section>
+
+      <Separator className="my-8" />
+
       {/* Newsletter subscribers (Supabase) */}
       <section>
         <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
@@ -288,13 +407,25 @@ export default async function AdminDashboardPage() {
       <section>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-            Product catalog
+            Product catalog{" "}
+            <span className="normal-case font-normal">
+              ({catalog.source === "supabase" ? "in Supabase — edit from anywhere" : "from file"})
+            </span>
           </h2>
-          <Button asChild size="sm" className="font-semibold">
-            <Link href="/admin/products/new">
-              <Plus className="size-4" /> Add product
-            </Link>
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            {supabaseReady && catalog.source === "file" && (
+              <form action={importCatalogToSupabase}>
+                <Button type="submit" size="sm" variant="outline" className="font-semibold">
+                  Import catalog to Supabase
+                </Button>
+              </form>
+            )}
+            <Button asChild size="sm" className="font-semibold">
+              <Link href="/admin/products/new">
+                <Plus className="size-4" /> Add product
+              </Link>
+            </Button>
+          </div>
         </div>
         <div className="mb-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatCard icon={Package} label="Products live" value={String(products.length)} />

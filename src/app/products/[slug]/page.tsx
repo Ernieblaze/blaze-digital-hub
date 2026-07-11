@@ -11,18 +11,25 @@ import { ProductCover } from "@/components/site/product-cover";
 import { DealCountdown } from "@/components/site/deal-countdown";
 import { ProductCard } from "@/components/site/product-card";
 import { FadeIn, StaggerContainer } from "@/components/site/motion";
-import { formatNaira, getProduct, products } from "@/lib/products";
+import { formatNaira } from "@/lib/products";
+import { getProductBySlug, getProducts } from "@/lib/catalog";
 
 // Note: `params` is a Promise in Next.js 16 — always await it.
 type PageProps = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
+// Refresh at most once a minute so admin product edits go live automatically.
+export const revalidate = 60;
+// Products added later (via the phone admin) render on demand.
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const products = await getProducts();
   return products.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return {};
   return {
     title: product.name,
@@ -33,7 +40,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProductPage({ params }: PageProps) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const [product, products] = await Promise.all([getProductBySlug(slug), getProducts()]);
   if (!product) notFound();
 
   const related = products

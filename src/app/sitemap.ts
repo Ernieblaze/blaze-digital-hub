@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
-import { products } from "@/lib/products";
+import { getProducts } from "@/lib/catalog";
 
 // Keep in sync with metadataBase in layout.tsx — swap for your custom domain later.
 const BASE = "https://blaze-digital-hub.vercel.app";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const products = await getProducts();
   const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = [

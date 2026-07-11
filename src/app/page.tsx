@@ -7,8 +7,14 @@ import { Testimonials } from "@/components/site/testimonials";
 import { HowItWorks } from "@/components/site/how-it-works";
 import { Footer } from "@/components/site/footer";
 import { siteSettings } from "@/lib/site-settings";
+import { getProducts } from "@/lib/catalog";
 
-export default function HomePage() {
+// Re-render at most once a minute so product edits made from the admin
+// (stored in Supabase) show up on the live site without a redeploy.
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const products = await getProducts();
   return (
     <>
       <Navbar />
@@ -21,10 +27,10 @@ export default function HomePage() {
             subline: siteSettings.heroSubline,
           }}
         />
-        <FeaturedProducts />
-        <Shop />
+        <FeaturedProducts products={products} />
+        <Shop products={products} />
         <Benefits />
-        <Testimonials />
+        <Testimonials products={products} />
         <HowItWorks />
       </main>
       <Footer />

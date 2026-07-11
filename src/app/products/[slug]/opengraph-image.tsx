@@ -1,11 +1,12 @@
 import { ImageResponse } from "next/og";
-import { getProduct, products } from "@/lib/products";
+import { getProductBySlug, getProducts } from "@/lib/catalog";
 
 export const alt = "Product — Blaze Digital Hub";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const products = await getProducts();
   return products.map((p) => ({ slug: p.slug }));
 }
 
@@ -18,7 +19,7 @@ export default async function ProductOgImage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProductBySlug(slug);
 
   return new ImageResponse(
     (

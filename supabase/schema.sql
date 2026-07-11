@@ -1,30 +1,52 @@
--- Blaze Digital Hub — Supabase schema
+-- Blaze Digital Hub — Supabase schema (Phase 1 + Phase 2)
 -- Run this in your Supabase project: Dashboard → SQL Editor → New query → paste → Run.
--- Safe to re-run (uses IF NOT EXISTS).
+-- Safe to re-run (uses IF NOT EXISTS). Already ran the newsletter part? Running
+-- the whole file again is fine.
 
--- ── Newsletter subscribers (live now — footer form on the site) ─────────────
+-- ── Newsletter subscribers (footer form on the site) ────────────────────────
 create table if not exists public.newsletter_subscribers (
   id uuid primary key default gen_random_uuid(),
   email text not null unique,
   source text not null default 'footer',
   created_at timestamptz not null default now()
 );
-
--- Row Level Security: the site talks to this table only through the
--- service-role key on the server, so lock the public/anon role out entirely.
 alter table public.newsletter_subscribers enable row level security;
 
--- ── Phase 2 (coming next): orders recorded by the Paystack webhook ──────────
--- Uncomment when we wire the webhook:
---
--- create table if not exists public.orders (
---   id uuid primary key default gen_random_uuid(),
---   paystack_reference text not null unique,
---   product_slug text not null,
---   customer_email text not null,
---   amount_kobo bigint not null,
---   status text not null,
---   paid_at timestamptz,
---   created_at timestamptz not null default now()
--- );
--- alter table public.orders enable row level security;
+-- ── Products (Phase 2: manage the catalog from any device via /admin) ──────
+create table if not exists public.products (
+  slug text primary key,
+  name text not null,
+  category text not null,
+  price integer not null,
+  compare_at_price integer,
+  tagline text not null default '',
+  description text not null default '',
+  whats_inside jsonb not null default '[]'::jsonb,
+  icon text not null default 'rocket',
+  cover text not null default '',
+  image text,
+  badge text,
+  featured boolean not null default false,
+  paystack_url text not null default '',
+  download_url text,
+  testimonial jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now()
+);
+alter table public.products enable row level security;
+
+-- ── Orders (Phase 2: recorded by the Paystack webhook) ─────────────────────
+create table if not exists public.orders (
+  id uuid primary key default gen_random_uuid(),
+  paystack_reference text not null unique,
+  product_slug text,
+  customer_email text not null,
+  amount_kobo bigint not null,
+  status text not null default 'success',
+  paid_at timestamptz,
+  delivered_at timestamptz,
+  created_at timestamptz not null default now()
+);
+alter table public.orders enable row level security;
+
+-- All tables are accessed only through the server-side service key, so RLS
+-- with no policies simply locks out the public/anon role entirely.

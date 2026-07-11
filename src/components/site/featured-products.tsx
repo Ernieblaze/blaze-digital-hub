@@ -2,9 +2,10 @@
 
 import { ProductCard } from "@/components/site/product-card";
 import { SectionHeading, StaggerContainer } from "@/components/site/motion";
-import { featuredProducts } from "@/lib/products";
+import type { Product } from "@/lib/products";
 
-export function FeaturedProducts() {
+export function FeaturedProducts({ products }: { products: Product[] }) {
+  const featuredProducts = products.filter((p) => p.featured);
   return (
     <section id="featured" className="py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">

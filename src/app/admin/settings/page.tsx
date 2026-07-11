@@ -4,7 +4,8 @@ import { redirect } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAdmin } from "@/lib/admin-auth";
-import { productCategories, products } from "@/lib/products";
+import { productCategories } from "@/lib/products";
+import { getProducts } from "@/lib/catalog";
 import { siteSettings } from "@/lib/site-settings";
 import { CategoryManager, SiteSettingsForm } from "./settings-forms";
 
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 export default async function AdminSettingsPage() {
   if (!(await isAdmin())) redirect("/admin/login");
 
+  const products = await getProducts();
   const inUse = [...new Set(products.map((p) => p.category))];
 
   return (

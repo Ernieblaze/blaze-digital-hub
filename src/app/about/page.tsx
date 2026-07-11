@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
-import { products } from "@/lib/products";
+import { getProducts } from "@/lib/catalog";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "About Ernie Blaze",
@@ -31,7 +33,8 @@ const values = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const products = await getProducts();
   return (
     <>
       <Navbar />

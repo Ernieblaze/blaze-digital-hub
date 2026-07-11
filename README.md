@@ -83,6 +83,18 @@ The footer newsletter form stores signups in Supabase. Setup:
 Subscriber count + latest signups appear in the owner dashboard. Phase 2 will add an
 `orders` table fed by a Paystack webhook (schema already sketched in the SQL file).
 
+## ⚙️ Phase 2 backend (orders, delivery, phone product management)
+
+- **Products in Supabase** — once `supabase/schema.sql` has been run and the catalog
+  imported (one click in /admin), products are managed from any device. The JSON file
+  remains as a fallback/seed.
+- **Orders** — set the Paystack webhook URL to `/api/paystack/webhook` (Paystack
+  Dashboard → Settings → API Keys & Webhooks). Every successful charge is recorded in
+  the `orders` table and shown in /admin.
+- **Automatic delivery** — set `RESEND_API_KEY` (free at resend.com) and give each
+  product a Download link in the admin form. Buyers get their file by email seconds
+  after paying. `RESEND_FROM` optional once you verify a domain in Resend.
+
 ## Future: buyer dashboard
 
 `/login` is a placeholder. When ready, add [Auth.js](https://authjs.dev) or [Clerk](https://clerk.com), gate a `/dashboard` route, and let buyers re-download purchases and claim bonuses.

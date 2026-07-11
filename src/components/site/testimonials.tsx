@@ -2,13 +2,12 @@
 
 import { Quote, Star } from "lucide-react";
 import { SectionHeading, StaggerContainer, StaggerItem } from "@/components/site/motion";
-import { products } from "@/lib/products";
+import type { Product } from "@/lib/products";
 
 /* Testimonials are pulled from each product's data so they stay in sync.
-   Replace the quotes in src/lib/products.ts with real customer feedback. */
-const testimonials = products.map((p) => ({ ...p.testimonial, product: p.name }));
-
-export function Testimonials() {
+   Edit each product's testimonial from /admin with real customer feedback. */
+export function Testimonials({ products }: { products: Product[] }) {
+  const testimonials = products.map((p) => ({ ...p.testimonial, product: p.name }));
   return (
     <section className="bg-muted/40 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
