@@ -1,0 +1,150 @@
+[
+  {
+    "slug": "blaze-forex-mastery-blueprint",
+    "name": "Blaze Forex Mastery Blueprint",
+    "category": "Trading",
+    "price": 15000,
+    "compareAtPrice": 25000,
+    "tagline": "The exact system I use to trade forex profitably — no fluff, no fake screenshots.",
+    "description": "A complete A-to-Z forex trading course built for Nigerians. Learn price action, risk management that protects your capital, and the psychology that separates funded traders from blown accounts. Includes real chart breakdowns and a plug-and-play trading plan.",
+    "whatsInside": [
+      "120-page illustrated PDF course (beginner → advanced)",
+      "My personal price-action strategy with entry/exit rules",
+      "Risk management calculator (Excel + Google Sheets)",
+      "10 recorded chart-breakdown videos",
+      "Prop-firm challenge preparation checklist",
+      "Lifetime updates — every new edition free"
+    ],
+    "icon": "candlestick",
+    "cover": "from-orange-600 via-red-600 to-rose-700",
+    "badge": "Bestseller",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-forex-blueprint",
+    "testimonial": {
+      "quote": "I blew two accounts before this blueprint. Three months in, I passed my first $10k prop challenge. The risk management module alone is worth 10x the price.",
+      "author": "Tobi A.",
+      "role": "Funded Trader, Lagos"
+    }
+  },
+  {
+    "slug": "crypto-starter-pack",
+    "name": "Crypto Starter Pack for Nigerians",
+    "category": "Trading",
+    "price": 8500,
+    "tagline": "Buy, hold and trade crypto safely — built around the Nigerian reality (P2P, wallets, security).",
+    "description": "Everything a Nigerian beginner needs to enter crypto without getting scammed. From setting up secure wallets and using P2P properly, to spotting real projects vs rug pulls, to a simple long-term accumulation strategy.",
+    "whatsInside": [
+      "80-page beginner-friendly PDF guide",
+      "Step-by-step P2P buying walkthrough (with screenshots)",
+      "Wallet security checklist (never get drained)",
+      "Top-10 red flags of scam projects",
+      "Simple DCA strategy template"
+    ],
+    "icon": "coins",
+    "cover": "from-amber-500 via-orange-500 to-red-600",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-crypto-starter",
+    "testimonial": {
+      "quote": "As a complete newbie I was scared of losing money to scams. This pack held my hand through everything. Now I stack sats every month with confidence.",
+      "author": "Chiamaka O.",
+      "role": "Student, UNIZIK"
+    }
+  },
+  {
+    "slug": "jamb-350-success-pack",
+    "name": "JAMB 350+ Success Pack",
+    "category": "Education",
+    "price": 5000,
+    "compareAtPrice": 8000,
+    "tagline": "The study system, past-question drills and exam hacks that push scores past 300.",
+    "description": "A complete JAMB preparation system: a 12-week study timetable, solved past questions with explanations, subject-by-subject scoring strategies, and CBT exam-day tactics that stop careless mistakes from eating your score.",
+    "whatsInside": [
+      "12-week ready-made study timetable",
+      "5 years of solved past questions (all 4 subjects) with explanations",
+      "Subject scoring strategy guides (Eng, Maths, Physics, Chem, Bio, Govt...)",
+      "CBT simulation practice guide",
+      "Exam-day checklist & anxiety-control routine"
+    ],
+    "icon": "graduation",
+    "cover": "from-orange-500 via-amber-500 to-yellow-500",
+    "badge": "Hot Deal",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-jamb-pack",
+    "testimonial": {
+      "quote": "I scored 289 on my first attempt. Used this pack for my second sitting and hit 334. The timetable and solved questions changed everything for me.",
+      "author": "Ibrahim S.",
+      "role": "300-level Medicine, ABU Zaria"
+    }
+  },
+  {
+    "slug": "viral-ads-template-bundle",
+    "name": "Viral Ads Template Bundle",
+    "category": "Design",
+    "price": 6000,
+    "tagline": "150+ editable Canva templates that make your brand look like it has a design team.",
+    "description": "Scroll-stopping ad creatives, WhatsApp status flyers, Instagram carousels and story templates — all editable in free Canva. Designed for Nigerian small businesses, vendors and personal brands that want to look premium without hiring a designer.",
+    "whatsInside": [
+      "150+ Canva templates (ads, flyers, carousels, stories)",
+      "Nigerian-market color palettes & font pairings",
+      "Hook & caption swipe file (50 proven hooks)",
+      "Logo-ready brand kit template",
+      "Video tutorial: customize everything in 10 minutes"
+    ],
+    "icon": "palette",
+    "cover": "from-rose-500 via-red-500 to-orange-600",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-ads-bundle",
+    "testimonial": {
+      "quote": "My thrift page went from looking like every other vendor to looking like a real brand overnight. Sales DMs doubled in two weeks.",
+      "author": "Blessing E.",
+      "role": "Fashion Vendor, Port Harcourt"
+    }
+  },
+  {
+    "slug": "campus-hustle-playbook",
+    "name": "Campus Hustle Playbook",
+    "category": "Hustle Tools",
+    "price": 7500,
+    "tagline": "17 legit side hustles you can run from your hostel with just a phone.",
+    "description": "A practical playbook of income streams that actually work for Nigerian students — from freelancing and mini-importation to digital products and campus services. Each hustle comes with startup cost, realistic monthly income, and a step-by-step launch plan.",
+    "whatsInside": [
+      "17 hustle blueprints with startup costs & income ranges",
+      "Phone-only freelancing setup guide (Fiverr/Upwork)",
+      "Mini-importation supplier contact templates",
+      "Pricing & negotiation scripts for Nigerian clients",
+      "First ₦100k roadmap: 90-day action plan"
+    ],
+    "icon": "rocket",
+    "cover": "from-red-600 via-orange-600 to-amber-500",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-hustle-playbook",
+    "testimonial": {
+      "quote": "Started the freelancing blueprint in my second week. Made my first ₦45k within a month while still attending lectures. This book paid for itself 6 times over.",
+      "author": "Daniel K.",
+      "role": "Student, UNILAG"
+    }
+  },
+  {
+    "slug": "blaze-productivity-planner",
+    "name": "The Blaze Productivity Planner",
+    "category": "Hustle Tools",
+    "price": 4000,
+    "tagline": "A digital planner built for people juggling school, work and side hustles.",
+    "description": "A beautifully designed digital planner (Notion + printable PDF) that keeps students and hustlers organized: goal setting, weekly sprints, money tracking, and a daily focus system that kills procrastination.",
+    "whatsInside": [
+      "Notion template — duplicate in one click",
+      "Printable PDF planner (A4 & A5)",
+      "90-day goal-setting framework",
+      "Income & expense tracker",
+      "Daily deep-focus routine worksheet"
+    ],
+    "icon": "notebook",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-planner",
+    "testimonial": {
+      "quote": "I run two hustles alongside 400-level engineering. This planner is the only reason I'm not drowning. The weekly sprint system is genius.",
+      "author": "Fatima M.",
+      "role": "Engineering Student & Designer"
+    }
+  }
+]
