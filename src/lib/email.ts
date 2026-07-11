@@ -53,3 +53,34 @@ export async function sendEmail({
   }
   return true;
 }
+
+/**
+ * Adds/updates an email in your Brevo contacts, so newsletter signups are
+ * campaign-ready inside Brevo without CSV exports. Optionally add them to a
+ * specific list by setting BREVO_LIST_ID (the list's number in Brevo).
+ */
+export async function addBrevoContact(email: string): Promise<boolean> {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) return false;
+
+  const listId = Number(process.env.BREVO_LIST_ID);
+  const res = await fetch("https://api.brevo.com/v3/contacts", {
+    method: "POST",
+    headers: {
+      "api-key": apiKey,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      updateEnabled: true,
+      ...(Number.isFinite(listId) && listId > 0 ? { listIds: [listId] } : {}),
+    }),
+  });
+
+  if (!res.ok && res.status !== 204) {
+    console.error("[email] Brevo contact sync failed:", res.status, await res.text());
+    return false;
+  }
+  return true;
+}

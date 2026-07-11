@@ -16,6 +16,32 @@ export function isDeliveryConfigured() {
   return isEmailConfigured();
 }
 
+/**
+ * Sent when a product has no download link yet — the buyer still hears from
+ * us immediately instead of silence.
+ */
+export async function sendOrderConfirmationEmail(
+  customerEmail: string,
+  product: Product
+): Promise<boolean> {
+  if (!isEmailConfigured()) return false;
+
+  return sendEmail({
+    to: customerEmail,
+    subject: `Order confirmed: ${product.name} 🔥`,
+    html: `
+      <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px">
+        <h2 style="color:#ea580c">Your order is confirmed! 🔥</h2>
+        <p>We received your payment for <strong>${product.name}</strong> (${formatNaira(product.price)}). Your download is being prepared and will reach this email shortly.</p>
+        <p style="font-size:13px;color:#666">
+          Need it faster? <a href="${whatsappLink("Hi! I just paid for " + product.name + " — sending my receipt.")}" style="color:#ea580c">Message us on WhatsApp</a> with your payment reference and we'll send it right away.
+        </p>
+        <p style="font-size:13px;color:#666">— Coach Ernest Favour (Ernie Blaze)</p>
+      </div>
+    `,
+  });
+}
+
 export async function sendDeliveryEmail(
   customerEmail: string,
   product: Product

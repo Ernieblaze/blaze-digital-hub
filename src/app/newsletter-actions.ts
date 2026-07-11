@@ -1,5 +1,6 @@
 "use server";
 
+import { addBrevoContact } from "@/lib/email";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type SubscribeState = { ok: boolean; error?: string } | null;
@@ -29,6 +30,9 @@ export async function subscribe(
     console.error("[newsletter] insert failed:", error.message);
     return { ok: false, error: "Something went wrong — try again in a moment." };
   }
+
+  // Best-effort: also sync into Brevo contacts for campaigns.
+  await addBrevoContact(email);
 
   return { ok: true };
 }

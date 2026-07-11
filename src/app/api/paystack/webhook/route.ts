@@ -11,7 +11,7 @@
 
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { getProducts } from "@/lib/catalog";
-import { sendDeliveryEmail } from "@/lib/delivery";
+import { sendDeliveryEmail, sendOrderConfirmationEmail } from "@/lib/delivery";
 import { supabaseAdmin } from "@/lib/supabase";
 
 type ChargeEvent = {
@@ -41,6 +41,20 @@ export async function POST(request: Request) {
   if (!valid) return new Response("Invalid signature", { status: 401 });
 
   const event = JSON.parse(rawBody) as ChargeEvent;
+
+  // Refunds: flip the matching order's status so the books stay honest.
+  if (event.event === "refund.processed") {
+    const refund = event.data as unknown as { transaction_reference?: string };
+    const supabase = supabaseAdmin();
+    if (supabase && refund.transaction_reference) {
+      await supabase
+        .from("orders")
+        .update({ status: "refunded" })
+        .eq("paystack_reference", refund.transaction_reference);
+    }
+    return new Response("OK", { status: 200 });
+  }
+
   if (event.event !== "charge.success") {
     return new Response("Ignored", { status: 200 });
   }
@@ -76,14 +90,19 @@ export async function POST(request: Request) {
   }
 
   // Fire the delivery email (best-effort — the order record above is the
-  // source of truth either way).
+  // source of truth either way). If the product has no download link yet,
+  // send an order confirmation instead so the buyer never gets silence.
   if (product && email) {
-    const delivered = await sendDeliveryEmail(email, product);
-    if (supabase && delivered) {
-      await supabase
-        .from("orders")
-        .update({ delivered_at: new Date().toISOString() })
-        .eq("paystack_reference", reference);
+    if (product.downloadUrl) {
+      const delivered = await sendDeliveryEmail(email, product);
+      if (supabase && delivered) {
+        await supabase
+          .from("orders")
+          .update({ delivered_at: new Date().toISOString() })
+          .eq("paystack_reference", reference);
+      }
+    } else {
+      await sendOrderConfirmationEmail(email, product);
     }
   }
 

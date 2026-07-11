@@ -199,6 +199,22 @@ export default async function AdminDashboardPage() {
         </div>
       </div>
 
+      {/* Quick links — handy on phones */}
+      <div className="mt-4 flex flex-wrap gap-2">
+        <Button asChild size="sm" variant="secondary">
+          <Link href="/admin/orders">Orders</Link>
+        </Button>
+        <Button asChild size="sm" variant="secondary">
+          <Link href="/admin/subscribers">Subscribers</Link>
+        </Button>
+        <Button asChild size="sm" variant="secondary">
+          <Link href="/admin/products/new">Add product</Link>
+        </Button>
+        <Button asChild size="sm" variant="secondary">
+          <Link href="/admin/settings">Settings</Link>
+        </Button>
+      </div>
+
       <Separator className="my-6" />
 
       {/* Setup checklist — hidden once everything is done */}

@@ -43,8 +43,8 @@ const shopLinks = [
 const companyLinks = [
   { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
-  { href: "/#contact", label: "Contact" },
-  { href: "/login", label: "Buyer Login" },
+  { href: "/contact", label: "Contact" },
+  { href: "/login", label: "My Downloads" },
 ];
 
 const legalLinks = [

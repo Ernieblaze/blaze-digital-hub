@@ -10,6 +10,7 @@ import {
   generateCode,
   hashCode,
 } from "@/lib/buyer-auth";
+import { rateLimit } from "@/lib/rate-limit";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type PortalState =
@@ -22,6 +23,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export async function requestCode(_prev: PortalState, formData: FormData): Promise<PortalState> {
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   if (!EMAIL_RE.test(email)) return { step: "request", error: "Enter a valid email address." };
+  if (!rateLimit(`portal-request:${email}`, 3)) {
+    return { step: "request", error: "Too many codes requested — wait 15 minutes." };
+  }
 
   const supabase = supabaseAdmin();
   if (!supabase || !isEmailConfigured()) {
@@ -65,6 +69,9 @@ export async function verifyCode(_prev: PortalState, formData: FormData): Promis
   const code = String(formData.get("code") ?? "").trim();
   if (!EMAIL_RE.test(email)) return { step: "request", error: "Start again with your email." };
   if (!/^\d{6}$/.test(code)) return { step: "verify", email, error: "The code is 6 digits." };
+  if (!rateLimit(`portal-verify:${email}`, 6)) {
+    return { step: "request", error: "Too many wrong codes — request a fresh one in 15 minutes." };
+  }
 
   const supabase = supabaseAdmin();
   if (!supabase) return { step: "request", error: "Portal not available right now." };

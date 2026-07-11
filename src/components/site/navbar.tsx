@@ -20,7 +20,7 @@ const links = [
   { href: "/#shop", label: "Shop" },
   { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ];
 
 /** True after hydration — safe way to branch on client-only state like theme. */
