@@ -5,6 +5,7 @@ import {
   AlertTriangle,
   ArrowUpRight,
   BadgeCheck,
+  Mail,
   Pencil,
   Plus,
   Banknote,
@@ -24,6 +25,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Separator } from "@/components/ui/separator";
 import { isAdmin } from "@/lib/admin-auth";
 import { getPaystackStats, isPaystackConfigured } from "@/lib/paystack";
+import { isSupabaseConfigured, supabaseAdmin } from "@/lib/supabase";
 import { formatNaira, products } from "@/lib/products";
 import { logout } from "./actions";
 import { DeleteProductButton } from "./products/delete-button";
@@ -60,11 +62,27 @@ function StatCard({
   );
 }
 
+async function getSubscribers() {
+  const supabase = supabaseAdmin();
+  if (!supabase) return null;
+  const { data, count, error } = await supabase
+    .from("newsletter_subscribers")
+    .select("email, created_at", { count: "exact" })
+    .order("created_at", { ascending: false })
+    .limit(5);
+  if (error) {
+    console.error("[admin] subscribers query failed:", error.message);
+    return null;
+  }
+  return { count: count ?? 0, latest: data ?? [] };
+}
+
 export default async function AdminDashboardPage() {
   if (!(await isAdmin())) redirect("/admin/login");
 
-  const stats = await getPaystackStats();
+  const [stats, subscribers] = await Promise.all([getPaystackStats(), getSubscribers()]);
   const paystackReady = isPaystackConfigured();
+  const supabaseReady = isSupabaseConfigured();
   const productsWithLiveLink = products.filter((p) => !p.paystackUrl.includes("REPLACE"));
 
   return (
@@ -211,6 +229,56 @@ export default async function AdminDashboardPage() {
               </CardContent>
             </Card>
           </>
+        )}
+      </section>
+
+      <Separator className="my-8" />
+
+      {/* Newsletter subscribers (Supabase) */}
+      <section>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          Newsletter (Supabase)
+        </h2>
+        {!supabaseReady ? (
+          <Card className="border-orange-500/40">
+            <CardContent className="flex items-start gap-3 p-5">
+              <AlertTriangle className="mt-0.5 size-5 shrink-0 text-orange-500" />
+              <div className="text-sm">
+                <p className="font-semibold">Supabase not connected yet</p>
+                <p className="text-muted-foreground">
+                  Run <code className="rounded bg-muted px-1">supabase/schema.sql</code> in your
+                  Supabase SQL Editor, then add{" "}
+                  <code className="rounded bg-muted px-1">SUPABASE_URL</code> and{" "}
+                  <code className="rounded bg-muted px-1">SUPABASE_SERVICE_ROLE_KEY</code> to{" "}
+                  <code className="rounded bg-muted px-1">.env.local</code> and Vercel. Footer
+                  email signups will then be stored and counted here.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2">
+            <StatCard
+              icon={Mail}
+              label="Subscribers"
+              value={String(subscribers?.count ?? 0)}
+              hint="from the footer signup form"
+            />
+            <Card>
+              <CardContent className="p-5">
+                <p className="mb-2 text-sm text-muted-foreground">Latest signups</p>
+                {subscribers && subscribers.latest.length > 0 ? (
+                  <ul className="space-y-1 text-sm">
+                    {subscribers.latest.map((s) => (
+                      <li key={s.email} className="truncate">{s.email}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-sm text-muted-foreground">No signups yet.</p>
+                )}
+              </CardContent>
+            </Card>
+          </div>
         )}
       </section>
 

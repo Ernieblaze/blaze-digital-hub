@@ -27,7 +27,18 @@
       "PowerShell(Remove-Item \"src\\\\app\\\\favicon.ico\" -Confirm:$false)",
       "PowerShell(curl.exe -s -o \"$env:TEMP\\\\icon.png\" -w \"icon:%{http_code} %{content_type} \" http://localhost:3000/icon; curl.exe -s -o \"$env:TEMP\\\\aicon.png\" -w \"apple:%{http_code} %{content_type}`n\" http://localhost:3000/apple-icon)",
       "PowerShell(winget install --id GitHub.cli -e --accept-source-agreements --accept-package-agreements --silent)",
-      "PowerShell(git add -A)"
+      "PowerShell(git add -A)",
+      "PowerShell($deadline=\\(Get-Date\\).AddSeconds\\(90\\); while\\(\\(Get-Date\\) -lt $deadline\\){ if\\(Test-Path \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\"\\){ break }; Start-Sleep -Seconds 3 }; & \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" --version)",
+      "PowerShell(Get-Content \"C:\\\\Users\\\\ERNIEB~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Ernie-Blaze-blaze-digital-hub\\\\08baeea7-64d9-4d2a-9886-9a639909314c\\\\tasks\\\\bton69om9.output\" -Tail 3; Get-ChildItem \"C:\\\\Program Files\\\\GitHub CLI\",\"$env:LOCALAPPDATA\\\\Programs\\\\GitHub CLI\" -ErrorAction SilentlyContinue | Select-Object FullName)",
+      "PowerShell($deadline=\\(Get-Date\\).AddSeconds\\(150\\); $gh=$null; while\\(\\(Get-Date\\) -lt $deadline\\){ foreach\\($p in \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\",\"$env:LOCALAPPDATA\\\\Programs\\\\GitHub CLI\\\\gh.exe\"\\){ if\\(Test-Path $p\\){ $gh=$p; break } }; if\\($gh\\){ break }; Start-Sleep -Seconds 5 }; if\\($gh\\){ & $gh --version } else { \"not installed yet\"; Get-Content \"C:\\\\Users\\\\ERNIEB~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Ernie-Blaze-blaze-digital-hub\\\\08baeea7-64d9-4d2a-9886-9a639909314c\\\\tasks\\\\bton69om9.output\" -Tail 3 })",
+      "PowerShell($deadline=\\(Get-Date\\).AddSeconds\\(240\\); $gh=$null; while\\(\\(Get-Date\\) -lt $deadline\\){ foreach\\($p in \"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\",\"$env:LOCALAPPDATA\\\\Programs\\\\GitHub CLI\\\\gh.exe\"\\){ if\\(Test-Path $p\\){ $gh=$p; break } }; if\\($gh\\){ break }; Start-Sleep -Seconds 10 }; if\\($gh\\){ \"$gh\"; & $gh --version } else { \"still not installed\"; Get-Content \"C:\\\\Users\\\\ERNIEB~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Ernie-Blaze-blaze-digital-hub\\\\08baeea7-64d9-4d2a-9886-9a639909314c\\\\tasks\\\\bton69om9.output\" -Tail 5 })",
+      "PowerShell($out = \"protocol=https`nhost=github.com`n\" | git credential fill 2>$null; $creds=@{}; $out | ForEach-Object { $k,$v = $_ -split '=',2; if\\($k\\){ $creds[$k]=$v } }; \"username: $\\($creds['username']\\)\"; \"has token: $\\([bool]$creds['password']\\)\")",
+      "PowerShell(git remote add origin https://github.com/Ernieblaze/blaze-digital-hub.git)",
+      "PowerShell(git ls-remote origin 2>&1)",
+      "PowerShell(git push -u origin master)",
+      "PowerShell(git ls-remote origin)",
+      "PowerShell(npm install @supabase/supabase-js)",
+      "PowerShell(git push)"
     ]
   }
 }

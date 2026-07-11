@@ -71,6 +71,18 @@ On Vercel, add both under **Project → Settings → Environment Variables**. Tr
 come from **Vercel Analytics** (already wired in `layout.tsx`) — enable it in your Vercel
 project's Analytics tab after deploying.
 
+## 🗄️ Supabase (newsletter storage, Phase-2 backend)
+
+The footer newsletter form stores signups in Supabase. Setup:
+
+1. Create a project at [supabase.com](https://supabase.com) (free plan works).
+2. Open **SQL Editor**, paste the contents of `supabase/schema.sql`, run it.
+3. In **Project Settings → API**, copy the **Project URL** and **service_role key** into
+   `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` (in `.env.local` and on Vercel).
+
+Subscriber count + latest signups appear in the owner dashboard. Phase 2 will add an
+`orders` table fed by a Paystack webhook (schema already sketched in the SQL file).
+
 ## Future: buyer dashboard
 
 `/login` is a placeholder. When ready, add [Auth.js](https://authjs.dev) or [Clerk](https://clerk.com), gate a `/dashboard` route, and let buyers re-download purchases and claim bonuses.
