@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { ADMIN_COOKIE, adminSessionToken, isAdminConfigured } from "@/lib/admin-auth";
+import { ADMIN_COOKIE, adminPassword, adminSessionToken, isAdminConfigured } from "@/lib/admin-auth";
 
 export type LoginState = { error: string } | null;
 
@@ -11,8 +11,10 @@ export async function login(_prev: LoginState, formData: FormData): Promise<Logi
     return { error: "ADMIN_PASSWORD is not set. Add it to .env.local and restart the server." };
   }
 
+  // Trim both sides: phone keyboards add trailing spaces, and pasted env
+  // values can carry invisible newlines.
   const password = formData.get("password");
-  if (typeof password !== "string" || password !== process.env.ADMIN_PASSWORD) {
+  if (typeof password !== "string" || password.trim() !== adminPassword()) {
     return { error: "Wrong password. Try again." };
   }
 

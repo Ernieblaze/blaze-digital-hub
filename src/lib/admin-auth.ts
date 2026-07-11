@@ -12,15 +12,23 @@ import { cookies } from "next/headers";
 
 export const ADMIN_COOKIE = "blaze_admin_session";
 
+/**
+ * The configured password, trimmed — pasting into Vercel's env UI can leave
+ * an invisible trailing space/newline that would otherwise reject every login.
+ */
+export function adminPassword(): string | null {
+  return process.env.ADMIN_PASSWORD?.trim() || null;
+}
+
 /** Token stored in the cookie after a successful login. Null when no password is configured. */
 export function adminSessionToken(): string | null {
-  const password = process.env.ADMIN_PASSWORD;
+  const password = adminPassword();
   if (!password) return null;
   return createHash("sha256").update(`${password}:blaze-admin-v1`).digest("hex");
 }
 
 export function isAdminConfigured() {
-  return Boolean(process.env.ADMIN_PASSWORD);
+  return Boolean(adminPassword());
 }
 
 export async function isAdmin(): Promise<boolean> {
