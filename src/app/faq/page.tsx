@@ -47,6 +47,10 @@ const faqs = [
     a: "The trading and design products work anywhere. The JAMB pack and some hustle blueprints are built specifically for the Nigerian context — that's their superpower.",
   },
   {
+    q: "Can I earn money promoting your products?",
+    a: "Yes — our affiliate program pays you a commission on every sale made through your personal referral links. Log in to your Dashboard with just your email, copy your links, share them anywhere, and withdraw your earnings to your bank account. See the Become an Affiliate page for details.",
+  },
+  {
     q: "How do I contact support?",
     a: `Fastest: WhatsApp. You can also email ${siteSettings.contactEmail}. Real humans reply — usually within a few hours.`,
   },

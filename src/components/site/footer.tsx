@@ -44,7 +44,8 @@ const companyLinks = [
   { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
-  { href: "/login", label: "My Downloads" },
+  { href: "/affiliates", label: "Become an Affiliate 💸" },
+  { href: "/login", label: "My Account" },
 ];
 
 const legalLinks = [
