@@ -139,11 +139,17 @@ export async function POST(request: Request) {
       }
     }
   }
-  sendEmail({
-    to: siteSettings.contactEmail,
-    subject: `💰 Sale: ${product?.name ?? "a product"} — ${formatNaira(amount / 100)}`,
-    html: `<p><strong>${email}</strong> just paid <strong>${formatNaira(amount / 100)}</strong> for <strong>${product?.name ?? "unknown product"}</strong> (ref ${reference}).${metadata?.ref_code ? ` Referred by code ${metadata.ref_code}.` : ""}</p>`,
-  }).catch(() => {});
+  // Awaited: unawaited promises can be dropped when the serverless
+  // instance freezes after the response. Failure is still non-fatal.
+  try {
+    await sendEmail({
+      to: siteSettings.contactEmail,
+      subject: `💰 Sale: ${product?.name ?? "a product"} — ${formatNaira(amount / 100)}`,
+      html: `<p><strong>${email}</strong> just paid <strong>${formatNaira(amount / 100)}</strong> for <strong>${product?.name ?? "unknown product"}</strong> (ref ${reference}).${metadata?.ref_code ? ` Referred by code ${metadata.ref_code}.` : ""}</p>`,
+    });
+  } catch (error) {
+    console.error("[webhook] sale alert failed:", error);
+  }
 
   // Fire the delivery email (best-effort — the order record above is the
   // source of truth either way). If the product has no download link yet,
