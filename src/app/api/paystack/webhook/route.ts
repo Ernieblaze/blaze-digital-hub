@@ -50,6 +50,26 @@ export async function POST(request: Request) {
     timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
   if (!valid) return new Response("Invalid signature", { status: 401 });
 
+  // TEMPORARY SHARED-BUSINESS MODE: when Blaze runs on the old approved
+  // Paystack business, forward every event to the RSU app's original
+  // webhook (set PAYSTACK_FORWARD_URL in env) so its subscriptions keep
+  // working. Remove the env var once Blaze has its own live business.
+  const forwardUrl = process.env.PAYSTACK_FORWARD_URL;
+  if (forwardUrl) {
+    try {
+      await fetch(forwardUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-paystack-signature": signature,
+        },
+        body: rawBody,
+      });
+    } catch (error) {
+      console.error("[webhook] forward to RSU failed:", error);
+    }
+  }
+
   const event = JSON.parse(rawBody) as ChargeEvent;
 
   // Refunds: flip the matching order's status so the books stay honest.
@@ -78,9 +98,16 @@ export async function POST(request: Request) {
     metadata?.product_slug ??
     metadata?.custom_fields?.find((f) => f.variable_name === "product_slug")?.value;
   let product = metaSlug ? products.find((p) => p.slug === metaSlug) : undefined;
-  if (!product) {
+  if (!product && !metaSlug) {
     const priceMatches = products.filter((p) => p.price === amount / 100);
     if (priceMatches.length === 1) product = priceMatches[0];
+  }
+
+  // Shared-business mode: charges that aren't ours (no metadata, no price
+  // match — e.g. RSU subscriptions) are forwarded above but NOT recorded
+  // as Blaze orders.
+  if (!product && !metaSlug) {
+    return new Response("Not a store charge", { status: 200 });
   }
 
   // AFFILIATE COMMISSION: the ref code arrived via server-set checkout
