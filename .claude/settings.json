@@ -64,7 +64,13 @@
       "PowerShell($deadline=\\(Get-Date\\).AddSeconds\\(40\\); $f=\"C:\\\\Users\\\\ERNIEB~1\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Ernie-Blaze-blaze-digital-hub\\\\08baeea7-64d9-4d2a-9886-9a639909314c\\\\tasks\\\\byfhtmco8.output\"; while\\(\\(Get-Date\\) -lt $deadline\\){ if\\(\\(Test-Path $f\\) -and \\(Select-String -Path $f -Pattern 'Ready' -Quiet\\)\\){ break }; Start-Sleep -Milliseconds 1500 }; Get-Content $f -Tail 4)",
       "Bash(curl -s -o /dev/null -D /tmp/h.txt https://blaze-digital-hub.vercel.app/r/HEALTHCHK?to=/faq)",
       "Bash(curl -s -o /dev/null -w '%{http_code}' https://blaze-digital-hub.vercel.app/)",
-      "PowerShell(curl.exe -s -o NUL -w \"localhost:3000 -> %{http_code}`n\" http://localhost:3000/)"
+      "PowerShell(curl.exe -s -o NUL -w \"localhost:3000 -> %{http_code}`n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" -L \"https://drive.google.com/file/d/1rSALkpOTlXuWFI7y1ZUPULmkZd_AGBEQ/view?usp=sharing\")",
+      "Bash(echo 'view link: __CMDSUB_OUTPUT__')",
+      "Bash(curl -s -o /tmp/dl.bin -w \"%{http_code}\" -L \"https://drive.google.com/uc?export=download&id=1rSALkpOTlXuWFI7y1ZUPULmkZd_AGBEQ\")",
+      "Bash(echo 'direct download: __TRACKED_VAR__')",
+      "Bash(head -c 8 /tmp/dl.bin)",
+      "Bash(xxd)"
     ]
   }
 }

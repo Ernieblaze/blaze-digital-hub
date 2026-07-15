@@ -18,9 +18,8 @@ export default async function NewProductPage() {
         <CardHeader>
           <CardTitle className="text-xl">Add a new product</CardTitle>
           <CardDescription>
-            Saves to <code className="rounded bg-muted px-1">src/lib/products-data.json</code> —
-            the shop, featured section and product page appear instantly. Push to GitHub to
-            update the live site.
+            Saves straight to your database — the shop, featured section and product page go
+            live within a minute, from any device.
           </CardDescription>
         </CardHeader>
         <CardContent>
