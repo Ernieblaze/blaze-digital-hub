@@ -4,6 +4,7 @@
  * live server), these can be changed from the admin at any time.
  */
 
+import categoriesData from "@/lib/categories-data.json";
 import { siteSettings } from "@/lib/site-settings";
 import { supabaseAdmin } from "@/lib/supabase";
 
@@ -19,7 +20,27 @@ export const CONFIG_DEFAULTS = {
   hero_highlight: siteSettings.heroHighlight,
   hero_subline: siteSettings.heroSubline,
   announcement: siteSettings.announcement,
+  /* Shop categories as a JSON array — DB-backed so the admin can manage
+     them on the live site (the file is only the seed). */
+  categories: JSON.stringify(categoriesData),
 };
+
+/** Current category list (DB-backed, file as fallback). */
+export async function getCategories(): Promise<string[]> {
+  try {
+    const parsed = JSON.parse(await getConfig("categories")) as unknown;
+    if (Array.isArray(parsed) && parsed.every((c) => typeof c === "string") && parsed.length > 0) {
+      return parsed;
+    }
+  } catch {
+    /* fall through to seed */
+  }
+  return categoriesData;
+}
+
+export async function setCategories(list: string[]): Promise<boolean> {
+  return setConfig("categories", JSON.stringify(list));
+}
 
 export type ConfigKey = keyof typeof CONFIG_DEFAULTS;
 

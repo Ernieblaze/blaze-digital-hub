@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAdmin } from "@/lib/admin-auth";
+import { getCategories } from "@/lib/app-config";
 import { ProductForm } from "../product-form";
 
 export const metadata: Metadata = {
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 
 export default async function NewProductPage() {
   if (!(await isAdmin())) redirect("/admin/login");
+  const productCategories = await getCategories();
 
   return (
     <main className="mx-auto w-full max-w-3xl px-4 py-8">
@@ -23,7 +25,7 @@ export default async function NewProductPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ProductForm />
+          <ProductForm productCategories={productCategories} />
         </CardContent>
       </Card>
     </main>

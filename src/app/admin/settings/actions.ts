@@ -9,7 +9,6 @@ import { getProducts } from "@/lib/catalog";
 import type { SiteSettings } from "@/lib/site-settings";
 
 const SETTINGS_FILE = path.join(process.cwd(), "src", "lib", "site-settings-data.json");
-const CATEGORIES_FILE = path.join(process.cwd(), "src", "lib", "categories-data.json");
 
 const READONLY_HINT =
   "Couldn't write the data file. On the live site the file system is read-only — make changes locally, then push to deploy.";
@@ -95,18 +94,19 @@ export async function addCategory(
 ): Promise<SettingsFormState> {
   if (!(await isAdmin())) redirect("/admin/login");
 
+  const { getCategories, setCategories } = await import("@/lib/app-config");
+
   const name = String(formData.get("name") ?? "").trim();
   if (!name) return { error: "Category name is required." };
 
-  const list = JSON.parse(await readFile(CATEGORIES_FILE, "utf8")) as string[];
+  const list = await getCategories();
   if (list.some((c) => c.toLowerCase() === name.toLowerCase())) {
     return { error: `“${name}” already exists.` };
   }
 
-  try {
-    await writeFile(CATEGORIES_FILE, JSON.stringify([...list, name], null, 2) + "\n", "utf8");
-  } catch {
-    return { error: READONLY_HINT };
+  // DB-backed: works on the live site from any device.
+  if (!(await setCategories([...list, name]))) {
+    return { error: "Couldn't save — is Supabase connected?" };
   }
 
   revalidateSite();
@@ -116,16 +116,14 @@ export async function addCategory(
 export async function deleteCategory(formData: FormData): Promise<void> {
   if (!(await isAdmin())) redirect("/admin/login");
 
+  const { getCategories, setCategories } = await import("@/lib/app-config");
+
   const name = String(formData.get("name") ?? "");
   const products = await getProducts();
   // Never orphan products — the UI disables the button, this guards direct POSTs.
   if (products.some((p) => p.category === name)) return;
 
-  const list = JSON.parse(await readFile(CATEGORIES_FILE, "utf8")) as string[];
-  await writeFile(
-    CATEGORIES_FILE,
-    JSON.stringify(list.filter((c) => c !== name), null, 2) + "\n",
-    "utf8"
-  );
+  const list = await getCategories();
+  await setCategories(list.filter((c) => c !== name));
   revalidateSite();
 }

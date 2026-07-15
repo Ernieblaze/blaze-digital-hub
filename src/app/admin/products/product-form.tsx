@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import Link from "next/link";
 import { Loader2, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { coverPresets, productCategories, productIcons, type Product } from "@/lib/products";
+import { coverPresets, productIcons, type Product } from "@/lib/products";
 import { saveProduct, type ProductFormState } from "./actions";
 
 const inputClass =
@@ -20,7 +20,13 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-export function ProductForm({ product }: { product?: Product }) {
+export function ProductForm({
+  product,
+  productCategories,
+}: {
+  product?: Product;
+  productCategories: string[];
+}) {
   const [state, action, pending] = useActionState<ProductFormState, FormData>(saveProduct, null);
 
   return (

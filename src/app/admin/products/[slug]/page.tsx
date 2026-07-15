@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAdmin } from "@/lib/admin-auth";
+import { getCategories } from "@/lib/app-config";
 import { getProductBySlug } from "@/lib/catalog";
 import { ProductForm } from "../product-form";
 
@@ -18,7 +19,10 @@ export default async function EditProductPage({
   if (!(await isAdmin())) redirect("/admin/login");
 
   const { slug } = await params;
-  const product = await getProductBySlug(slug);
+  const [product, productCategories] = await Promise.all([
+    getProductBySlug(slug),
+    getCategories(),
+  ]);
   if (!product) notFound();
 
   return (
@@ -32,7 +36,7 @@ export default async function EditProductPage({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ProductForm product={product} />
+          <ProductForm product={product} productCategories={productCategories} />
         </CardContent>
       </Card>
     </main>

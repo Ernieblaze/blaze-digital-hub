@@ -7,9 +7,9 @@ import { redirect } from "next/navigation";
 import { isAdmin } from "@/lib/admin-auth";
 import { getProducts, productToRow } from "@/lib/catalog";
 import { supabaseAdmin } from "@/lib/supabase";
+import { getCategories } from "@/lib/app-config";
 import {
   coverPresets,
-  productCategories,
   productIcons,
   products as fileProducts,
   type Category,
@@ -70,7 +70,7 @@ export async function saveProduct(
 
   if (!name) return { error: "Product name is required." };
   if (!Number.isFinite(price) || price <= 0) return { error: "Price must be a positive number." };
-  if (!productCategories.includes(category)) return { error: "Pick a valid category." };
+  if (!(await getCategories()).includes(category)) return { error: "Pick a valid category." };
   if (!productIcons.includes(icon)) return { error: "Pick a valid cover icon." };
 
   const whatsInside = str("whatsInside")

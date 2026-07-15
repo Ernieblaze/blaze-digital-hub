@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { ProductCard } from "@/components/site/product-card";
 import { SectionHeading } from "@/components/site/motion";
-import { categories, type Product } from "@/lib/products";
+import type { Product } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
 const sortOptions = [
@@ -33,6 +33,9 @@ function sortProducts(list: Product[], sort: SortValue) {
 
 export function Shop({ products }: { products: Product[] }) {
   const [active, setActive] = useState<string>("All");
+  // Pills derive from the live catalog, so new categories appear the moment
+  // a product uses them — no separate list to keep in sync.
+  const categories = ["All", ...new Set(products.map((p) => p.category))];
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<SortValue>("featured");
 
