@@ -32,14 +32,18 @@ export function ProductCover({
   className?: string;
 }) {
   if (product.image) {
+    // Uploaded covers show at their FULL natural ratio (no cropping) —
+    // `aspect-auto`/`h-auto` at the end override any aspect classes the
+    // parent passes for the gradient fallback.
     return (
-      <div className={cn("relative overflow-hidden", className)}>
+      <div className={cn("relative overflow-hidden", className, "aspect-auto h-auto")}>
         <Image
           src={product.image}
           alt={product.name}
-          fill
+          width={1200}
+          height={1900}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover"
+          className="h-auto w-full"
         />
       </div>
     );

@@ -70,7 +70,8 @@
       "Bash(curl -s -o /tmp/dl.bin -w \"%{http_code}\" -L \"https://drive.google.com/uc?export=download&id=1rSALkpOTlXuWFI7y1ZUPULmkZd_AGBEQ\")",
       "Bash(echo 'direct download: __TRACKED_VAR__')",
       "Bash(head -c 8 /tmp/dl.bin)",
-      "Bash(xxd)"
+      "Bash(xxd)",
+      "Bash(curl -s -o /tmp/prod.html -w '%{http_code}' https://blaze-digital-hub.vercel.app/products/understand-your-body-better-as-a-woman)"
     ]
   }
 }
