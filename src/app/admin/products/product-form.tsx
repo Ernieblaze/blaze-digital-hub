@@ -96,12 +96,26 @@ export function ProductForm({
         />
       </Field>
 
-      <Field label="Real cover image (optional — drop the file in public/products/ first, e.g. /products/my-product.jpg)">
+      <Field label="Cover image — upload straight from your device (JPG/PNG, under 6MB)">
+        <input
+          type="file"
+          name="imageFile"
+          accept="image/jpeg,image/png,image/webp,image/gif"
+          className={`${inputClass} file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-primary-foreground`}
+        />
+        {product?.image && (
+          <p className="mt-1 text-xs text-muted-foreground">
+            Current image is set — uploading a new one replaces it.
+          </p>
+        )}
+      </Field>
+
+      <Field label="…or paste an image URL instead (optional)">
         <input
           name="image"
           defaultValue={product?.image}
           className={inputClass}
-          placeholder="/products/my-product.jpg"
+          placeholder="https://…"
         />
       </Field>
 

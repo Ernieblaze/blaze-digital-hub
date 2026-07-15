@@ -8,6 +8,7 @@ import { isAdmin } from "@/lib/admin-auth";
 import { getProducts, productToRow } from "@/lib/catalog";
 import { supabaseAdmin } from "@/lib/supabase";
 import { getCategories } from "@/lib/app-config";
+import { uploadProductImage } from "@/lib/storage";
 import {
   coverPresets,
   productIcons,
@@ -82,6 +83,16 @@ export async function saveProduct(
   const originalSlug = str("originalSlug");
   const slug = str("slug") ? slugify(str("slug")) : slugify(name);
 
+  // Cover image: a direct file upload wins over a pasted URL.
+  let imageUrl =
+    str("image").startsWith("/") || str("image").startsWith("http") ? str("image") : "";
+  const imageFile = formData.get("imageFile");
+  if (imageFile instanceof File && imageFile.size > 0) {
+    const uploaded = await uploadProductImage(imageFile, slug);
+    if (uploaded.error) return { error: uploaded.error };
+    imageUrl = uploaded.url!;
+  }
+
   const product: Product = {
     slug,
     name,
@@ -97,9 +108,7 @@ export async function saveProduct(
     cover: coverPresets.includes(str("cover") as (typeof coverPresets)[number])
       ? str("cover")
       : coverPresets[0],
-    ...(str("image").startsWith("/") || str("image").startsWith("http")
-      ? { image: str("image") }
-      : {}),
+    ...(imageUrl ? { image: imageUrl } : {}),
     ...(badge === "Bestseller" || badge === "New" || badge === "Hot Deal" ? { badge } : {}),
     ...(formData.get("featured") ? { featured: true } : {}),
     paystackUrl: str("paystackUrl") || `https://paystack.shop/pay/REPLACE-${slug}`,
