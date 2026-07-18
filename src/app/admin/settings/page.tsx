@@ -7,7 +7,12 @@ import { isAdmin } from "@/lib/admin-auth";
 import { getAllConfig, getCategories } from "@/lib/app-config";
 import { getProducts } from "@/lib/catalog";
 import { siteSettings } from "@/lib/site-settings";
-import { CategoryManager, HomeContentForm, SiteSettingsForm } from "./settings-forms";
+import {
+  CategoryManager,
+  ClearOrderHistoryButton,
+  HomeContentForm,
+  SiteSettingsForm,
+} from "./settings-forms";
 
 export const metadata: Metadata = {
   title: "Site Settings",
@@ -69,6 +74,21 @@ export default async function AdminSettingsPage() {
         </CardHeader>
         <CardContent>
           <CategoryManager categories={productCategories} inUse={inUse} />
+        </CardContent>
+      </Card>
+
+      <Card className="mt-6 border-red-500/40">
+        <CardHeader>
+          <CardTitle className="text-xl">Danger zone</CardTitle>
+          <CardDescription>
+            Wipes every recorded order (test purchases included) so revenue charts and
+            sales-by-product start from zero. Note: cleared buyers also lose the purchase
+            list in their buyer portal (emailed files still work). Export the CSV from
+            Orders first if you want a copy.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ClearOrderHistoryButton />
         </CardContent>
       </Card>
     </main>

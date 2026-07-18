@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import type { SiteSettings } from "@/lib/site-settings";
 import {
   addCategory,
+  clearOrderHistory,
   deleteCategory,
   saveHomeContent,
   saveSettings,
@@ -154,5 +155,37 @@ export function CategoryManager({
       </form>
       {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
     </div>
+  );
+}
+
+/** Danger zone: wipe the recorded order history so analytics start fresh. */
+export function ClearOrderHistoryButton() {
+  const [state, action, pending] = useActionState<SettingsFormState, FormData>(
+    clearOrderHistory,
+    null
+  );
+
+  return (
+    <form
+      action={action}
+      onSubmit={(e) => {
+        if (
+          !confirm(
+            "Delete ALL recorded orders? Sales stats and order history restart from zero. Export the CSV from Orders first if you want a copy. This cannot be undone."
+          )
+        )
+          e.preventDefault();
+      }}
+      className="space-y-2"
+    >
+      {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
+      {state?.saved && (
+        <p className="text-sm text-emerald-500">Order history cleared — analytics start fresh.</p>
+      )}
+      <Button type="submit" disabled={pending} variant="destructive" className="font-semibold">
+        {pending ? <Loader2 className="size-4 animate-spin" /> : <Trash2 className="size-4" />}
+        Clear all order history
+      </Button>
+    </form>
   );
 }

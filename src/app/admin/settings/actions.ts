@@ -113,6 +113,32 @@ export async function addCategory(
   return { saved: true };
 }
 
+/**
+ * Danger zone: wipes the whole order history (Supabase `orders`) so sales
+ * analytics start from zero — e.g. after test purchases during setup.
+ * Export a CSV from /admin/orders first if you want to keep the records.
+ */
+export async function clearOrderHistory(
+  _prev: SettingsFormState,
+  _formData: FormData
+): Promise<SettingsFormState> {
+  if (!(await isAdmin())) redirect("/admin/login");
+
+  const { supabaseAdmin } = await import("@/lib/supabase");
+  const supabase = supabaseAdmin();
+  if (!supabase) return { error: "Couldn't clear — is Supabase connected?" };
+
+  const { error } = await supabase
+    .from("orders")
+    .delete()
+    .not("paystack_reference", "is", null);
+  if (error) return { error: `Couldn't clear orders: ${error.message}` };
+
+  revalidatePath("/admin");
+  revalidatePath("/admin/orders");
+  return { saved: true };
+}
+
 export async function deleteCategory(formData: FormData): Promise<void> {
   if (!(await isAdmin())) redirect("/admin/login");
 
