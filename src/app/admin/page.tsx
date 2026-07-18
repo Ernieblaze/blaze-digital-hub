@@ -34,6 +34,7 @@ import { logout } from "./actions";
 import { importCatalogToSupabase } from "./products/actions";
 import { DeleteProductButton } from "./products/delete-button";
 import { groupDailyRevenue, RevenueChart } from "./revenue-chart";
+import { TransactionsTable } from "./transactions-table";
 
 export const metadata: Metadata = {
   title: "Owner Dashboard",
@@ -193,7 +194,6 @@ export default async function AdminDashboardPage() {
     },
   ];
   const remaining = checklist.filter((c) => !c.done).length;
-  const productsWithLiveLink = products.filter((p) => !p.paystackUrl.includes("REPLACE"));
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8">
@@ -354,43 +354,19 @@ export default async function AdminDashboardPage() {
                     No transactions yet — they&apos;ll show up here the moment someone pays.
                   </p>
                 ) : (
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b text-left text-muted-foreground">
-                        <th className="pb-2 pr-4 font-medium">Customer</th>
-                        <th className="pb-2 pr-4 font-medium">Amount</th>
-                        <th className="pb-2 pr-4 font-medium">Status</th>
-                        <th className="pb-2 pr-4 font-medium">Channel</th>
-                        <th className="pb-2 font-medium">Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {stats.recent.map((t) => (
-                        <tr key={t.id} className="border-b last:border-0">
-                          <td className="py-2 pr-4">{t.customer.email}</td>
-                          <td className="py-2 pr-4 font-medium">{formatNaira(t.amount / 100)}</td>
-                          <td className="py-2 pr-4">
-                            {t.status === "success" ? (
-                              <span className="inline-flex items-center gap-1 text-emerald-500">
-                                <CheckCircle2 className="size-3.5" /> success
-                              </span>
-                            ) : (
-                              <span className="inline-flex items-center gap-1 text-red-500">
-                                <XCircle className="size-3.5" /> {t.status}
-                              </span>
-                            )}
-                          </td>
-                          <td className="py-2 pr-4">{t.channel}</td>
-                          <td className="py-2 text-muted-foreground">
-                            {new Date(t.paid_at ?? t.created_at).toLocaleString("en-NG", {
-                              dateStyle: "medium",
-                              timeStyle: "short",
-                            })}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  <TransactionsTable
+                    rows={stats.recent.map((t) => ({
+                      id: t.id,
+                      customer_email: t.customer.email,
+                      amount_kobo: t.amount,
+                      status: t.status,
+                      channel: t.channel,
+                      date: new Date(t.paid_at ?? t.created_at).toLocaleString("en-NG", {
+                        dateStyle: "medium",
+                        timeStyle: "short",
+                      }),
+                    }))}
+                  />
                 )}
               </CardContent>
             </Card>
@@ -619,12 +595,12 @@ export default async function AdminDashboardPage() {
           <StatCard icon={Package} label="Products live" value={String(products.length)} />
           <StatCard
             icon={BadgeCheck}
-            label="Checkout links set"
-            value={`${productsWithLiveLink.length} / ${products.length}`}
+            label="Deliverable"
+            value={`${downloadsSet} / ${products.length}`}
             hint={
-              productsWithLiveLink.length === products.length
-                ? "all products sellable"
-                : "some still use placeholder links"
+              downloadsSet === products.length
+                ? "every product has its file — safe to sell"
+                : "some products have NO download file yet"
             }
           />
           <StatCard
@@ -657,13 +633,13 @@ export default async function AdminDashboardPage() {
                   <th className="pb-2 pr-4 font-medium">Category</th>
                   <th className="pb-2 pr-4 font-medium">Price</th>
                   <th className="pb-2 pr-4 font-medium">Badge</th>
-                  <th className="pb-2 pr-4 font-medium">Checkout link</th>
+                  <th className="pb-2 pr-4 font-medium">Delivery</th>
                   <th className="pb-2 font-medium">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {products.map((p) => {
-                  const linkReady = !p.paystackUrl.includes("REPLACE");
+                  const deliverable = Boolean(p.downloadUrl);
                   return (
                     <tr key={p.slug} className="border-b last:border-0">
                       <td className="py-2.5 pr-4 font-medium">
@@ -685,13 +661,13 @@ export default async function AdminDashboardPage() {
                       </td>
                       <td className="py-2.5 pr-4">{p.badge ?? "—"}</td>
                       <td className="py-2.5 pr-4">
-                        {linkReady ? (
+                        {deliverable ? (
                           <span className="inline-flex items-center gap-1 text-emerald-500">
-                            <CheckCircle2 className="size-3.5" /> ready
+                            <CheckCircle2 className="size-3.5" /> file attached
                           </span>
                         ) : (
                           <span className="inline-flex items-center gap-1 text-orange-500">
-                            <AlertTriangle className="size-3.5" /> placeholder
+                            <AlertTriangle className="size-3.5" /> no file — don&apos;t sell yet
                           </span>
                         )}
                       </td>
@@ -718,6 +694,71 @@ export default async function AdminDashboardPage() {
           </CardContent>
         </Card>
       </section>
+
+      <Separator className="my-8" />
+
+      {/* Course launch playbook — the repeatable workflow, always at hand */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">📖 Course Launch Playbook</CardTitle>
+          <CardDescription>
+            The exact routine for every new course — from file to first ad. Tap to expand.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <details className="group">
+            <summary className="cursor-pointer text-sm font-semibold text-primary">
+              Show the 8 steps
+            </summary>
+            <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm">
+              <li>
+                <strong>Export the course as PDF</strong> (Canva/Docs → Download → PDF). Name it
+                cleanly, e.g. <code className="rounded bg-muted px-1">My-Course-Name.pdf</code>.
+              </li>
+              <li>
+                <strong>Upload to Google Drive</strong> (helloblazedigitalhub account) → right-click
+                → Share → &ldquo;Anyone with the link&rdquo; → Copy link. Then turn it into a
+                direct-download link:{" "}
+                <code className="rounded bg-muted px-1 break-all">
+                  https://drive.google.com/uc?export=download&amp;id=FILE_ID
+                </code>{" "}
+                (the FILE_ID is the long code between /d/ and /view in the copied link).
+              </li>
+              <li>
+                <strong>Design the poster</strong> in Canva (same tall size as your first one),
+                download as <strong>JPG</strong> (smaller = uploads reliably).
+              </li>
+              <li>
+                <strong>Add product</strong> (button above): name, category, price + compare-at
+                price, tagline, description, what&apos;s inside, upload the poster, paste the
+                download link, tick Featured → Save.
+              </li>
+              <li>
+                <strong>Verify before advertising:</strong> open the product page → buy it yourself
+                (₦ small real charge) → confirm the Download button works and the email arrives.
+                Never run ads to an unverified product.
+              </li>
+              <li>
+                <strong>Copy the ad link:</strong> the product page URL, e.g.{" "}
+                <code className="rounded bg-muted px-1 break-all">
+                  blaze-digital-hub.vercel.app/products/your-course-slug
+                </code>
+                . That page IS your ad landing page — use it as the destination in Facebook/TikTok
+                Ads Manager. One product = one ad campaign = clean results.
+              </li>
+              <li>
+                <strong>Launch promo (optional):</strong> create a coupon in Coupons (e.g.
+                LAUNCH20) and mention it in the ad creative.
+              </li>
+              <li>
+                <strong>Track:</strong> Orders section = sales per product · Leads = people who
+                almost bought (email them!) · Vercel Analytics = which ads bring traffic ·
+                Affiliates = give partners their links from /affiliates.
+              </li>
+            </ol>
+          </details>
+        </CardContent>
+      </Card>
 
       <p className="mt-8 text-center text-xs text-muted-foreground">
         Traffic insights (page views, top pages, countries) come from Vercel Analytics once the

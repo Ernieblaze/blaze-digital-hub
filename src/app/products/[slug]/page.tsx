@@ -76,7 +76,7 @@ export default async function ProductPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Navbar />
-      <main className="flex-1 pt-24 pb-20">
+      <main className="flex-1 pt-24 pb-32 sm:pb-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Link
             href="/#shop"
@@ -263,6 +263,30 @@ export default async function ProductPage({ params }: PageProps) {
           ) : null}
         </div>
       </main>
+
+      {/* Sticky buy bar — phones only. Ad traffic is 90% mobile; the price
+          and Buy button stay in reach no matter how far they scroll. */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/95 backdrop-blur-md sm:hidden">
+        <div className="flex items-center justify-between gap-3 px-4 py-3">
+          <div className="min-w-0">
+            <p className="truncate text-xs text-muted-foreground">{product.name}</p>
+            <p className="text-lg font-extrabold">
+              {formatNaira(product.price)}
+              {product.compareAtPrice ? (
+                <span className="ml-2 text-sm font-normal text-muted-foreground line-through">
+                  {formatNaira(product.compareAtPrice)}
+                </span>
+              ) : null}
+            </p>
+          </div>
+          <Button asChild size="lg" className="shrink-0 font-semibold shadow-lg shadow-orange-500/25">
+            <Link href={`/checkout/${product.slug}`}>
+              Buy Now <ArrowUpRight className="size-4" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+
       <Footer />
     </>
   );
