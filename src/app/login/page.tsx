@@ -147,7 +147,7 @@ export default async function BuyerPortalPage({
                                 </Button>
                               ) : (
                                 <span className="text-xs text-muted-foreground">
-                                  Link coming — WhatsApp us for instant delivery
+                                  Link coming — email us for instant delivery
                                 </span>
                               )}
                             </div>

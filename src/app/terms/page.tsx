@@ -59,7 +59,7 @@ export default function TermsPage() {
         {
           heading: "8. Contact",
           body: [
-            `Questions about these terms? Email ${siteSettings.contactEmail} or reach us on WhatsApp via the chat button on any page.`,
+            `Questions about these terms? Email ${siteSettings.contactEmail} — the mail button on any page opens a message to us directly.`,
           ],
         },
       ]}

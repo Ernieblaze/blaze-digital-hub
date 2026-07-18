@@ -7,7 +7,7 @@ import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { ProductCard } from "@/components/site/product-card";
 import { getProducts } from "@/lib/catalog";
-import { siteSettings, whatsappLink } from "@/lib/site-settings";
+import { siteSettings } from "@/lib/site-settings";
 
 export const revalidate = 3600;
 
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: "I paid but didn't get my product. What do I do?",
-    a: "First check your spam/promotions folder and confirm the email you entered at checkout. Still nothing after 30 minutes? Message us on WhatsApp with your payment reference and we'll resend it immediately.",
+    a: `First check your spam/promotions folder and confirm the email you entered at checkout. Still nothing after 30 minutes? Email us at ${siteSettings.contactEmail} with your payment reference and we'll resend it immediately.`,
   },
   {
     q: "Do I get updates when a product is improved?",
@@ -68,7 +68,7 @@ export default async function FaqPage() {
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-center text-muted-foreground">
             Everything about delivery, payments and updates. Can&apos;t find your answer?
-            WhatsApp us — we reply fast.
+            Email us — we reply fast.
           </p>
 
           <div className="mt-10 space-y-4">
@@ -84,8 +84,8 @@ export default async function FaqPage() {
 
           <div className="mt-12 text-center">
             <Button asChild size="lg" className="font-semibold shadow-lg shadow-orange-500/25">
-              <a href={whatsappLink("Hi! I have a question about Blaze Digital Hub.")} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="size-4" /> Chat with us on WhatsApp
+              <a href={`mailto:${siteSettings.contactEmail}?subject=${encodeURIComponent("Question about Blaze Digital Hub")}`}>
+                <MessageCircle className="size-4" /> Email us — {siteSettings.contactEmail}
               </a>
             </Button>
             <p className="mt-4 text-sm text-muted-foreground">

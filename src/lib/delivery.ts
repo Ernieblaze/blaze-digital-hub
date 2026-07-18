@@ -10,7 +10,6 @@
 import { sendEmail, isEmailConfigured } from "@/lib/email";
 import type { Product } from "@/lib/products";
 import { formatNaira } from "@/lib/products";
-import { whatsappLink } from "@/lib/site-settings";
 
 export function isDeliveryConfigured() {
   return isEmailConfigured();
@@ -34,7 +33,7 @@ export async function sendOrderConfirmationEmail(
         <h2 style="color:#ea580c">Your order is confirmed! 🔥</h2>
         <p>We received your payment for <strong>${product.name}</strong> (${formatNaira(product.price)}). Your download is being prepared and will reach this email shortly.</p>
         <p style="font-size:13px;color:#666">
-          Need it faster? <a href="${whatsappLink("Hi! I just paid for " + product.name + " — sending my receipt.")}" style="color:#ea580c">Message us on WhatsApp</a> with your payment reference and we'll send it right away.
+          Need it faster? Just reply to this email with your payment reference and we'll send it right away.
         </p>
         <p style="font-size:13px;color:#666">— Coach Ernest Favour (Ernie Blaze)</p>
       </div>
@@ -67,7 +66,7 @@ export async function sendDeliveryEmail(
           <a href="https://blaze-digital-hub.vercel.app/login" style="color:#ea580c">blaze-digital-hub.vercel.app/login</a>.
         </p>
         <p style="font-size:13px;color:#666">
-          Questions? <a href="${whatsappLink("Hi! I just bought " + product.name)}" style="color:#ea580c">Chat with us on WhatsApp</a>.
+          Questions? Just reply to this email — a real person answers.
         </p>
         <p style="font-size:13px;color:#666">— Coach Ernest Favour (Ernie Blaze)</p>
       </div>

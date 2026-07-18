@@ -35,7 +35,7 @@ export async function startCheckout(
   if (!secret) {
     // No API key — fall back to the hosted payment page (untracked referral).
     if (!product.paystackUrl.includes("REPLACE")) redirect(product.paystackUrl);
-    return { error: "Checkout isn't configured yet — message us on WhatsApp to buy." };
+    return { error: "Checkout isn't configured yet — email us to buy directly." };
   }
 
   const cookieStore = await cookies();

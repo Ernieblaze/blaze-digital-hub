@@ -23,7 +23,7 @@ export async function sendContactMessage(
 
   if (!isEmailConfigured()) {
     return {
-      error: "The contact form isn't switched on yet — reach us on WhatsApp instead (green button).",
+      error: `The contact form isn't switched on yet — email us directly at ${siteSettings.contactEmail}.`,
     };
   }
 

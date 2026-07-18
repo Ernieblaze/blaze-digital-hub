@@ -32,7 +32,7 @@ const benefits = [
   {
     icon: HeartHandshake,
     title: "Real Support",
-    text: "Stuck? Reach out on WhatsApp or email and get answers from a real person, fast.",
+    text: "Stuck? Email us and get answers from a real person, fast.",
   },
 ];
 

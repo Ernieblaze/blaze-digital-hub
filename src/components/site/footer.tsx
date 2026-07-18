@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Flame, Mail, MessageCircle } from "lucide-react";
+import { Flame, Mail } from "lucide-react";
 import { NewsletterForm } from "@/components/site/newsletter-form";
-import { siteSettings, whatsappLink } from "@/lib/site-settings";
+import { siteSettings } from "@/lib/site-settings";
 
 /* Brand icons were removed from lucide-react, so these are inline SVGs. */
 type IconProps = React.SVGProps<SVGSVGElement>;
@@ -60,7 +60,6 @@ const socials = [
   { href: siteSettings.facebook, icon: FacebookIcon, label: "Facebook" },
   { href: siteSettings.twitter, icon: XIcon, label: "X (Twitter)" },
   { href: siteSettings.youtube, icon: YoutubeIcon, label: "YouTube" },
-  { href: whatsappLink(), icon: MessageCircle, label: "WhatsApp" },
 ].filter((s) => s.href);
 
 export function Footer() {

@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { getProductBySlug } from "@/lib/catalog";
-import { whatsappLink } from "@/lib/site-settings";
+import { siteSettings } from "@/lib/site-settings";
 import type { Product } from "@/lib/products";
 
 export const metadata: Metadata = {
@@ -83,8 +83,8 @@ export default async function ThankYouPage({
               </Link>
             </Button>
             <Button asChild variant="outline" className="w-full">
-              <a href={whatsappLink("Hi! I just paid — quick question.")} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="size-4" /> Need help? WhatsApp us
+              <a href={`mailto:${siteSettings.contactEmail}?subject=${encodeURIComponent("I just paid — quick question")}`}>
+                <MessageCircle className="size-4" /> Need help? Email us
               </a>
             </Button>
           </CardContent>

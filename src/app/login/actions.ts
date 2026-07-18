@@ -32,7 +32,7 @@ export async function requestCode(_prev: PortalState, formData: FormData): Promi
     return {
       step: "request",
       error:
-        "The download portal isn't switched on yet. Message us on WhatsApp and we'll send your files directly.",
+        "The download portal isn't switched on yet. Email us and we'll send your files directly.",
     };
   }
 

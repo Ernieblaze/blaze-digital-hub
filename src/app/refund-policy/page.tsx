@@ -31,7 +31,7 @@ export default function RefundPolicyPage() {
         {
           heading: "How to request a refund",
           body: [
-            `Message us on WhatsApp (chat button on any page) or email ${siteSettings.contactEmail} with: the email you used at checkout, your Paystack payment reference, and a short description of the issue. We respond within 24 hours.`,
+            `Email ${siteSettings.contactEmail} (the mail button on any page opens a message) with: the email you used at checkout, your Paystack payment reference, and a short description of the issue. We respond within 24 hours.`,
           ],
         },
       ]}

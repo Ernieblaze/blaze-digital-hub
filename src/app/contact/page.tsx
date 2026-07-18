@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
-import { siteSettings, whatsappLink } from "@/lib/site-settings";
+import { siteSettings } from "@/lib/site-settings";
 import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
@@ -25,14 +25,9 @@ export default function ContactPage() {
             Questions about a product, your order, or bulk licenses? We reply fast.
           </p>
 
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="mt-8 flex justify-center">
             <Button asChild size="lg" className="font-semibold shadow-lg shadow-orange-500/25">
-              <a href={whatsappLink("Hi! I have a question.")} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="size-4" /> WhatsApp (fastest)
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="font-semibold">
-              <a href={`mailto:${siteSettings.contactEmail}`}>
+              <a href={`mailto:${siteSettings.contactEmail}?subject=${encodeURIComponent("Question about Blaze Digital Hub")}`}>
                 <Mail className="size-4" /> {siteSettings.contactEmail}
               </a>
             </Button>

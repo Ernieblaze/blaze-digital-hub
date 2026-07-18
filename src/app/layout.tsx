@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
-import { WhatsAppButton } from "@/components/site/whatsapp-button";
-import { whatsappLink } from "@/lib/site-settings";
+import { SupportButton } from "@/components/site/support-button";
+import { siteSettings } from "@/lib/site-settings";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -74,7 +74,7 @@ export default function RootLayout({
         {/* Dark by default for the premium feel; users can toggle from the navbar */}
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
-          <WhatsAppButton href={whatsappLink("Hi! I'm interested in your products.")} />
+          <SupportButton email={siteSettings.contactEmail} />
         </ThemeProvider>
         <Analytics />
       </body>
