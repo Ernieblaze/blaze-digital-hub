@@ -19,6 +19,8 @@ export type PaystackTransaction = {
   paid_at: string | null;
   created_at: string;
   customer: { email: string; first_name?: string | null; last_name?: string | null };
+  /** Set by the internal checkout — absent on shared-business (RSU) charges. */
+  metadata?: { product_slug?: string } | null;
 };
 
 export type PaystackStats = {
@@ -63,9 +65,12 @@ export async function getPaystackStats(): Promise<PaystackStats | null> {
   if (!isPaystackConfigured()) return null;
 
   try {
-    const transactions = await paystackGet<PaystackTransaction[]>(
-      "/transaction?perPage=100"
-    );
+    const all = await paystackGet<PaystackTransaction[]>("/transaction?perPage=100");
+
+    // The Paystack business is shared with the RSU app for now, so its log
+    // mixes in RSU subscriptions. Only charges started by our checkout carry
+    // product_slug metadata — everything else is not a store sale.
+    const transactions = all.filter((t) => t.metadata?.product_slug);
 
     const successful = transactions.filter((t) => t.status === "success");
     const failed = transactions.filter((t) => t.status === "failed");

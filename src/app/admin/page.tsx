@@ -327,7 +327,7 @@ export default async function AdminDashboardPage() {
                 icon={Banknote}
                 label="Total revenue"
                 value={formatNaira(stats.totalRevenue)}
-                hint={`across last ${stats.totalCount} transactions`}
+                hint={`across ${stats.totalCount} store transactions`}
               />
               <StatCard icon={Receipt} label="Successful sales" value={String(stats.successfulCount)} />
               <StatCard
@@ -346,7 +346,10 @@ export default async function AdminDashboardPage() {
             <Card className="mt-4">
               <CardHeader>
                 <CardTitle className="text-base">Recent transactions</CardTitle>
-                <CardDescription>Latest {stats.recent.length} payments, newest first.</CardDescription>
+                <CardDescription>
+                  Latest {stats.recent.length} store payments, newest first — RSU/shared-business
+                  charges are filtered out.
+                </CardDescription>
               </CardHeader>
               <CardContent className="overflow-x-auto">
                 {stats.recent.length === 0 ? (
