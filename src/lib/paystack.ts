@@ -64,8 +64,14 @@ async function paystackGet<T>(path: string): Promise<T> {
 export async function getPaystackStats(): Promise<PaystackStats | null> {
   if (!isPaystackConfigured()) return null;
 
+  // Fresh-start line: order history was reset on 19 Jul 2026 before the real
+  // launch, so earlier (test) charges stay out of the sales stats for good.
+  const STATS_SINCE = "2026-07-19T00:00:00Z";
+
   try {
-    const all = await paystackGet<PaystackTransaction[]>("/transaction?perPage=100");
+    const all = await paystackGet<PaystackTransaction[]>(
+      `/transaction?perPage=100&from=${encodeURIComponent(STATS_SINCE)}`
+    );
 
     // The Paystack business is shared with the RSU app for now, so its log
     // mixes in RSU subscriptions. Only charges started by our checkout carry
