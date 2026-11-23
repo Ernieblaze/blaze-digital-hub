@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Download, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, Download, ShieldCheck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const trustBadges = [
@@ -29,16 +29,7 @@ export function Hero({ copy }: { copy: HeroCopy }) {
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-3xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: EASE }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary backdrop-blur-sm"
-          >
-            <Sparkles className="size-3.5" />
-            {copy.badge}
-          </motion.div>
-
+          {/* The "built by" badge now lives in the footer (copy.badge). */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}

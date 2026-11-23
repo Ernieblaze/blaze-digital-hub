@@ -123,7 +123,7 @@ export async function POST(request: Request) {
 
       let delivered = false;
       if (product?.downloadUrl && email) {
-        delivered = await sendDeliveryEmail(email, product);
+        delivered = await sendDeliveryEmail(email, product, t.reference);
         if (delivered) {
           await supabase
             .from("orders")

@@ -8,12 +8,14 @@ import { Separator } from "@/components/ui/separator";
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { ProductCover } from "@/components/site/product-cover";
+import { ProductGallery } from "@/components/site/product-gallery";
 import { DealCountdown } from "@/components/site/deal-countdown";
 import { ProductCard } from "@/components/site/product-card";
 import { FadeIn, StaggerContainer } from "@/components/site/motion";
 import { formatNaira } from "@/lib/products";
 import { getProductBySlug, getProducts } from "@/lib/catalog";
 import { getProductReviews, maskEmail } from "@/lib/reviews";
+import { SITE_URL } from "@/lib/site-url";
 
 // Note: `params` is a Promise in Next.js 16 — always await it.
 type PageProps = { params: Promise<{ slug: string }> };
@@ -58,14 +60,14 @@ export default async function ProductPage({ params }: PageProps) {
     "@type": "Product",
     name: product.name,
     description: product.tagline,
-    image: `https://blaze-digital-hub.vercel.app/products/${product.slug}/opengraph-image`,
+    image: `${SITE_URL}/products/${product.slug}/opengraph-image`,
     brand: { "@type": "Brand", name: "Blaze Digital Hub" },
     offers: {
       "@type": "Offer",
       price: product.price,
       priceCurrency: "NGN",
       availability: "https://schema.org/InStock",
-      url: `https://blaze-digital-hub.vercel.app/products/${product.slug}`,
+      url: `${SITE_URL}/products/${product.slug}`,
     },
   };
 
@@ -200,15 +202,20 @@ export default async function ProductPage({ params }: PageProps) {
             </FadeIn>
           </div>
 
-          {/* Product-specific testimonial */}
-          <FadeIn className="mt-16 rounded-2xl border border-primary/20 bg-gradient-to-br from-orange-600/10 via-transparent to-transparent p-8 sm:p-10">
-            <Quote className="mb-4 size-7 text-primary/50" />
-            <blockquote className="max-w-3xl text-lg leading-relaxed text-pretty sm:text-xl">
-              &ldquo;{product.testimonial.quote}&rdquo;
-            </blockquote>
-            <p className="mt-5 font-semibold">{product.testimonial.author}</p>
-            <p className="text-sm text-muted-foreground">{product.testimonial.role}</p>
-          </FadeIn>
+          {/* "Look inside" gallery (real pages, previews, photos) */}
+          <ProductGallery product={product} />
+
+          {/* Product-specific testimonial (hidden when the product has none) */}
+          {product.testimonial?.quote ? (
+            <FadeIn className="mt-16 rounded-2xl border border-primary/20 bg-gradient-to-br from-orange-600/10 via-transparent to-transparent p-8 sm:p-10">
+              <Quote className="mb-4 size-7 text-primary/50" />
+              <blockquote className="max-w-3xl text-lg leading-relaxed text-pretty sm:text-xl">
+                &ldquo;{product.testimonial.quote}&rdquo;
+              </blockquote>
+              <p className="mt-5 font-semibold">{product.testimonial.author}</p>
+              <p className="text-sm text-muted-foreground">{product.testimonial.role}</p>
+            </FadeIn>
+          ) : null}
 
           {/* Verified-buyer reviews */}
           {reviewData.count > 0 && (

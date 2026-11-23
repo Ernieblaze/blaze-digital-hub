@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useState } from "react";
 import {
   Banknote,
   Check,
@@ -75,9 +75,12 @@ export function AffiliatePanel({
     null
   );
   const [editingBank, setEditingBank] = useState(false);
-  useEffect(() => {
+  // Close the bank form once a save succeeds (state adjusted during render, no effect).
+  const [handledBankState, setHandledBankState] = useState(bankState);
+  if (bankState !== handledBankState) {
+    setHandledBankState(bankState);
     if (bankState?.ok) setEditingBank(false);
-  }, [bankState]);
+  }
   const inputClass =
     "w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring";
 

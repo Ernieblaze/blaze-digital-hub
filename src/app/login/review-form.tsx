@@ -21,7 +21,7 @@ export function ReviewForm({
   const [open, setOpen] = useState(false);
 
   if (state?.ok) {
-    return <p className="text-xs text-emerald-500">Review saved — thank you! It's live on the product page. ⭐</p>;
+    return <p className="text-xs text-emerald-500">Review saved — thank you! It&apos;s live on the product page. ⭐</p>;
   }
 
   if (!open) {

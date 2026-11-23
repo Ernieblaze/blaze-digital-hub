@@ -35,13 +35,18 @@ export function ProductCover({
     // Uploaded covers show at their FULL natural ratio (no cropping) —
     // `aspect-auto`/`h-auto` at the end override any aspect classes the
     // parent passes for the gradient fallback.
+    // Name a file like "cover-1600x1000.webp" to declare its size; otherwise
+    // the old portrait default (1200×1900) is assumed.
+    const size = product.image.match(/-(\d{3,5})x(\d{3,5})\.(?:webp|png|jpe?g|avif)(?:\?|$)/i);
+    const width = size ? Number(size[1]) : 1200;
+    const height = size ? Number(size[2]) : 1900;
     return (
       <div className={cn("relative overflow-hidden", className, "aspect-auto h-auto")}>
         <Image
           src={product.image}
           alt={product.name}
-          width={1200}
-          height={1900}
+          width={width}
+          height={height}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="h-auto w-full"
         />

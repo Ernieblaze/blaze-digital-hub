@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { buyerDownloadLink, PAGE_LINK_TTL_SECONDS } from "@/lib/secure-download";
 import { CheckCircle2, Download, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -47,7 +48,9 @@ export default async function ThankYouPage({
   searchParams: Promise<{ reference?: string; trxref?: string }>;
 }) {
   const { reference, trxref } = await searchParams;
-  const product = await verifyPurchase(reference ?? trxref ?? "");
+  const ref = reference ?? trxref ?? "";
+  const product = await verifyPurchase(ref);
+  const downloadLink = product ? buyerDownloadLink(product, ref, PAGE_LINK_TTL_SECONDS) : null;
 
   return (
     <>
@@ -60,24 +63,24 @@ export default async function ThankYouPage({
               {product ? `${product.name} is yours! 🔥` : "Payment received! 🔥"}
             </CardTitle>
             <CardDescription>
-              {product?.downloadUrl
+              {downloadLink
                 ? "Verified! Grab your download right here — we've also emailed it to you for safekeeping."
                 : "Your download is on its way to your email right now — check your inbox and the spam folder. You can also re-download anytime from My Downloads."}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
-            {product?.downloadUrl && (
+            {downloadLink && (
               <Button
                 asChild
                 size="lg"
                 className="h-12 w-full text-base font-semibold shadow-lg shadow-orange-500/25"
               >
-                <a href={product.downloadUrl} target="_blank" rel="noopener noreferrer">
+                <a href={downloadLink} target="_blank" rel="noopener noreferrer">
                   <Download className="size-4" /> Download now
                 </a>
               </Button>
             )}
-            <Button asChild variant={product?.downloadUrl ? "outline" : "default"} className="w-full font-semibold">
+            <Button asChild variant={downloadLink ? "outline" : "default"} className="w-full font-semibold">
               <Link href="/login">
                 <Download className="size-4" /> Open My Downloads
               </Link>

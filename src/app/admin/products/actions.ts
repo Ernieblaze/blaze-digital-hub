@@ -112,7 +112,9 @@ export async function saveProduct(
     ...(badge === "Bestseller" || badge === "New" || badge === "Hot Deal" ? { badge } : {}),
     ...(formData.get("featured") ? { featured: true } : {}),
     paystackUrl: str("paystackUrl") || `https://paystack.shop/pay/REPLACE-${slug}`,
-    ...(str("downloadUrl").startsWith("http") ? { downloadUrl: str("downloadUrl") } : {}),
+    ...(str("downloadUrl").startsWith("http") || str("downloadUrl").startsWith("private:")
+      ? { downloadUrl: str("downloadUrl") }
+      : {}),
     testimonial: {
       quote: str("testimonialQuote") || "Loved it — instant delivery and pure value.",
       author: str("testimonialAuthor") || "Happy Customer",
@@ -122,6 +124,9 @@ export async function saveProduct(
 
   // Duplicate-slug guard against the current catalog (whichever source is live)
   const existing = await getProducts();
+  // The admin form doesn't edit the gallery yet, so keep whatever the product already has.
+  const previous = existing.find((p) => p.slug === (originalSlug || slug));
+  if (previous?.gallery?.length) product.gallery = previous.gallery;
   const slugTaken = existing.some((p) => p.slug === slug);
   const isRename = originalSlug && originalSlug !== slug;
   if (slugTaken && (!originalSlug || isRename)) {

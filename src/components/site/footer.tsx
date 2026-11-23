@@ -150,7 +150,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t pt-6 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Blaze Digital Hub. All rights reserved.
+            © {new Date().getFullYear()} Blaze Digital Hub. All rights reserved. {siteSettings.heroBadge}.
           </p>
           <p className="text-xs text-muted-foreground">
             Payments secured by <span className="font-semibold text-foreground">Paystack</span> 🇳🇬

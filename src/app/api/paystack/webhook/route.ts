@@ -183,7 +183,7 @@ export async function POST(request: Request) {
   // send an order confirmation instead so the buyer never gets silence.
   if (product && email) {
     if (product.downloadUrl) {
-      const delivered = await sendDeliveryEmail(email, product);
+      const delivered = await sendDeliveryEmail(email, product, reference);
       if (supabase && delivered) {
         await supabase
           .from("orders")

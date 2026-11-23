@@ -136,3 +136,11 @@ alter table public.coupons enable row level security;
 
 -- All tables are accessed only through the server-side service key, so RLS
 -- with no policies simply locks out the public/anon role entirely.
+
+-- ── 2026-11 additions ─────────────────────────────────────────────────────
+-- "Look inside" gallery images per product.
+alter table public.products add column if not exists gallery jsonb not null default '[]'::jsonb;
+-- Private bucket for paid files (never public). Files are served only through
+-- short-lived signed URLs from /download/<token> after the order is checked.
+insert into storage.buckets (id, name, public) values ('deliverables', 'deliverables', false)
+on conflict (id) do update set public = false;

@@ -98,8 +98,8 @@ export function Navbar({ announcement }: { announcement?: string }) {
 
         <div className="flex items-center gap-1">
           <ThemeToggle />
-          {/* Cart placeholder — wire to a cart state / Paystack later */}
-          <Button variant="ghost" size="icon" aria-label="Cart" asChild>
+          {/* Shop shortcut (each product has its own checkout, so there's no cart) */}
+          <Button variant="ghost" size="icon" aria-label="Shop all products" title="Shop all products" asChild>
             <Link href="/#shop">
               <ShoppingBag className="size-4.5" />
             </Link>

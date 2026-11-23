@@ -69,10 +69,15 @@ export type Product = {
    */
   paystackUrl: string;
   /**
-   * Link to the actual file the buyer receives (Google Drive, Dropbox, etc.).
-   * Used by the automatic delivery email after a successful payment.
+   * The file the buyer receives. Two kinds:
+   * - "https://…" — a normal link (Google Drive, Dropbox…). Anyone with the link can open it.
+   * - "private:<path>" — a file in the PRIVATE Supabase Storage bucket "deliverables"
+   *   (e.g. "private:remote-job-blueprint/v1.pdf"). Buyers only ever get short-lived,
+   *   signed /download/… links that check the order was paid. Recommended for paid PDFs.
    */
   downloadUrl?: string;
+  /** Optional "Look inside" images shown on the product page (pages, previews, photos). */
+  gallery?: { src: string; alt: string }[];
   testimonial: { quote: string; author: string; role: string };
 };
 

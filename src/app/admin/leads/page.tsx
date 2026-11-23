@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowLeft, CheckCircle2, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAdmin } from "@/lib/admin-auth";
 import { getProducts } from "@/lib/catalog";

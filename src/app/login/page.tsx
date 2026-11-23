@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { buyerDownloadLink, PAGE_LINK_TTL_SECONDS } from "@/lib/secure-download";
 import { Download, Flame, LogOut, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,6 +16,7 @@ import { buyerLogout } from "./actions";
 import { AffiliatePanel } from "./affiliate-panel";
 import { PortalForm } from "./portal-form";
 import { ReviewForm } from "./review-form";
+import { SITE_URL } from "@/lib/site-url";
 
 export const metadata: Metadata = {
   title: "My Account",
@@ -22,9 +24,10 @@ export const metadata: Metadata = {
     "Re-download your products and earn commissions by sharing your referral links.",
 };
 
-const SITE = "https://blaze-digital-hub.vercel.app";
+const SITE = SITE_URL;
 
 type OrderRow = {
+  paystack_reference: string;
   product_slug: string | null;
   amount_kobo: number;
   paid_at: string;
@@ -35,7 +38,7 @@ async function ordersFor(email: string): Promise<OrderRow[]> {
   if (!supabase) return [];
   const { data, error } = await supabase
     .from("orders")
-    .select("product_slug, amount_kobo, paid_at")
+    .select("paystack_reference, product_slug, amount_kobo, paid_at")
     .eq("customer_email", email)
     .eq("status", "success")
     .order("paid_at", { ascending: false });
@@ -119,6 +122,9 @@ export default async function BuyerPortalPage({
                     <ul className="space-y-3">
                       {orders.map((order) => {
                         const product = products.find((p) => p.slug === order.product_slug);
+                        const downloadLink = product
+                          ? buyerDownloadLink(product, order.paystack_reference, PAGE_LINK_TTL_SECONDS)
+                          : null;
                         const review = order.product_slug
                           ? myReviews.get(order.product_slug)
                           : undefined;
@@ -139,9 +145,9 @@ export default async function BuyerPortalPage({
                                   })}
                                 </p>
                               </div>
-                              {product?.downloadUrl ? (
+                              {downloadLink ? (
                                 <Button asChild size="sm" className="shrink-0 font-semibold">
-                                  <a href={product.downloadUrl} target="_blank" rel="noopener noreferrer">
+                                  <a href={downloadLink} target="_blank" rel="noopener noreferrer">
                                     <Download className="size-4" /> Download
                                   </a>
                                 </Button>

@@ -10,6 +10,8 @@
 import { sendEmail, isEmailConfigured } from "@/lib/email";
 import type { Product } from "@/lib/products";
 import { formatNaira } from "@/lib/products";
+import { buyerDownloadLink, isPrivateFile, EMAIL_LINK_TTL_SECONDS } from "@/lib/secure-download";
+import { SITE_URL } from "@/lib/site-url";
 
 export function isDeliveryConfigured() {
   return isEmailConfigured();
@@ -43,9 +45,15 @@ export async function sendOrderConfirmationEmail(
 
 export async function sendDeliveryEmail(
   customerEmail: string,
-  product: Product
+  product: Product,
+  reference: string
 ): Promise<boolean> {
   if (!isEmailConfigured() || !product.downloadUrl) return false;
+  const link = buyerDownloadLink(product, reference, EMAIL_LINK_TTL_SECONDS);
+  if (!link) return false;
+  const keepNote = isPrivateFile(product)
+    ? "This secure link works for 7 days. After that, get a fresh one anytime at"
+    : "Save this email — the link is yours for life. You can also re-download anytime at";
 
   return sendEmail({
     to: customerEmail,
@@ -55,15 +63,14 @@ export async function sendDeliveryEmail(
         <h2 style="color:#ea580c">Payment received — here's your product! 🔥</h2>
         <p>Thank you for buying <strong>${product.name}</strong> (${formatNaira(product.price)}) from Blaze Digital Hub.</p>
         <p style="margin:28px 0">
-          <a href="${product.downloadUrl}"
+          <a href="${link}"
              style="background:#ea580c;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold">
             Download ${product.name}
           </a>
         </p>
         <p style="font-size:13px;color:#666">
-          Save this email — the link is yours for life, and you'll get free updates whenever
-          this product improves. You can also re-download anytime at
-          <a href="https://blaze-digital-hub.vercel.app/login" style="color:#ea580c">blaze-digital-hub.vercel.app/login</a>.
+          ${keepNote}
+          <a href="${SITE_URL}/login" style="color:#ea580c">${SITE_URL.replace(/^https?:\/\//, "")}/login</a>.
         </p>
         <p style="font-size:13px;color:#666">
           Questions? Just reply to this email — a real person answers.

@@ -29,7 +29,7 @@ export async function resendDelivery(formData: FormData) {
   const product = await getProductBySlug(order.product_slug);
   if (!product) return;
 
-  const delivered = await sendDeliveryEmail(order.customer_email, product);
+  const delivered = await sendDeliveryEmail(order.customer_email, product, reference);
   if (delivered) {
     await supabase
       .from("orders")

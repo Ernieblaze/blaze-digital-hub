@@ -7,7 +7,9 @@ import type { Product } from "@/lib/products";
 /* Testimonials are pulled from each product's data so they stay in sync.
    Edit each product's testimonial from /admin with real customer feedback. */
 export function Testimonials({ products }: { products: Product[] }) {
-  const testimonials = products.map((p) => ({ ...p.testimonial, product: p.name }));
+  const testimonials = products
+    .filter((p) => p.testimonial?.quote)
+    .map((p) => ({ ...p.testimonial, product: p.name }));
   return (
     <section className="bg-muted/40 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">

@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { SupportButton } from "@/components/site/support-button";
 import { siteSettings } from "@/lib/site-settings";
 import "./globals.css";
+import { SITE_URL } from "@/lib/site-url";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://blaze-digital-hub.vercel.app"), // TODO: swap for your custom domain
+  metadataBase: new URL(SITE_URL), // set NEXT_PUBLIC_SITE_URL for the custom domain
   title: {
     default: "Blaze Digital Hub — Premium Digital Products by Ernie Blaze",
     template: "%s | Blaze Digital Hub",
@@ -67,7 +68,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Blaze Digital Hub",
-              url: "https://blaze-digital-hub.vercel.app",
+              url: SITE_URL,
             }),
           }}
         />

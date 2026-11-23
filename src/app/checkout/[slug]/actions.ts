@@ -6,6 +6,7 @@ import { REF_COOKIE } from "@/lib/affiliate";
 import { getProductBySlug } from "@/lib/catalog";
 import { rateLimit } from "@/lib/rate-limit";
 import { supabaseAdmin } from "@/lib/supabase";
+import { SITE_URL } from "@/lib/site-url";
 
 export type CheckoutState = { error: string } | null;
 
@@ -79,7 +80,7 @@ export async function startCheckout(
         email,
         amount: amountNaira * 100, // kobo
         currency: "NGN",
-        callback_url: "https://blaze-digital-hub.vercel.app/thank-you",
+        callback_url: `${SITE_URL}/thank-you`,
         metadata: {
           product_slug: product.slug,
           ...(refCode ? { ref_code: refCode } : {}),

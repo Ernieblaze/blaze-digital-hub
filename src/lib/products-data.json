@@ -1,5 +1,75 @@
 [
   {
+    "slug": "remote-job-blueprint",
+    "name": "Remote Job Blueprint Naija",
+    "category": "Hustle Tools",
+    "price": 3500,
+    "tagline": "Land your first remote job or client from Nigeria, get paid in dollars, and stay far from fake offers.",
+    "description": "A 92-page, step-by-step guide for Nigerian graduates, NYSC members and job seekers. Pick one skill you can start with (even with only a phone), build a portfolio with zero clients, write a CV remote employers actually read, find real remote jobs, spot fake offers in five minutes, and bring your dollars home to naira. Every price, app and fee was checked in November 2026, including the new PayPal-through-Paga option.",
+    "whatsInside": [
+      "13 step-by-step chapters, from choosing a skill to raising your pay",
+      "Which remote skills work with only a phone, and when you need a laptop",
+      "How to build a portfolio with zero clients (practice-client method)",
+      "A one-page CV that passes keyword filters, with a before/after example",
+      "Real job sites that hire Nigerians, plus search tricks for hidden roles",
+      "Upwork and Fiverr: profile, proposals, fees and your first review",
+      "The 5-minute check that exposes fake remote jobs and task scams",
+      "Getting paid in dollars: Payoneer, USD accounts and PayPal via Paga",
+      "11 copy-ready templates: CV, proposal, follow-up, invoice and more",
+      "A 7-day quick-start plan so you start today"
+    ],
+    "icon": "rocket",
+    "cover": "from-orange-600 via-red-600 to-rose-700",
+    "image": "/products/remote-job-blueprint/cover-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-remote-job-blueprint",
+    "downloadUrl": "private:remote-job-blueprint/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/remote-job-blueprint/pages/chapter-1-900x1277.webp",
+        "alt": "First page of Chapter 1: How remote work really works for Nigerians"
+      },
+      {
+        "src": "/products/remote-job-blueprint/cv-before-after-1400x1106.webp",
+        "alt": "A CV before and after: three crowded pages versus one clear page"
+      },
+      {
+        "src": "/products/remote-job-blueprint/photo-home-1600x1000.webp",
+        "alt": "A young Nigerian woman working from home with her laptop and notebook"
+      },
+      {
+        "src": "/products/remote-job-blueprint/pages/plan-900x1277.webp",
+        "alt": "The 7-day quick-start plan page"
+      },
+      {
+        "src": "/products/remote-job-blueprint/scam-chat-1400x1260.webp",
+        "alt": "A fake job chat with five red flags marked"
+      },
+      {
+        "src": "/products/remote-job-blueprint/pages/job-boards-900x1277.webp",
+        "alt": "Chapter 7 page with an annotated job board screenshot"
+      },
+      {
+        "src": "/products/remote-job-blueprint/money-flow-1400x761.webp",
+        "alt": "Three routes for dollars to reach a Nigerian bank account"
+      },
+      {
+        "src": "/products/remote-job-blueprint/photo-celebrate-1600x1000.webp",
+        "alt": "Two young Nigerians smiling at a laptop"
+      },
+      {
+        "src": "/products/remote-job-blueprint/pages/templates-900x1277.webp",
+        "alt": "The copy-ready templates section"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
+  },
+  {
     "slug": "blaze-forex-mastery-blueprint",
     "name": "Blaze Forex Mastery Blueprint",
     "category": "Trading",

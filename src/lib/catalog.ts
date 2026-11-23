@@ -32,6 +32,7 @@ type ProductRow = {
   featured: boolean;
   paystack_url: string;
   download_url: string | null;
+  gallery?: Product["gallery"] | null;
   testimonial: Product["testimonial"];
 };
 
@@ -52,6 +53,7 @@ function rowToProduct(row: ProductRow): Product {
     ...(row.featured ? { featured: true } : {}),
     paystackUrl: row.paystack_url,
     ...(row.download_url ? { downloadUrl: row.download_url } : {}),
+    ...(row.gallery?.length ? { gallery: row.gallery } : {}),
     testimonial: row.testimonial ?? { quote: "", author: "", role: "" },
   };
 }
@@ -73,6 +75,7 @@ export function productToRow(p: Product): ProductRow {
     featured: Boolean(p.featured),
     paystack_url: p.paystackUrl,
     download_url: p.downloadUrl ?? null,
+    ...(p.gallery?.length ? { gallery: p.gallery } : {}),
     testimonial: p.testimonial,
   };
 }

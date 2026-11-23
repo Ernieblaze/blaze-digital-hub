@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { X } from "lucide-react";
 import { siteSettings } from "@/lib/site-settings";
 
@@ -14,11 +14,14 @@ export function AnnouncementBar({ override }: { override?: string }) {
   // build-time file value.
   const message = (override ?? siteSettings.announcement).trim();
   const storageKey = `blaze-announcement-dismissed:${message}`;
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (message && localStorage.getItem(storageKey) !== "1") setVisible(true);
-  }, [message, storageKey]);
+  // Read the "dismissed" flag from localStorage without an effect (hidden on the server).
+  const dismissedBefore = useSyncExternalStore(
+    subscribeToStorage,
+    () => localStorage.getItem(storageKey) === "1",
+    () => true,
+  );
+  const [dismissedNow, setDismissedNow] = useState(false);
+  const visible = Boolean(message) && !dismissedBefore && !dismissedNow;
 
   if (!visible) return null;
 
@@ -29,7 +32,7 @@ export function AnnouncementBar({ override }: { override?: string }) {
         aria-label="Dismiss announcement"
         onClick={() => {
           localStorage.setItem(storageKey, "1");
-          setVisible(false);
+          setDismissedNow(true);
         }}
         className="shrink-0 rounded p-0.5 hover:bg-white/20"
       >
@@ -37,4 +40,9 @@ export function AnnouncementBar({ override }: { override?: string }) {
       </button>
     </div>
   );
+}
+
+function subscribeToStorage(onChange: () => void) {
+  window.addEventListener("storage", onChange);
+  return () => window.removeEventListener("storage", onChange);
 }
