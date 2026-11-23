@@ -70,6 +70,76 @@
     }
   },
   {
+    "slug": "edit-and-earn",
+    "name": "Edit & Earn Naija",
+    "category": "Hustle Tools",
+    "price": 4000,
+    "tagline": "Make money editing short videos with CapCut and AI tools, from your phone or laptop.",
+    "description": "A 61-page, step-by-step guide to the short-video edits Nigerian businesses and creators actually pay for. Learn the 3-second hook, readable captions, pacing that keeps people watching and which music business clients can use. Use AI tools to work faster without making your videos look cheap, build a portfolio in 7 days with no clients, price your work, and land your first paying clients. Checked in November 2026.",
+    "whatsInside": [
+      "11 step-by-step chapters, from your first edit to monthly clients",
+      "Phone or laptop: what each can do, and CapCut free vs Pro",
+      "The 3-second hook: five opening styles that stop the scroll",
+      "Captions people can read, and the TikTok safe zone",
+      "The retention edit: cuts, zooms, b-roll and sound effects",
+      "Music you're allowed to use for business clients",
+      "AI tools that speed you up, and the lines not to cross",
+      "A portfolio in 7 days with zero clients",
+      "Pricing packages, client outreach scripts and a delivery process",
+      "9 copy-ready templates: price list, first DM, client brief and more"
+    ],
+    "icon": "rocket",
+    "cover": "from-rose-500 via-red-500 to-orange-600",
+    "image": "/products/edit-and-earn/cover-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-edit-and-earn",
+    "downloadUrl": "private:edit-and-earn/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/edit-and-earn/timeline-1400x1094.webp",
+        "alt": "The editing timeline with each part labelled"
+      },
+      {
+        "src": "/products/edit-and-earn/pages/chapter-4-900x1277.webp",
+        "alt": "Opening page of Chapter 4: The first 3 seconds decide everything"
+      },
+      {
+        "src": "/products/edit-and-earn/hooks-1400x1177.webp",
+        "alt": "A weak opening and a strong opening side by side"
+      },
+      {
+        "src": "/products/edit-and-earn/captions-1400x789.webp",
+        "alt": "Caption do's and don'ts with the TikTok safe zone"
+      },
+      {
+        "src": "/products/edit-and-earn/pages/plan-900x1277.webp",
+        "alt": "The 7-day edit plan page"
+      },
+      {
+        "src": "/products/edit-and-earn/retention-1400x660.webp",
+        "alt": "A retention edit on the timeline: something changes every few seconds"
+      },
+      {
+        "src": "/products/edit-and-earn/dm-pitch-1400x1236.webp",
+        "alt": "An outreach message that includes a free sample edit"
+      },
+      {
+        "src": "/products/edit-and-earn/price-list-1400x720.webp",
+        "alt": "An example editing price list with three packages"
+      },
+      {
+        "src": "/products/edit-and-earn/pages/templates-900x1277.webp",
+        "alt": "The copy-ready templates section"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
+  },
+  {
     "slug": "blaze-forex-mastery-blueprint",
     "name": "Blaze Forex Mastery Blueprint",
     "category": "Trading",
