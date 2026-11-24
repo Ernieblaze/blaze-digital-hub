@@ -1,5 +1,318 @@
 [
   {
+    "slug": "claude-video",
+    "name": "AI Motion Video Naija",
+    "category": "Hustle Tools",
+    "price": 10000,
+    "tagline": "Make professional motion videos with Claude Code and HyperFrames, from brief to paid job.",
+    "description": "A 64-page course on making motion videos with Claude Code. Compare three routes, count the dollar cost in naira, install every tool, write a brief, build a 10-second advert, repair the design and motion, add licensed sound, deliver and price the work. It includes a real advert rendered in three versions. You need a laptop, and the main route needs Claude Pro at $20 a month, not included.",
+    "whatsInside": [
+      "12 chapters and a 7-day plan",
+      "Full cost table, with a browser route to try first",
+      "Installation in order, with error fixes",
+      "Brief, script and style sheet",
+      "A 10-second advert, from weak draft to repair",
+      "Design, motion and sound",
+      "Export sizes and Git versions",
+      "Three client samples",
+      "Pricing sums, agreement points and first message",
+      "9 prompts and working sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-blue-500 via-blue-600 to-indigo-700",
+    "image": "/products/claude-video/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-claude-video",
+    "downloadUrl": "private:claude-video/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/claude-video/look-inside-1600x1264.webp",
+        "alt": "Eight pages from AI Motion Video Naija"
+      },
+      {
+        "src": "/products/claude-video/pages/p1-900x1278.webp",
+        "alt": "Page 1 of AI Motion Video Naija"
+      },
+      {
+        "src": "/products/claude-video/pages/p8-900x1278.webp",
+        "alt": "Page 8 of AI Motion Video Naija"
+      },
+      {
+        "src": "/products/claude-video/pages/p13-900x1278.webp",
+        "alt": "Page 13 of AI Motion Video Naija"
+      },
+      {
+        "src": "/products/claude-video/pages/p30-900x1278.webp",
+        "alt": "Page 30 of AI Motion Video Naija"
+      },
+      {
+        "src": "/products/claude-video/pages/p32-900x1278.webp",
+        "alt": "Page 32 of AI Motion Video Naija"
+      },
+      {
+        "src": "/products/claude-video/pages/p36-900x1278.webp",
+        "alt": "Page 36 of AI Motion Video Naija"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
+  },
+  {
+    "slug": "web-ai",
+    "name": "AI Website Builder Naija",
+    "category": "Hustle Tools",
+    "price": 15000,
+    "tagline": "Build a website with AI, connect a domain and deliver it to a client.",
+    "description": "A 68-page course that goes from an empty folder to a client handover. Learn VS Code, Claude Code, prompts, page structure, GitHub, Vercel, Supabase, Firebase, Paystack's safe flow, domains, testing, pricing and contracts. It includes real practice code shown on a computer and phone. You need a laptop. Claude Pro, hosting, domains and other services cost extra and are listed first.",
+    "whatsInside": [
+      "13 chapters and a 7-day plan",
+      "A price table for every service",
+      "The parts of a site in plain English",
+      "Brief, content and CLAUDE.md rules",
+      "Build and repair a real practice page",
+      "GitHub, previews and going back",
+      "Supabase and Firebase safety",
+      "Paystack flow with test cases",
+      "Domain, launch and security checks",
+      "Pricing, clients and handover",
+      "10 prompts and working sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-emerald-400 via-teal-500 to-teal-700",
+    "image": "/products/web-ai/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-web-ai",
+    "downloadUrl": "private:web-ai/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/web-ai/look-inside-1600x1264.webp",
+        "alt": "Eight pages from AI Website Builder Naija"
+      },
+      {
+        "src": "/products/web-ai/pages/p1-900x1278.webp",
+        "alt": "Page 1 of AI Website Builder Naija"
+      },
+      {
+        "src": "/products/web-ai/pages/p10-900x1278.webp",
+        "alt": "Page 10 of AI Website Builder Naija"
+      },
+      {
+        "src": "/products/web-ai/pages/p14-900x1278.webp",
+        "alt": "Page 14 of AI Website Builder Naija"
+      },
+      {
+        "src": "/products/web-ai/pages/p26-900x1278.webp",
+        "alt": "Page 26 of AI Website Builder Naija"
+      },
+      {
+        "src": "/products/web-ai/pages/p34-900x1278.webp",
+        "alt": "Page 34 of AI Website Builder Naija"
+      },
+      {
+        "src": "/products/web-ai/pages/p45-900x1278.webp",
+        "alt": "Page 45 of AI Website Builder Naija"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
+  },
+  {
+    "slug": "claude-naija",
+    "name": "Claude for Nigerians",
+    "category": "Hustle Tools",
+    "price": 2500,
+    "tagline": "Start free, pay safely from Nigeria and use Claude for real work.",
+    "description": "A 49-page starter course. Open your own account, understand Free and paid plans, compare honest ways to pay, protect private information, ask clearly, write, clean tables, read PDFs, save a working system and sell one small service. Claude subscriptions are not included, and you can do the first week on the Free plan.",
+    "whatsInside": [
+      "10 chapters and a 7-day plan",
+      "Free, Pro and other plans explained",
+      "Three honest payment routes and how to cancel",
+      "A privacy traffic light",
+      "A five-part way to ask",
+      "CVs, replies and proposals without lies",
+      "Spreadsheet and PDF checks",
+      "Six small services",
+      "Pricing and break-even sums",
+      "9 prompts and working sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-sky-300 via-sky-400 to-blue-500",
+    "image": "/products/claude-naija/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-claude-naija",
+    "downloadUrl": "private:claude-naija/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/claude-naija/look-inside-1600x1264.webp",
+        "alt": "Eight pages from Claude for Nigerians"
+      },
+      {
+        "src": "/products/claude-naija/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Claude for Nigerians"
+      },
+      {
+        "src": "/products/claude-naija/pages/p10-900x1278.webp",
+        "alt": "Page 10 of Claude for Nigerians"
+      },
+      {
+        "src": "/products/claude-naija/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Claude for Nigerians"
+      },
+      {
+        "src": "/products/claude-naija/pages/p18-900x1278.webp",
+        "alt": "Page 18 of Claude for Nigerians"
+      },
+      {
+        "src": "/products/claude-naija/pages/p30-900x1278.webp",
+        "alt": "Page 30 of Claude for Nigerians"
+      },
+      {
+        "src": "/products/claude-naija/pages/p35-900x1278.webp",
+        "alt": "Page 35 of Claude for Nigerians"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
+  },
+  {
+    "slug": "film-ai",
+    "name": "AI Film Studio Naija",
+    "category": "Hustle Tools",
+    "price": 7500,
+    "tagline": "Write and make short Nigerian stories and cartoons with AI.",
+    "description": "A 49-page course for making a short AI-assisted film. Choose a story, count credits, write eight beats, design characters, storyboard, make shots in Google Flow or another tool, record voices, edit, label and price client work. Google's naira plan prices and free daily credits are explained. Tool subscriptions are not included, and the sample storyboard is drawn, not presented as AI video.",
+    "whatsInside": [
+      "10 chapters and a 7-day plan",
+      "Credit and subscription budget",
+      "A one-page story method",
+      "Character and place sheets",
+      "Eight-shot storyboard",
+      "Seven-part shot requests and repairs",
+      "Voice, language and sound",
+      "Editing and AI labels",
+      "Rights questions",
+      "Pricing, stages and clients",
+      "9 working sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-indigo-600 via-violet-700 to-purple-900",
+    "image": "/products/film-ai/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-film-ai",
+    "downloadUrl": "private:film-ai/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/film-ai/look-inside-1600x1264.webp",
+        "alt": "Eight pages from AI Film Studio Naija"
+      },
+      {
+        "src": "/products/film-ai/pages/p1-900x1278.webp",
+        "alt": "Page 1 of AI Film Studio Naija"
+      },
+      {
+        "src": "/products/film-ai/pages/p8-900x1278.webp",
+        "alt": "Page 8 of AI Film Studio Naija"
+      },
+      {
+        "src": "/products/film-ai/pages/p13-900x1278.webp",
+        "alt": "Page 13 of AI Film Studio Naija"
+      },
+      {
+        "src": "/products/film-ai/pages/p19-900x1278.webp",
+        "alt": "Page 19 of AI Film Studio Naija"
+      },
+      {
+        "src": "/products/film-ai/pages/p20-900x1278.webp",
+        "alt": "Page 20 of AI Film Studio Naija"
+      },
+      {
+        "src": "/products/film-ai/pages/p27-900x1278.webp",
+        "alt": "Page 27 of AI Film Studio Naija"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
+  },
+  {
+    "slug": "design-ai",
+    "name": "Pro Design with AI",
+    "category": "Hustle Tools",
+    "price": 7500,
+    "tagline": "Use AI and finish the work like a professional designer.",
+    "description": "A 52-page design course. Learn to see faults, set up a free tool kit, write a brief, build layouts by hand, use AI pictures carefully, finish a flyer, adapt sizes, make a small brand, export for print and price the work. Most practice can be done with free tools. Paid subscriptions and assets are not included.",
+    "whatsInside": [
+      "10 chapters and a 7-day plan",
+      "Free and paid tool prices",
+      "Six words for judging design",
+      "Brief, ranking and layout",
+      "AI pictures, cut-outs and repairs",
+      "Four finishing passes",
+      "One idea in many sizes",
+      "A careful small brand",
+      "Screen, print and rights files",
+      "Pricing and client messages",
+      "9 working sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-yellow-400 via-amber-400 to-red-500",
+    "image": "/products/design-ai/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-design-ai",
+    "downloadUrl": "private:design-ai/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/design-ai/look-inside-1600x1264.webp",
+        "alt": "Eight pages from Pro Design with AI"
+      },
+      {
+        "src": "/products/design-ai/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Pro Design with AI"
+      },
+      {
+        "src": "/products/design-ai/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Pro Design with AI"
+      },
+      {
+        "src": "/products/design-ai/pages/p9-900x1278.webp",
+        "alt": "Page 9 of Pro Design with AI"
+      },
+      {
+        "src": "/products/design-ai/pages/p18-900x1278.webp",
+        "alt": "Page 18 of Pro Design with AI"
+      },
+      {
+        "src": "/products/design-ai/pages/p21-900x1278.webp",
+        "alt": "Page 21 of Pro Design with AI"
+      },
+      {
+        "src": "/products/design-ai/pages/p35-900x1278.webp",
+        "alt": "Page 35 of Pro Design with AI"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
+  },
+  {
     "slug": "remote-job-blueprint",
     "name": "Remote Job Blueprint Naija",
     "category": "Hustle Tools",
