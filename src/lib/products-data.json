@@ -5,15 +5,15 @@
     "category": "Hustle Tools",
     "price": 3500,
     "tagline": "Land your first remote job or client from Nigeria, get paid in dollars, and stay far from fake offers.",
-    "description": "A 92-page, step-by-step guide for Nigerian graduates, NYSC members and job seekers. Pick one skill you can start with (even with only a phone), build a portfolio with zero clients, write a CV remote employers actually read, find real remote jobs, spot fake offers in five minutes, and bring your dollars home to naira. Every price, app and fee was checked in November 2026, including the new PayPal-through-Paga option.",
+    "description": "A 106-page, step-by-step guide for Nigerian graduates, NYSC members and job seekers. Pick one skill you can start with (even with only a phone), build a portfolio with zero clients, write a CV remote employers actually read, find real remote jobs, spot fake offers in five minutes, and bring your dollars home to naira. Researched in November 2026, with dated screenshots, including the PayPal-through-Paga option. Fees change, so confirm before you pay.",
     "whatsInside": [
       "13 step-by-step chapters, from choosing a skill to raising your pay",
       "Which remote skills work with only a phone, and when you need a laptop",
       "How to build a portfolio with zero clients (practice-client method)",
-      "A one-page CV that passes keyword filters, with a before/after example",
-      "Real job sites that hire Nigerians, plus search tricks for hidden roles",
+      "A one-page CV built for keyword filters, with a before/after example",
+      "Job sites to check, with real screenshots, plus search tricks for hidden roles",
       "Upwork and Fiverr: profile, proposals, fees and your first review",
-      "The 5-minute check that exposes fake remote jobs and task scams",
+      "The 5-minute check that helps you spot fake remote jobs and task scams",
       "Getting paid in dollars: Payoneer, USD accounts and PayPal via Paga",
       "11 copy-ready templates: CV, proposal, follow-up, invoice and more",
       "A 7-day quick-start plan so you start today"
@@ -27,40 +27,40 @@
     "downloadUrl": "private:remote-job-blueprint/v1.pdf",
     "gallery": [
       {
-        "src": "/products/remote-job-blueprint/pages/chapter-1-900x1277.webp",
-        "alt": "First page of Chapter 1: How remote work really works for Nigerians"
+        "src": "/products/remote-job-blueprint/look-inside-1600x1264.webp",
+        "alt": "Eight pages from Remote Job Blueprint Naija"
       },
       {
-        "src": "/products/remote-job-blueprint/cv-before-after-1400x1106.webp",
-        "alt": "A CV before and after: three crowded pages versus one clear page"
+        "src": "/products/remote-job-blueprint/pages/p1-v2-900x1278.webp",
+        "alt": "Page 1 of Remote Job Blueprint Naija"
       },
       {
-        "src": "/products/remote-job-blueprint/photo-home-1600x1000.webp",
-        "alt": "A young Nigerian woman working from home with her laptop and notebook"
+        "src": "/products/remote-job-blueprint/pages/p8-v2-900x1278.webp",
+        "alt": "Page 8 of Remote Job Blueprint Naija"
       },
       {
-        "src": "/products/remote-job-blueprint/pages/plan-900x1277.webp",
-        "alt": "The 7-day quick-start plan page"
+        "src": "/products/remote-job-blueprint/pages/p9-v2-900x1278.webp",
+        "alt": "Page 9 of Remote Job Blueprint Naija"
       },
       {
-        "src": "/products/remote-job-blueprint/scam-chat-1400x1260.webp",
-        "alt": "A fake job chat with five red flags marked"
+        "src": "/products/remote-job-blueprint/pages/p14-v2-900x1278.webp",
+        "alt": "Page 14 of Remote Job Blueprint Naija"
       },
       {
-        "src": "/products/remote-job-blueprint/pages/job-boards-900x1277.webp",
-        "alt": "Chapter 7 page with an annotated job board screenshot"
+        "src": "/products/remote-job-blueprint/pages/p52-v2-900x1278.webp",
+        "alt": "Page 52 of Remote Job Blueprint Naija"
       },
       {
-        "src": "/products/remote-job-blueprint/money-flow-1400x761.webp",
-        "alt": "Three routes for dollars to reach a Nigerian bank account"
+        "src": "/products/remote-job-blueprint/pages/p76-v2-900x1278.webp",
+        "alt": "Page 76 of Remote Job Blueprint Naija"
       },
       {
-        "src": "/products/remote-job-blueprint/photo-celebrate-1600x1000.webp",
-        "alt": "Two young Nigerians smiling at a laptop"
+        "src": "/products/remote-job-blueprint/pages/p85-v2-900x1278.webp",
+        "alt": "Page 85 of Remote Job Blueprint Naija"
       },
       {
-        "src": "/products/remote-job-blueprint/pages/templates-900x1277.webp",
-        "alt": "The copy-ready templates section"
+        "src": "/products/remote-job-blueprint/pages/p83-v2-900x1278.webp",
+        "alt": "Page 83 of Remote Job Blueprint Naija"
       }
     ],
     "testimonial": {
@@ -74,8 +74,8 @@
     "name": "Edit & Earn Naija",
     "category": "Hustle Tools",
     "price": 4000,
-    "tagline": "Make money editing short videos with CapCut and AI tools, from your phone or laptop.",
-    "description": "A 61-page, step-by-step guide to the short-video edits Nigerian businesses and creators actually pay for. Learn the 3-second hook, readable captions, pacing that keeps people watching and which music business clients can use. Use AI tools to work faster without making your videos look cheap, build a portfolio in 7 days with no clients, price your work, and land your first paying clients. Checked in November 2026.",
+    "tagline": "Edit short videos for clients with CapCut and AI tools, from your phone or laptop.",
+    "description": "A 69-page, step-by-step guide to the short-video edits Nigerian businesses and creators ask for. Learn the 3-second hook, readable captions, pacing that keeps people watching and which music business clients can use. Use AI tools to work faster without making your videos look cheap, build a portfolio in 7 days with no clients, price your work, and contact your first clients. Researched in November 2026, with dated screenshots.",
     "whatsInside": [
       "11 step-by-step chapters, from your first edit to monthly clients",
       "Phone or laptop: what each can do, and CapCut free vs Pro",
@@ -97,40 +97,105 @@
     "downloadUrl": "private:edit-and-earn/v1.pdf",
     "gallery": [
       {
-        "src": "/products/edit-and-earn/timeline-1400x1094.webp",
-        "alt": "The editing timeline with each part labelled"
+        "src": "/products/edit-and-earn/look-inside-1600x1264.webp",
+        "alt": "Eight pages from Edit & Earn Naija"
       },
       {
-        "src": "/products/edit-and-earn/pages/chapter-4-900x1277.webp",
-        "alt": "Opening page of Chapter 4: The first 3 seconds decide everything"
+        "src": "/products/edit-and-earn/pages/p1-v2-900x1278.webp",
+        "alt": "Page 1 of Edit & Earn Naija"
       },
       {
-        "src": "/products/edit-and-earn/hooks-1400x1177.webp",
-        "alt": "A weak opening and a strong opening side by side"
+        "src": "/products/edit-and-earn/pages/p8-v2-900x1278.webp",
+        "alt": "Page 8 of Edit & Earn Naija"
       },
       {
-        "src": "/products/edit-and-earn/captions-1400x789.webp",
-        "alt": "Caption do's and don'ts with the TikTok safe zone"
+        "src": "/products/edit-and-earn/pages/p23-v2-900x1278.webp",
+        "alt": "Page 23 of Edit & Earn Naija"
       },
       {
-        "src": "/products/edit-and-earn/pages/plan-900x1277.webp",
-        "alt": "The 7-day edit plan page"
+        "src": "/products/edit-and-earn/pages/p48-v2-900x1278.webp",
+        "alt": "Page 48 of Edit & Earn Naija"
       },
       {
-        "src": "/products/edit-and-earn/retention-1400x660.webp",
-        "alt": "A retention edit on the timeline: something changes every few seconds"
+        "src": "/products/edit-and-earn/pages/p27-v2-900x1278.webp",
+        "alt": "Page 27 of Edit & Earn Naija"
       },
       {
-        "src": "/products/edit-and-earn/dm-pitch-1400x1236.webp",
-        "alt": "An outreach message that includes a free sample edit"
+        "src": "/products/edit-and-earn/pages/p30-v2-900x1278.webp",
+        "alt": "Page 30 of Edit & Earn Naija"
       },
       {
-        "src": "/products/edit-and-earn/price-list-1400x720.webp",
-        "alt": "An example editing price list with three packages"
+        "src": "/products/edit-and-earn/pages/p44-v2-900x1278.webp",
+        "alt": "Page 44 of Edit & Earn Naija"
       },
       {
-        "src": "/products/edit-and-earn/pages/templates-900x1277.webp",
-        "alt": "The copy-ready templates section"
+        "src": "/products/edit-and-earn/pages/p35-v2-900x1278.webp",
+        "alt": "Page 35 of Edit & Earn Naija"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
+  },
+  {
+    "slug": "ad-runner",
+    "name": "Ad Runner Naija",
+    "category": "Hustle Tools",
+    "price": 4000,
+    "tagline": "Run Facebook, Instagram and TikTok ads for Nigerian businesses, and know if they made money.",
+    "description": "A 43-page working manual for running small ad tests for Nigerian businesses. Work out what a sale can cost, get access without passwords, check the rules, write three ads, plan Meta and TikTok tests, read the results and price your work. Researched in November 2026, with dated screenshots.",
+    "whatsInside": [
+      "10 short chapters and a 7-day plan",
+      "Break-even sums with naira examples",
+      "How clients share access without passwords",
+      "ARCON, claims, music and picture checks",
+      "Three ad angles for one offer",
+      "How to plan a first Meta test",
+      "When TikTok's minimum budget is too high",
+      "A decision chart for reading results",
+      "7 working sheets, from test plan to honest report"
+    ],
+    "icon": "rocket",
+    "cover": "from-amber-400 via-yellow-500 to-orange-500",
+    "image": "/products/ad-runner/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-ad-runner",
+    "downloadUrl": "private:ad-runner/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/ad-runner/look-inside-1600x1264.webp",
+        "alt": "Eight pages from Ad Runner Naija"
+      },
+      {
+        "src": "/products/ad-runner/pages/p1-v2-900x1278.webp",
+        "alt": "Page 1 of Ad Runner Naija"
+      },
+      {
+        "src": "/products/ad-runner/pages/p7-v2-900x1278.webp",
+        "alt": "Page 7 of Ad Runner Naija"
+      },
+      {
+        "src": "/products/ad-runner/pages/p12-v2-900x1278.webp",
+        "alt": "Page 12 of Ad Runner Naija"
+      },
+      {
+        "src": "/products/ad-runner/pages/p21-v2-900x1278.webp",
+        "alt": "Page 21 of Ad Runner Naija"
+      },
+      {
+        "src": "/products/ad-runner/pages/p24-v2-900x1278.webp",
+        "alt": "Page 24 of Ad Runner Naija"
+      },
+      {
+        "src": "/products/ad-runner/pages/p29-v2-900x1278.webp",
+        "alt": "Page 29 of Ad Runner Naija"
+      },
+      {
+        "src": "/products/ad-runner/pages/p32-v2-900x1278.webp",
+        "alt": "Page 32 of Ad Runner Naija"
       }
     ],
     "testimonial": {
