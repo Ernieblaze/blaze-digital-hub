@@ -205,6 +205,130 @@
     }
   },
   {
+    "slug": "social-manager",
+    "name": "Social Media Manager Naija",
+    "category": "Hustle Tools",
+    "price": 3500,
+    "tagline": "Plan, post, reply and report for Nigerian businesses, with AI helping.",
+    "description": "A 57-page guide to managing pages for Nigerian businesses. Audit a page, write a one-page plan, set up AI so it doesn't invent facts, fill a two-week calendar, make clear posts, schedule and reply, report honestly, price your work and contact your first client. One practice client runs through the whole book. Researched in November 2026, with dated screenshots.",
+    "whatsInside": [
+      "10 chapters and a 7-day plan",
+      "A ten-point page audit",
+      "A one-page client plan",
+      "Five AI prompts and a fact sheet that stops inventions",
+      "A two-week content calendar",
+      "Picture, carousel and short-video lessons",
+      "Safe access, scheduling and replies",
+      "A weekly report with one decision",
+      "Pricing sums and agreement points",
+      "8 working sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-violet-400 via-purple-500 to-indigo-600",
+    "image": "/products/social-manager/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-social-manager",
+    "downloadUrl": "private:social-manager/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/social-manager/look-inside-1600x1264.webp",
+        "alt": "Eight pages from Social Media Manager Naija"
+      },
+      {
+        "src": "/products/social-manager/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Social Media Manager Naija"
+      },
+      {
+        "src": "/products/social-manager/pages/p9-900x1278.webp",
+        "alt": "Page 9 of Social Media Manager Naija"
+      },
+      {
+        "src": "/products/social-manager/pages/p15-900x1278.webp",
+        "alt": "Page 15 of Social Media Manager Naija"
+      },
+      {
+        "src": "/products/social-manager/pages/p21-900x1278.webp",
+        "alt": "Page 21 of Social Media Manager Naija"
+      },
+      {
+        "src": "/products/social-manager/pages/p28-900x1278.webp",
+        "alt": "Page 28 of Social Media Manager Naija"
+      },
+      {
+        "src": "/products/social-manager/pages/p32-900x1278.webp",
+        "alt": "Page 32 of Social Media Manager Naija"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
+  },
+  {
+    "slug": "content-pays",
+    "name": "Content Pays Naija",
+    "category": "Hustle Tools",
+    "price": 3000,
+    "tagline": "What pays Nigerian creators, what doesn't, and one route to start with.",
+    "description": "A 62-page guide to honest ways Nigerian creators can be paid. See what is open on YouTube, Facebook, TikTok and X as at 24 November 2026, choose one route, make useful videos, work with brands, sell something small, receive money safely and follow a 30-day plan. No VPN tricks, bought accounts or earnings promises.",
+    "whatsInside": [
+      "10 chapters and a 30-day plan",
+      "YouTube's two levels and the reported 2027 change",
+      "How Facebook's invitation form works",
+      "What TikTok pays for, and what is closed to Nigeria",
+      "A chart for choosing one route",
+      "20 video ideas from five kinds of video",
+      "Brand samples, quotes, labels and agreements",
+      "A small product, tested before you build",
+      "Payment, tax records and scam checks",
+      "8 working sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-pink-400 via-rose-500 to-fuchsia-600",
+    "image": "/products/content-pays/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-content-pays",
+    "downloadUrl": "private:content-pays/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/content-pays/look-inside-1600x1264.webp",
+        "alt": "Eight pages from Content Pays Naija"
+      },
+      {
+        "src": "/products/content-pays/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Content Pays Naija"
+      },
+      {
+        "src": "/products/content-pays/pages/p9-900x1278.webp",
+        "alt": "Page 9 of Content Pays Naija"
+      },
+      {
+        "src": "/products/content-pays/pages/p10-900x1278.webp",
+        "alt": "Page 10 of Content Pays Naija"
+      },
+      {
+        "src": "/products/content-pays/pages/p13-900x1278.webp",
+        "alt": "Page 13 of Content Pays Naija"
+      },
+      {
+        "src": "/products/content-pays/pages/p34-900x1278.webp",
+        "alt": "Page 34 of Content Pays Naija"
+      },
+      {
+        "src": "/products/content-pays/pages/p38-900x1278.webp",
+        "alt": "Page 38 of Content Pays Naija"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
+  },
+  {
     "slug": "blaze-forex-mastery-blueprint",
     "name": "Blaze Forex Mastery Blueprint",
     "category": "Trading",
