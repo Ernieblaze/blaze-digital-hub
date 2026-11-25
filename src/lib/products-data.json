@@ -904,5 +904,71 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "tax-records",
+    "name": "Small Business Tax and Records Kit",
+    "category": "Hustle Tools",
+    "price": 5000,
+    "tagline": "A records and tax-question kit for small businesses, with an Excel workbook.",
+    "description": "A 41-page guide and Excel workbook for Nigerian sole traders, freelancers and small shops. Open a tax folder, separate money, record sales, costs, debts and stock, match bank and cash, read profit and prepare questions for filing. Based on the official Tax Administration Act text and dated sources. Education only, and it must be checked by a tax professional.",
+    "whatsInside": [
+      "8 chapters and a 7-day plan",
+      "Excel workbook with seven sheets",
+      "Eight-part tax folder",
+      "Daily, weekly and monthly records",
+      "Invoice, debt and receipt formats",
+      "Profit and cash sums",
+      "Official six-year record rule",
+      "Individual tax bands with a practice sum",
+      "Questions for your tax professional",
+      "Filing and proof checklist"
+    ],
+    "icon": "coins",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/tax-records/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-tax-records",
+    "downloadUrl": "private:tax-records/v1.zip",
+    "gallery": [
+      {
+        "src": "/products/tax-records/look-inside-1600x1324.webp",
+        "alt": "Eight pages from Small Business Tax and Records Kit"
+      },
+      {
+        "src": "/products/tax-records/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Small Business Tax and Records Kit"
+      },
+      {
+        "src": "/products/tax-records/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Small Business Tax and Records Kit"
+      },
+      {
+        "src": "/products/tax-records/pages/p12-900x1278.webp",
+        "alt": "Page 12 of Small Business Tax and Records Kit"
+      },
+      {
+        "src": "/products/tax-records/pages/p16-900x1278.webp",
+        "alt": "Page 16 of Small Business Tax and Records Kit"
+      },
+      {
+        "src": "/products/tax-records/pages/p19-900x1278.webp",
+        "alt": "Page 19 of Small Business Tax and Records Kit"
+      },
+      {
+        "src": "/products/tax-records/pages/p24-900x1278.webp",
+        "alt": "Page 24 of Small Business Tax and Records Kit"
+      },
+      {
+        "src": "/products/tax-records/pages/p28-900x1278.webp",
+        "alt": "Page 28 of Small Business Tax and Records Kit"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
