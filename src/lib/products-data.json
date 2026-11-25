@@ -772,5 +772,71 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "jamb-2027",
+    "name": "JAMB 2027 300+ Study Plan",
+    "category": "Hustle Tools",
+    "price": 2500,
+    "tagline": "A 15-week UTME plan with 110 original questions, answers and timed practice.",
+    "description": "A 50-page study plan for 30 November 2026 to 14 March 2027. Set your score, prepare for registration, study with recall and a mistake book, follow weekly subject plans and build CBT speed. Includes 110 original questions with answers. It isn't an official JAMB product, has no leaked questions and doesn't promise a score.",
+    "whatsInside": [
+      "10 chapters and a first 7-day plan",
+      "15 dated weeks",
+      "Science, commercial and arts plans",
+      "110 original questions with answers",
+      "English proof method",
+      "Four-line working for calculations",
+      "A six-letter mistake book",
+      "105-minute CBT pace",
+      "Registration safety checks",
+      "Weekly, mock and exam-day sheets"
+    ],
+    "icon": "graduation",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/jamb-2027/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-jamb-2027",
+    "downloadUrl": "private:jamb-2027/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/jamb-2027/look-inside-1600x1252.webp",
+        "alt": "Eight pages from JAMB 2027 300+ Study Plan"
+      },
+      {
+        "src": "/products/jamb-2027/pages/p1-900x1278.webp",
+        "alt": "Page 1 of JAMB 2027 300+ Study Plan"
+      },
+      {
+        "src": "/products/jamb-2027/pages/p8-900x1278.webp",
+        "alt": "Page 8 of JAMB 2027 300+ Study Plan"
+      },
+      {
+        "src": "/products/jamb-2027/pages/p9-900x1278.webp",
+        "alt": "Page 9 of JAMB 2027 300+ Study Plan"
+      },
+      {
+        "src": "/products/jamb-2027/pages/p12-900x1278.webp",
+        "alt": "Page 12 of JAMB 2027 300+ Study Plan"
+      },
+      {
+        "src": "/products/jamb-2027/pages/p14-900x1278.webp",
+        "alt": "Page 14 of JAMB 2027 300+ Study Plan"
+      },
+      {
+        "src": "/products/jamb-2027/pages/p15-900x1278.webp",
+        "alt": "Page 15 of JAMB 2027 300+ Study Plan"
+      },
+      {
+        "src": "/products/jamb-2027/pages/p21-900x1278.webp",
+        "alt": "Page 21 of JAMB 2027 300+ Study Plan"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
