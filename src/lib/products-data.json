@@ -1881,5 +1881,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "child-read",
+    "name": "Teach Your Child to Read",
+    "category": "Hustle Tools",
+    "price": 2500,
+    "tagline": "Teach a child sounds, blending, words and short stories in 12 gentle weeks.",
+    "description": "A 39-page home reading guide for children beginning English reading. Play with sounds, teach 26 starting sounds with cards, blend, spell, learn letter teams and read 12 original tiny stories. Includes checks and error help. It doesn't diagnose learning problems, and an early-reading teacher must test it with children.",
+    "whatsInside": [
+      "9 chapters and a 12-week plan",
+      "26 sound cards to cut",
+      "Five listening games",
+      "Blending method and word list",
+      "Sound boxes and tricky words",
+      "Eight letter teams",
+      "12 original tiny stories",
+      "Error and support chart",
+      "Two-week checks",
+      "Five lesson sheets"
+    ],
+    "icon": "graduation",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/child-read/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-child-read",
+    "downloadUrl": "private:child-read/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/child-read/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Teach Your Child to Read"
+      },
+      {
+        "src": "/products/child-read/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Teach Your Child to Read"
+      },
+      {
+        "src": "/products/child-read/pages/p7-900x1278.webp",
+        "alt": "Page 7 of Teach Your Child to Read"
+      },
+      {
+        "src": "/products/child-read/pages/p11-900x1278.webp",
+        "alt": "Page 11 of Teach Your Child to Read"
+      },
+      {
+        "src": "/products/child-read/pages/p12-900x1278.webp",
+        "alt": "Page 12 of Teach Your Child to Read"
+      },
+      {
+        "src": "/products/child-read/pages/p15-900x1278.webp",
+        "alt": "Page 15 of Teach Your Child to Read"
+      },
+      {
+        "src": "/products/child-read/pages/p17-900x1278.webp",
+        "alt": "Page 17 of Teach Your Child to Read"
+      },
+      {
+        "src": "/products/child-read/pages/p20-900x1278.webp",
+        "alt": "Page 20 of Teach Your Child to Read"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
