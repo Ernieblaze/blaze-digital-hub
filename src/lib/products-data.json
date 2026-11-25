@@ -706,5 +706,71 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "ai-work",
+    "name": "AI at Work",
+    "category": "Hustle Tools",
+    "price": 5000,
+    "tagline": "Practical AI for teachers, office workers and shop owners, with checks at every step.",
+    "description": "A 51-page course with one shared method and three job tracks. Choose safe work, protect private details, write a clear work order, check facts and sums, then build lessons, emails, minutes, reports or shop replies. Save a kit, measure your time and show its value. AI subscriptions aren't included, and you can start free.",
+    "whatsInside": [
+      "10 chapters and a 7-day plan",
+      "Teacher track: lesson, quiz and marking guide",
+      "Office track: email, minutes, sheets and reports",
+      "Shop track: fact sheet, 12 replies and posts",
+      "A privacy traffic light",
+      "Five checks for AI mistakes",
+      "Formulas on a small table you can repeat",
+      "A five-file work kit",
+      "Time and price sums",
+      "10 prompts and sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/ai-work/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-ai-work",
+    "downloadUrl": "private:ai-work/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/ai-work/look-inside-1600x1252.webp",
+        "alt": "Eight pages from AI at Work"
+      },
+      {
+        "src": "/products/ai-work/pages/p1-900x1278.webp",
+        "alt": "Page 1 of AI at Work"
+      },
+      {
+        "src": "/products/ai-work/pages/p9-900x1278.webp",
+        "alt": "Page 9 of AI at Work"
+      },
+      {
+        "src": "/products/ai-work/pages/p13-900x1278.webp",
+        "alt": "Page 13 of AI at Work"
+      },
+      {
+        "src": "/products/ai-work/pages/p17-900x1278.webp",
+        "alt": "Page 17 of AI at Work"
+      },
+      {
+        "src": "/products/ai-work/pages/p24-900x1278.webp",
+        "alt": "Page 24 of AI at Work"
+      },
+      {
+        "src": "/products/ai-work/pages/p26-900x1278.webp",
+        "alt": "Page 26 of AI at Work"
+      },
+      {
+        "src": "/products/ai-work/pages/p32-900x1278.webp",
+        "alt": "Page 32 of AI at Work"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
