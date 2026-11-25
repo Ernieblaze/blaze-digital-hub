@@ -2206,5 +2206,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "wedding-kit",
+    "name": "Wedding Budget and Planning Kit",
+    "category": "Hustle Tools",
+    "price": 3000,
+    "tagline": "Plan families, guests, vendors, documents and the day under one honest limit.",
+    "description": "A 39-page wedding and first-home planner with an Excel budget and guest list. Talk as a couple, agree family custom, check registry papers, build a safe limit, compare vendors, count plates, run the day and plan the first 90 days. 2026 prices disagree, so use your own quotes. It isn't legal or family advice.",
+    "whatsInside": [
+      "8 chapters and a 7-day start",
+      "Excel budget and guest workbook",
+      "Couple money and marriage talk",
+      "Family custom agreement",
+      "Registry document clock",
+      "Practice 80-guest budget",
+      "Vendor contract questions",
+      "Plate and attendance count",
+      "Wedding-day timeline",
+      "First 90 days money plan"
+    ],
+    "icon": "notebook",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/wedding-kit/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-wedding-kit",
+    "downloadUrl": "private:wedding-kit/v1.zip",
+    "gallery": [
+      {
+        "src": "/products/wedding-kit/look-inside-1600x1324.webp",
+        "alt": "Eight pages from Wedding Budget and Planning Kit"
+      },
+      {
+        "src": "/products/wedding-kit/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Wedding Budget and Planning Kit"
+      },
+      {
+        "src": "/products/wedding-kit/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Wedding Budget and Planning Kit"
+      },
+      {
+        "src": "/products/wedding-kit/pages/p11-900x1278.webp",
+        "alt": "Page 11 of Wedding Budget and Planning Kit"
+      },
+      {
+        "src": "/products/wedding-kit/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Wedding Budget and Planning Kit"
+      },
+      {
+        "src": "/products/wedding-kit/pages/p17-900x1278.webp",
+        "alt": "Page 17 of Wedding Budget and Planning Kit"
+      },
+      {
+        "src": "/products/wedding-kit/pages/p20-900x1278.webp",
+        "alt": "Page 20 of Wedding Budget and Planning Kit"
+      },
+      {
+        "src": "/products/wedding-kit/pages/p24-900x1278.webp",
+        "alt": "Page 24 of Wedding Budget and Planning Kit"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
