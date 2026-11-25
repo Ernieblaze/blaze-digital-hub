@@ -1946,5 +1946,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "baby-food",
+    "name": "Baby Food Timetable",
+    "category": "Hustle Tools",
+    "price": 3000,
+    "tagline": "Plan safe Nigerian foods, textures and 28 ideas for babies from about 6 to 12 months.",
+    "description": "A 37-page family food guide for babies starting safe foods. Check readiness, choking and allergies, enrich local meals, move from smooth to soft fingers, plan a month, handle refusal and illness, and shop small. Based on dated WHO and CDC pages. A child-health professional must review it and advise any baby with special needs.",
+    "whatsInside": [
+      "8 chapters and a 7-day start",
+      "Readiness and hunger cues",
+      "Choking and allergy checks",
+      "Local enriched foods",
+      "6 to 8 month week",
+      "9 to 12 month week",
+      "28-day flexible meal bank",
+      "Illness warning signs",
+      "Small market basket",
+      "Diary and helper sheets"
+    ],
+    "icon": "notebook",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/baby-food/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-baby-food",
+    "downloadUrl": "private:baby-food/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/baby-food/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Baby Food Timetable"
+      },
+      {
+        "src": "/products/baby-food/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Baby Food Timetable"
+      },
+      {
+        "src": "/products/baby-food/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Baby Food Timetable"
+      },
+      {
+        "src": "/products/baby-food/pages/p12-900x1278.webp",
+        "alt": "Page 12 of Baby Food Timetable"
+      },
+      {
+        "src": "/products/baby-food/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Baby Food Timetable"
+      },
+      {
+        "src": "/products/baby-food/pages/p18-900x1278.webp",
+        "alt": "Page 18 of Baby Food Timetable"
+      },
+      {
+        "src": "/products/baby-food/pages/p20-900x1278.webp",
+        "alt": "Page 20 of Baby Food Timetable"
+      },
+      {
+        "src": "/products/baby-food/pages/p22-900x1278.webp",
+        "alt": "Page 22 of Baby Food Timetable"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
