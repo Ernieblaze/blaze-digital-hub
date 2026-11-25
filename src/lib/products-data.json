@@ -838,5 +838,71 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "job-kit",
+    "name": "Job Test, CV and Interview Kit",
+    "category": "Hustle Tools",
+    "price": 3000,
+    "tagline": "Build a truthful CV, practise 60 original questions and prepare for the interview.",
+    "description": "A 45-page kit for Nigerian job seekers. Check that a vacancy is real, match its needs with proof, build a one-page CV, write a cover note, practise number, verbal, logic and situation questions, prepare six interview stories and read an offer. The questions are original. It doesn't promise employment.",
+    "whatsInside": [
+      "9 chapters, plus 7-day and 14-day plans",
+      "A five-minute fake-job check",
+      "One-page fictional CV",
+      "Need-and-proof table",
+      "Cover notes and form answers",
+      "60 original test questions with answers",
+      "24 interview answers to prepare",
+      "Six true story cards",
+      "Offer checklist",
+      "Application log and templates"
+    ],
+    "icon": "rocket",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/job-kit/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-job-kit",
+    "downloadUrl": "private:job-kit/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/job-kit/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Job Test, CV and Interview Kit"
+      },
+      {
+        "src": "/products/job-kit/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Job Test, CV and Interview Kit"
+      },
+      {
+        "src": "/products/job-kit/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Job Test, CV and Interview Kit"
+      },
+      {
+        "src": "/products/job-kit/pages/p9-900x1278.webp",
+        "alt": "Page 9 of Job Test, CV and Interview Kit"
+      },
+      {
+        "src": "/products/job-kit/pages/p13-900x1278.webp",
+        "alt": "Page 13 of Job Test, CV and Interview Kit"
+      },
+      {
+        "src": "/products/job-kit/pages/p16-900x1278.webp",
+        "alt": "Page 16 of Job Test, CV and Interview Kit"
+      },
+      {
+        "src": "/products/job-kit/pages/p24-900x1278.webp",
+        "alt": "Page 24 of Job Test, CV and Interview Kit"
+      },
+      {
+        "src": "/products/job-kit/pages/p28-900x1278.webp",
+        "alt": "Page 28 of Job Test, CV and Interview Kit"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
