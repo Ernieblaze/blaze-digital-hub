@@ -1621,5 +1621,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "import-1688",
+    "name": "Mini Importation from 1688",
+    "category": "Hustle Tools",
+    "price": 5000,
+    "tagline": "Check the law, calculate landed cost and test a small product from 1688.",
+    "description": "A 38-page guide to first product checks and small imports from 1688 to Nigeria. Screen Customs, regulator, carrier and copying risks, read supplier pages, question agents, calculate full cost, inspect one sample and test a small batch. No order was placed for this draft. A licensed customs professional must review it.",
+    "whatsInside": [
+      "8 chapters and a 7-day decision plan",
+      "Four legal doors",
+      "Product score and buyer questions",
+      "1688 page reading sheet",
+      "Supplier message and agent terms",
+      "Volume-weight sum",
+      "Full landed-cost example",
+      "Sample inspection",
+      "Small-batch record",
+      "Stop, repair or repeat choices"
+    ],
+    "icon": "coins",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/import-1688/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-import-1688",
+    "downloadUrl": "private:import-1688/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/import-1688/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Mini Importation from 1688"
+      },
+      {
+        "src": "/products/import-1688/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Mini Importation from 1688"
+      },
+      {
+        "src": "/products/import-1688/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Mini Importation from 1688"
+      },
+      {
+        "src": "/products/import-1688/pages/p11-900x1278.webp",
+        "alt": "Page 11 of Mini Importation from 1688"
+      },
+      {
+        "src": "/products/import-1688/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Mini Importation from 1688"
+      },
+      {
+        "src": "/products/import-1688/pages/p17-900x1278.webp",
+        "alt": "Page 17 of Mini Importation from 1688"
+      },
+      {
+        "src": "/products/import-1688/pages/p21-900x1278.webp",
+        "alt": "Page 21 of Mini Importation from 1688"
+      },
+      {
+        "src": "/products/import-1688/pages/p23-900x1278.webp",
+        "alt": "Page 23 of Mini Importation from 1688"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
