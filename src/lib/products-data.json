@@ -1491,5 +1491,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "speak-up",
+    "name": "Speak With Confidence",
+    "category": "Hustle Tools",
+    "price": 3500,
+    "tagline": "Practise clear points, calls, price and hard talks for work and life in 21 days.",
+    "description": "A 43-page speaking workbook for meetings, customers, calls, price talks, no, conflict and short speeches. Use your natural voice and language, learn a 40-second start, make one clear point, ask useful questions, set safe limits and review practice. It doesn't treat anxiety or make an unsafe situation safe.",
+    "whatsInside": [
+      "10 chapters and a 21-day plan",
+      "40-second start",
+      "Four-line message",
+      "Meeting entries and point card",
+      "Customer calls and limits",
+      "Price and scope practice",
+      "Short no scripts",
+      "Hard-talk and safe pause",
+      "Three-minute speech",
+      "Four-score practice record"
+    ],
+    "icon": "rocket",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/speak-up/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-speak-up",
+    "downloadUrl": "private:speak-up/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/speak-up/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Speak With Confidence"
+      },
+      {
+        "src": "/products/speak-up/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Speak With Confidence"
+      },
+      {
+        "src": "/products/speak-up/pages/p7-900x1278.webp",
+        "alt": "Page 7 of Speak With Confidence"
+      },
+      {
+        "src": "/products/speak-up/pages/p10-900x1278.webp",
+        "alt": "Page 10 of Speak With Confidence"
+      },
+      {
+        "src": "/products/speak-up/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Speak With Confidence"
+      },
+      {
+        "src": "/products/speak-up/pages/p16-900x1278.webp",
+        "alt": "Page 16 of Speak With Confidence"
+      },
+      {
+        "src": "/products/speak-up/pages/p20-900x1278.webp",
+        "alt": "Page 20 of Speak With Confidence"
+      },
+      {
+        "src": "/products/speak-up/pages/p24-900x1278.webp",
+        "alt": "Page 24 of Speak With Confidence"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
