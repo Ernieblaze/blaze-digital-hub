@@ -1686,5 +1686,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "small-chops",
+    "name": "Small Chops Money",
+    "category": "Hustle Tools",
+    "price": 3000,
+    "tagline": "Practise six small chops, count plates, cost orders and run a small event.",
+    "description": "A 39-page small-chops workbook. Set a safe frying place, test puff-puff, mosa, samosa, spring rolls, chicken bites and chin chin, plan plates, calculate cost, confirm orders and run an event day. Recipes are starting weights and need a caterer's tests and photos before publication. Check food rules in your area.",
+    "whatsInside": [
+      "8 chapters and a 7-day practice",
+      "Six starting recipes by weight",
+      "Samosa folding drawing",
+      "Puff-puff fault chart",
+      "Plate types and 50-guest count",
+      "Batch-time sums",
+      "Cost per piece and plate",
+      "Written event order",
+      "Event-day clock",
+      "Five working sheets"
+    ],
+    "icon": "coins",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/small-chops/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-small-chops",
+    "downloadUrl": "private:small-chops/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/small-chops/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Small Chops Money"
+      },
+      {
+        "src": "/products/small-chops/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Small Chops Money"
+      },
+      {
+        "src": "/products/small-chops/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Small Chops Money"
+      },
+      {
+        "src": "/products/small-chops/pages/p12-900x1278.webp",
+        "alt": "Page 12 of Small Chops Money"
+      },
+      {
+        "src": "/products/small-chops/pages/p15-900x1278.webp",
+        "alt": "Page 15 of Small Chops Money"
+      },
+      {
+        "src": "/products/small-chops/pages/p18-900x1278.webp",
+        "alt": "Page 18 of Small Chops Money"
+      },
+      {
+        "src": "/products/small-chops/pages/p21-900x1278.webp",
+        "alt": "Page 21 of Small Chops Money"
+      },
+      {
+        "src": "/products/small-chops/pages/p24-900x1278.webp",
+        "alt": "Page 24 of Small Chops Money"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
