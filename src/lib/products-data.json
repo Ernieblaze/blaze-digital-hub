@@ -1231,5 +1231,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "cake-biz",
+    "name": "Christmas Cake and Home Baking",
+    "category": "Hustle Tools",
+    "price": 3500,
+    "tagline": "Practise dependable cakes, cost them honestly and plan safe December orders.",
+    "description": "A 35-page home-baking workbook. Test your oven, repeat a plain sponge, read faults, plan cupcakes, fruit cake and buttercream, make a small menu, cost your hours and deliver. Recipes are starting ratios and still need a baker's tests and photos before publication. Check food rules for your kitchen.",
+    "whatsInside": [
+      "8 chapters and a 7-day test plan",
+      "Plain sponge by weight",
+      "Cupcake, fruit cake and buttercream test cards",
+      "Six cake-fault checks",
+      "Three drawn layouts",
+      "A four-product menu",
+      "Cost and hour sums",
+      "Order and allergy questions",
+      "Delivery plan",
+      "Five baking sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/cake-biz/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-cake-biz",
+    "downloadUrl": "private:cake-biz/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/cake-biz/look-inside-1600x1324.webp",
+        "alt": "Eight pages from Christmas Cake and Home Baking"
+      },
+      {
+        "src": "/products/cake-biz/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Christmas Cake and Home Baking"
+      },
+      {
+        "src": "/products/cake-biz/pages/p7-900x1278.webp",
+        "alt": "Page 7 of Christmas Cake and Home Baking"
+      },
+      {
+        "src": "/products/cake-biz/pages/p10-900x1278.webp",
+        "alt": "Page 10 of Christmas Cake and Home Baking"
+      },
+      {
+        "src": "/products/cake-biz/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Christmas Cake and Home Baking"
+      },
+      {
+        "src": "/products/cake-biz/pages/p18-900x1278.webp",
+        "alt": "Page 18 of Christmas Cake and Home Baking"
+      },
+      {
+        "src": "/products/cake-biz/pages/p20-900x1278.webp",
+        "alt": "Page 20 of Christmas Cake and Home Baking"
+      },
+      {
+        "src": "/products/cake-biz/pages/p23-900x1278.webp",
+        "alt": "Page 23 of Christmas Cake and Home Baking"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
