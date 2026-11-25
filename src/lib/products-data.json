@@ -1816,5 +1816,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "liquid-soap",
+    "name": "Liquid Soap and Cleaning Products",
+    "category": "Hustle Tools",
+    "price": 3000,
+    "tagline": "Make small detergent tests, check safety, stability, labels and cost before selling.",
+    "description": "A 36-page beginner workbook for dish, hand, laundry and floor liquid test batches. Learn exact ingredient questions, a 1 kg dish formula, pH and keeping records, labels and cost per wash. It uses no caustic soda, bleach or formalin. Formulas need a chemist's test and product approval before any sale.",
+    "whatsInside": [
+      "8 chapters and a 7-day test",
+      "Safety corner and never-mix rules",
+      "Ingredient strength questions",
+      "One-kilogram dish starting formula",
+      "Hand, laundry and floor test table",
+      "pH and 28-day keeping record",
+      "Cleaning test",
+      "Practice warning label",
+      "Cost per bottle and wash",
+      "Sell, improve or stop checklist"
+    ],
+    "icon": "rocket",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/liquid-soap/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-liquid-soap",
+    "downloadUrl": "private:liquid-soap/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/liquid-soap/look-inside-1600x1324.webp",
+        "alt": "Eight pages from Liquid Soap and Cleaning Products"
+      },
+      {
+        "src": "/products/liquid-soap/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Liquid Soap and Cleaning Products"
+      },
+      {
+        "src": "/products/liquid-soap/pages/p7-900x1278.webp",
+        "alt": "Page 7 of Liquid Soap and Cleaning Products"
+      },
+      {
+        "src": "/products/liquid-soap/pages/p11-900x1278.webp",
+        "alt": "Page 11 of Liquid Soap and Cleaning Products"
+      },
+      {
+        "src": "/products/liquid-soap/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Liquid Soap and Cleaning Products"
+      },
+      {
+        "src": "/products/liquid-soap/pages/p17-900x1278.webp",
+        "alt": "Page 17 of Liquid Soap and Cleaning Products"
+      },
+      {
+        "src": "/products/liquid-soap/pages/p22-900x1278.webp",
+        "alt": "Page 22 of Liquid Soap and Cleaning Products"
+      },
+      {
+        "src": "/products/liquid-soap/pages/p24-900x1278.webp",
+        "alt": "Page 24 of Liquid Soap and Cleaning Products"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
