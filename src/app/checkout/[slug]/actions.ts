@@ -5,8 +5,19 @@ import { redirect } from "next/navigation";
 import { REF_COOKIE } from "@/lib/affiliate";
 import { getProductBySlug } from "@/lib/catalog";
 import { rateLimit } from "@/lib/rate-limit";
+import type { Product } from "@/lib/products";
+import { DELIVERABLES_BUCKET, privateFilePath } from "@/lib/secure-download";
 import { supabaseAdmin } from "@/lib/supabase";
 import { SITE_URL } from "@/lib/site-url";
+
+async function isDeliverable(product: Product): Promise<boolean> {
+  const path = privateFilePath(product);
+  if (!path) return true;
+  const supabase = supabaseAdmin();
+  if (!supabase) return false;
+  const { data, error } = await supabase.storage.from(DELIVERABLES_BUCKET).exists(path);
+  return !error && Boolean(data);
+}
 
 export type CheckoutState = { error: string } | null;
 
@@ -31,6 +42,12 @@ export async function startCheckout(
 
   const product = await getProductBySlug(slug);
   if (!product) return { error: "Product not found." };
+
+  // Never take money for a file we can't deliver: the private file must already be uploaded.
+  // Checkout opens by itself once it is.
+  if (!(await isDeliverable(product))) {
+    return { error: "This product opens soon. You have not been charged. Please check back." };
+  }
 
   const secret = process.env.PAYSTACK_SECRET_KEY;
   if (!secret) {
