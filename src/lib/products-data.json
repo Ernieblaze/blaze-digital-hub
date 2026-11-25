@@ -640,5 +640,71 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "ads-fix",
+    "name": "Stop Wasting Money on Ads",
+    "category": "Hustle Tools",
+    "price": 3500,
+    "tagline": "Find where your ad money leaks, fix it, and test it with a small limit.",
+    "description": "A 53-page repair kit for business owners who run ads. Collect seven numbers from an old advert, find the most you can pay for a sale, trace where buyers leave, repair your replies, offer, picture, settings and account problems, then run one clean test. It doesn't promise sales, and ad spend isn't included.",
+    "whatsInside": [
+      "10 chapters and a 7-day repair plan",
+      "Break-even and ad-limit sums",
+      "The five-point leak test",
+      "WhatsApp reply and payment messages",
+      "How to write a clear offer",
+      "Picture, words and a 20-second video plan",
+      "Six settings that waste money",
+      "Rejected and restricted ads: the official doors",
+      "A small test with stop rules",
+      "7 working sheets"
+    ],
+    "icon": "coins",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/ads-fix/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-ads-fix",
+    "downloadUrl": "private:ads-fix/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/ads-fix/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Stop Wasting Money on Ads"
+      },
+      {
+        "src": "/products/ads-fix/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Stop Wasting Money on Ads"
+      },
+      {
+        "src": "/products/ads-fix/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Stop Wasting Money on Ads"
+      },
+      {
+        "src": "/products/ads-fix/pages/p11-900x1278.webp",
+        "alt": "Page 11 of Stop Wasting Money on Ads"
+      },
+      {
+        "src": "/products/ads-fix/pages/p13-900x1278.webp",
+        "alt": "Page 13 of Stop Wasting Money on Ads"
+      },
+      {
+        "src": "/products/ads-fix/pages/p22-900x1278.webp",
+        "alt": "Page 22 of Stop Wasting Money on Ads"
+      },
+      {
+        "src": "/products/ads-fix/pages/p32-900x1278.webp",
+        "alt": "Page 32 of Stop Wasting Money on Ads"
+      },
+      {
+        "src": "/products/ads-fix/pages/p40-900x1278.webp",
+        "alt": "Page 40 of Stop Wasting Money on Ads"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
