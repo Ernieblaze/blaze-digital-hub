@@ -1426,5 +1426,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "muscle-plan",
+    "name": "Broke Man's Muscle Plan",
+    "category": "Hustle Tools",
+    "price": 2500,
+    "tagline": "A 12-week home strength plan with bag weights and affordable Nigerian food.",
+    "description": "A 35-page beginner plan for healthy adult men. Learn six drawn moves, follow three four-week blocks, use effort and rest rules, count local protein and keep a training record. No gym or powder is required. It doesn't promise a body shape and isn't medical advice. A trainer and dietitian must review it.",
+    "whatsInside": [
+      "8 chapters and a first-week plan",
+      "Six drawn exercises",
+      "Three four-week training blocks",
+      "Warm-up and effort guide",
+      "Two-session progress rule",
+      "Protein and cost examples",
+      "Train, rest or get-help chart",
+      "Missed-week return",
+      "Session and food sheets",
+      "Safe next-month plan"
+    ],
+    "icon": "rocket",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/muscle-plan/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-muscle-plan",
+    "downloadUrl": "private:muscle-plan/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/muscle-plan/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Broke Man's Muscle Plan"
+      },
+      {
+        "src": "/products/muscle-plan/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Broke Man's Muscle Plan"
+      },
+      {
+        "src": "/products/muscle-plan/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Broke Man's Muscle Plan"
+      },
+      {
+        "src": "/products/muscle-plan/pages/p11-900x1278.webp",
+        "alt": "Page 11 of Broke Man's Muscle Plan"
+      },
+      {
+        "src": "/products/muscle-plan/pages/p12-900x1278.webp",
+        "alt": "Page 12 of Broke Man's Muscle Plan"
+      },
+      {
+        "src": "/products/muscle-plan/pages/p16-900x1278.webp",
+        "alt": "Page 16 of Broke Man's Muscle Plan"
+      },
+      {
+        "src": "/products/muscle-plan/pages/p18-900x1278.webp",
+        "alt": "Page 18 of Broke Man's Muscle Plan"
+      },
+      {
+        "src": "/products/muscle-plan/pages/p21-900x1278.webp",
+        "alt": "Page 21 of Broke Man's Muscle Plan"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
