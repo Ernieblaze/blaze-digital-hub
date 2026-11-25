@@ -2011,5 +2011,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "solar-guide",
+    "name": "Solar Buyer's Guide",
+    "category": "Hustle Tools",
+    "price": 3500,
+    "tagline": "Count your load, compare complete solar quotes and choose an installer safely.",
+    "description": "A 38-page consumer guide with an Excel load sheet. List watts and hours, reduce waste, understand inverter, battery and panels, check the site, compare three quotes, choose an installer, test handover and calculate full cost. It doesn't teach electrical installation or recommend a brand. An engineer must review your design.",
+    "whatsInside": [
+      "8 chapters and a 7-day quote plan",
+      "Excel daily-load calculator",
+      "Day and night Wh list",
+      "Inverter, battery and panel sums",
+      "Roof and wiring questions",
+      "Three-quote comparison",
+      "Installer and payment checklist",
+      "Handover and warning check",
+      "Cost and rough-payback sum",
+      "Five buyer sheets"
+    ],
+    "icon": "coins",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/solar-guide/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-solar-guide",
+    "downloadUrl": "private:solar-guide/v1.zip",
+    "gallery": [
+      {
+        "src": "/products/solar-guide/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Solar Buyer's Guide"
+      },
+      {
+        "src": "/products/solar-guide/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Solar Buyer's Guide"
+      },
+      {
+        "src": "/products/solar-guide/pages/p7-900x1278.webp",
+        "alt": "Page 7 of Solar Buyer's Guide"
+      },
+      {
+        "src": "/products/solar-guide/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Solar Buyer's Guide"
+      },
+      {
+        "src": "/products/solar-guide/pages/p12-900x1278.webp",
+        "alt": "Page 12 of Solar Buyer's Guide"
+      },
+      {
+        "src": "/products/solar-guide/pages/p15-900x1278.webp",
+        "alt": "Page 15 of Solar Buyer's Guide"
+      },
+      {
+        "src": "/products/solar-guide/pages/p16-900x1278.webp",
+        "alt": "Page 16 of Solar Buyer's Guide"
+      },
+      {
+        "src": "/products/solar-guide/pages/p20-900x1278.webp",
+        "alt": "Page 20 of Solar Buyer's Guide"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
