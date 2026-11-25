@@ -1035,5 +1035,71 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "reset-90",
+    "name": "90-Day Reset",
+    "category": "Hustle Tools",
+    "price": 2500,
+    "tagline": "Choose one result and follow a dated 90-day planner from January to March 2027.",
+    "description": "A 40-page guide and a separate dated planner PDF for 1 January to 31 March 2027. Find real time, choose one result and two habits, make a small first move, plan each week, return after a miss, control the phone and review Days 30, 60 and 90. It's a practical planner, not a mental health treatment.",
+    "whatsInside": [
+      "10 chapters and a New Year setup",
+      "Separate planner PDF with all 90 dated days",
+      "13 weekly plans and reviews",
+      "One-result sheet",
+      "Two-minute first actions",
+      "No-light and busy-day backups",
+      "Phone and budget rules",
+      "Day 30, 60 and 90 reviews",
+      "Savings example",
+      "Six printable sheets"
+    ],
+    "icon": "notebook",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/reset-90/poster-1600x1000.webp",
+    "badge": "New",
+    "featured": true,
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-reset-90",
+    "downloadUrl": "private:reset-90/v1.zip",
+    "gallery": [
+      {
+        "src": "/products/reset-90/look-inside-1600x1252.webp",
+        "alt": "Eight pages from 90-Day Reset"
+      },
+      {
+        "src": "/products/reset-90/pages/p1-900x1278.webp",
+        "alt": "Page 1 of 90-Day Reset"
+      },
+      {
+        "src": "/products/reset-90/pages/p7-900x1278.webp",
+        "alt": "Page 7 of 90-Day Reset"
+      },
+      {
+        "src": "/products/reset-90/pages/p10-900x1278.webp",
+        "alt": "Page 10 of 90-Day Reset"
+      },
+      {
+        "src": "/products/reset-90/pages/p11-900x1278.webp",
+        "alt": "Page 11 of 90-Day Reset"
+      },
+      {
+        "src": "/products/reset-90/pages/p14-900x1278.webp",
+        "alt": "Page 14 of 90-Day Reset"
+      },
+      {
+        "src": "/products/reset-90/pages/p18-900x1278.webp",
+        "alt": "Page 18 of 90-Day Reset"
+      },
+      {
+        "src": "/products/reset-90/pages/p21-900x1278.webp",
+        "alt": "Page 21 of 90-Day Reset"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
