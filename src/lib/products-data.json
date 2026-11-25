@@ -1296,5 +1296,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "food-timetable",
+    "name": "Family Food Timetable",
+    "category": "Hustle Tools",
+    "price": 2500,
+    "tagline": "A 28-day Nigerian family menu, safe kitchen plan and Excel market budget.",
+    "description": "A 36-page food-planning guide with a 28-day family timetable and Excel workbook. Build plates, use food at home, calculate current market costs, shop and store safely, plan school lunch and repair waste each week. Prices are yours to enter. It isn't a medical diet and should be checked by a dietitian before sale.",
+    "whatsInside": [
+      "9 chapters and a 7-day start",
+      "28 days of breakfast, lunch and dinner",
+      "Excel price and quantity budget",
+      "Food-at-home list",
+      "Food safety and leftovers",
+      "Batch-cooking bases",
+      "Regional meal swaps",
+      "School lunch plan",
+      "Saturday waste review",
+      "Four printable sheets"
+    ],
+    "icon": "notebook",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/food-timetable/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-food-timetable",
+    "downloadUrl": "private:food-timetable/v1.zip",
+    "gallery": [
+      {
+        "src": "/products/food-timetable/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Family Food Timetable"
+      },
+      {
+        "src": "/products/food-timetable/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Family Food Timetable"
+      },
+      {
+        "src": "/products/food-timetable/pages/p7-900x1278.webp",
+        "alt": "Page 7 of Family Food Timetable"
+      },
+      {
+        "src": "/products/food-timetable/pages/p10-900x1278.webp",
+        "alt": "Page 10 of Family Food Timetable"
+      },
+      {
+        "src": "/products/food-timetable/pages/p13-900x1278.webp",
+        "alt": "Page 13 of Family Food Timetable"
+      },
+      {
+        "src": "/products/food-timetable/pages/p19-900x1278.webp",
+        "alt": "Page 19 of Family Food Timetable"
+      },
+      {
+        "src": "/products/food-timetable/pages/p22-900x1278.webp",
+        "alt": "Page 22 of Family Food Timetable"
+      },
+      {
+        "src": "/products/food-timetable/pages/p24-900x1278.webp",
+        "alt": "Page 24 of Family Food Timetable"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
