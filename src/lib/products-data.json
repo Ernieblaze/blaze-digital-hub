@@ -1101,5 +1101,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "scholarship",
+    "name": "Scholarship Application Kit",
+    "category": "Hustle Tools",
+    "price": 4000,
+    "tagline": "Find a real scholarship, build true proof and submit a careful application.",
+    "description": "A 36-page workbook for Nigerian scholarship applicants. Check official awards, choose two that fit, build documents, write proof stories and your own essay, brief referees, submit and prepare an interview. Includes a dated Commonwealth example and six sheets. It doesn't write an application for you or promise selection.",
+    "whatsInside": [
+      "8 chapters and a 7-day plan",
+      "Official award search sheet",
+      "A must-check and 10-point fit score",
+      "Document matrix",
+      "Six proof stories",
+      "Essay order and word budget",
+      "Referee request and brief",
+      "Submission in Nigeria time",
+      "Interview questions",
+      "Six workbook sheets"
+    ],
+    "icon": "graduation",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/scholarship/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-scholarship",
+    "downloadUrl": "private:scholarship/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/scholarship/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Scholarship Application Kit"
+      },
+      {
+        "src": "/products/scholarship/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Scholarship Application Kit"
+      },
+      {
+        "src": "/products/scholarship/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Scholarship Application Kit"
+      },
+      {
+        "src": "/products/scholarship/pages/p10-900x1278.webp",
+        "alt": "Page 10 of Scholarship Application Kit"
+      },
+      {
+        "src": "/products/scholarship/pages/p13-900x1278.webp",
+        "alt": "Page 13 of Scholarship Application Kit"
+      },
+      {
+        "src": "/products/scholarship/pages/p16-900x1278.webp",
+        "alt": "Page 16 of Scholarship Application Kit"
+      },
+      {
+        "src": "/products/scholarship/pages/p18-900x1278.webp",
+        "alt": "Page 18 of Scholarship Application Kit"
+      },
+      {
+        "src": "/products/scholarship/pages/p21-900x1278.webp",
+        "alt": "Page 21 of Scholarship Application Kit"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
