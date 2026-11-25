@@ -2141,5 +2141,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "farm-start",
+    "name": "Catfish and Broiler Starter Guide",
+    "category": "Hustle Tools",
+    "price": 3500,
+    "tagline": "Choose one small broiler or catfish batch, keep health records and count true cost.",
+    "description": "A 36-page starter guide for 25 to 50 broilers or 100 to 200 catfish. Compare space and water, prepare clean entry, buy checked stock, keep weekly broiler or daily fish records, cost deaths, agree buyers and review. Uses some dated prices. It isn't a veterinary plan, and a vet and fish professional must review it.",
+    "whatsInside": [
+      "8 chapters and a 7-day no-buy plan",
+      "Broiler and catfish choice table",
+      "Clean-entry and place plan",
+      "Arrival and first-day checks",
+      "Broiler heat and growth record",
+      "Fish water and weight record",
+      "Full practice cost with dead stock",
+      "Buyer and withdrawal check",
+      "Batch result and next-size choice",
+      "Five farm sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/farm-start/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-farm-start",
+    "downloadUrl": "private:farm-start/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/farm-start/look-inside-1600x1324.webp",
+        "alt": "Eight pages from Catfish and Broiler Starter Guide"
+      },
+      {
+        "src": "/products/farm-start/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Catfish and Broiler Starter Guide"
+      },
+      {
+        "src": "/products/farm-start/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Catfish and Broiler Starter Guide"
+      },
+      {
+        "src": "/products/farm-start/pages/p11-900x1278.webp",
+        "alt": "Page 11 of Catfish and Broiler Starter Guide"
+      },
+      {
+        "src": "/products/farm-start/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Catfish and Broiler Starter Guide"
+      },
+      {
+        "src": "/products/farm-start/pages/p18-900x1278.webp",
+        "alt": "Page 18 of Catfish and Broiler Starter Guide"
+      },
+      {
+        "src": "/products/farm-start/pages/p21-900x1278.webp",
+        "alt": "Page 21 of Catfish and Broiler Starter Guide"
+      },
+      {
+        "src": "/products/farm-start/pages/p24-900x1278.webp",
+        "alt": "Page 24 of Catfish and Broiler Starter Guide"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
