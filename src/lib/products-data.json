@@ -1361,5 +1361,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "hampers",
+    "name": "Hamper and Gift Box Business",
+    "category": "Hustle Tools",
+    "price": 2500,
+    "tagline": "Design safe gift boxes, cost them and get orders before buying stock.",
+    "description": "A 36-page December and year-round hamper workbook. Choose one buyer, build three box designs, compare suppliers, calculate labour and stock, photograph, quote, take written orders, pack and review. Uses search data and made-up sums; it doesn't show sales results. Check rules for regulated food and products.",
+    "whatsInside": [
+      "8 chapters and a 7-day test",
+      "Four buyer types",
+      "Three box levels",
+      "Drawn safe-box layout",
+      "Supplier and expiry checks",
+      "Full hamper cost example",
+      "Office message and order form",
+      "Packing stations",
+      "December review",
+      "Year-round gift ideas"
+    ],
+    "icon": "rocket",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/hampers/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-hampers",
+    "downloadUrl": "private:hampers/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/hampers/look-inside-1600x1324.webp",
+        "alt": "Eight pages from Hamper and Gift Box Business"
+      },
+      {
+        "src": "/products/hampers/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Hamper and Gift Box Business"
+      },
+      {
+        "src": "/products/hampers/pages/p7-900x1278.webp",
+        "alt": "Page 7 of Hamper and Gift Box Business"
+      },
+      {
+        "src": "/products/hampers/pages/p10-900x1278.webp",
+        "alt": "Page 10 of Hamper and Gift Box Business"
+      },
+      {
+        "src": "/products/hampers/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Hamper and Gift Box Business"
+      },
+      {
+        "src": "/products/hampers/pages/p17-900x1278.webp",
+        "alt": "Page 17 of Hamper and Gift Box Business"
+      },
+      {
+        "src": "/products/hampers/pages/p20-900x1278.webp",
+        "alt": "Page 20 of Hamper and Gift Box Business"
+      },
+      {
+        "src": "/products/hampers/pages/p24-900x1278.webp",
+        "alt": "Page 24 of Hamper and Gift Box Business"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
