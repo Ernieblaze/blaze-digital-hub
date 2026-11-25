@@ -1556,5 +1556,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "biz-plan",
+    "name": "Business Plan and Grant Kit",
+    "category": "Hustle Tools",
+    "price": 4000,
+    "tagline": "Write a business plan from buyers, unit costs and a 12-month cash workbook.",
+    "description": "A 38-page business-plan and grant workbook with an Excel file. Gather buyer evidence, compare choices, price one unit, test cash month by month, write nine plan headings, answer a grant form and submit with proof. It doesn't promise funding or replace an accountant.",
+    "whatsInside": [
+      "8 chapters and a 7-day plan",
+      "12-month cash Excel workbook",
+      "Buyer interview log",
+      "Competitor and supplier map",
+      "Unit and break-even sums",
+      "Nine plan headings",
+      "Grant-question map and budget",
+      "Practice Fresh Cut plan",
+      "Risk actions",
+      "Submission and report sheets"
+    ],
+    "icon": "coins",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/biz-plan/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-biz-plan",
+    "downloadUrl": "private:biz-plan/v1.zip",
+    "gallery": [
+      {
+        "src": "/products/biz-plan/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Business Plan and Grant Kit"
+      },
+      {
+        "src": "/products/biz-plan/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Business Plan and Grant Kit"
+      },
+      {
+        "src": "/products/biz-plan/pages/p7-900x1278.webp",
+        "alt": "Page 7 of Business Plan and Grant Kit"
+      },
+      {
+        "src": "/products/biz-plan/pages/p9-900x1278.webp",
+        "alt": "Page 9 of Business Plan and Grant Kit"
+      },
+      {
+        "src": "/products/biz-plan/pages/p12-900x1278.webp",
+        "alt": "Page 12 of Business Plan and Grant Kit"
+      },
+      {
+        "src": "/products/biz-plan/pages/p15-900x1278.webp",
+        "alt": "Page 15 of Business Plan and Grant Kit"
+      },
+      {
+        "src": "/products/biz-plan/pages/p16-900x1278.webp",
+        "alt": "Page 16 of Business Plan and Grant Kit"
+      },
+      {
+        "src": "/products/biz-plan/pages/p19-900x1278.webp",
+        "alt": "Page 19 of Business Plan and Grant Kit"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
