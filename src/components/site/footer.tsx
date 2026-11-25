@@ -35,9 +35,9 @@ const YoutubeIcon = (props: IconProps) => (
 
 const shopLinks = [
   { href: "/#shop", label: "All Products" },
-  { href: "/products/blaze-forex-mastery-blueprint", label: "Forex Blueprint" },
-  { href: "/products/jamb-350-success-pack", label: "JAMB Success Pack" },
-  { href: "/products/campus-hustle-playbook", label: "Hustle Playbook" },
+  { href: "/products/claude-video", label: "AI Motion Video" },
+  { href: "/products/web-ai", label: "AI Website Builder" },
+  { href: "/products/remote-job-blueprint", label: "Remote Job Blueprint" },
 ];
 
 const companyLinks = [

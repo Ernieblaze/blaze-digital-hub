@@ -10,6 +10,8 @@ export function Testimonials({ products }: { products: Product[] }) {
   const testimonials = products
     .filter((p) => p.testimonial?.quote)
     .map((p) => ({ ...p.testimonial, product: p.name }));
+  // Nothing to show: hide the whole section instead of an empty heading.
+  if (testimonials.length === 0) return null;
   return (
     <section className="bg-muted/40 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
