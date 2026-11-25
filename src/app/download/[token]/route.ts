@@ -71,7 +71,9 @@ export async function GET(_request: Request, ctx: RouteContext<"/download/[token
   const path = product ? privateFilePath(product) : null;
   if (!product || !path) return page("This file isn't available", "Contact us with your payment reference and we'll send it to you.", 404);
 
-  const fileName = `${product.name.replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-")}.pdf`;
+  // Most products are PDFs; kits with extra files are ZIPs.
+  const extension = path.toLowerCase().endsWith(".zip") ? "zip" : "pdf";
+  const fileName = `${product.name.replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-")}.${extension}`;
   const { data, error } = await supabase.storage
     .from(DELIVERABLES_BUCKET)
     .createSignedUrl(path, SIGNED_URL_SECONDS, { download: fileName });

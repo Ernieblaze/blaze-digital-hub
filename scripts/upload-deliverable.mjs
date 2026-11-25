@@ -38,7 +38,7 @@ if (!buckets?.some((b) => b.id === BUCKET)) {
 
 const body = await readFile(localFile);
 const { error } = await supabase.storage.from(BUCKET).upload(bucketPath, body, {
-  contentType: "application/pdf",
+  contentType: bucketPath.toLowerCase().endsWith(".zip") ? "application/zip" : "application/pdf",
   upsert: true,
 });
 if (error) throw error;
