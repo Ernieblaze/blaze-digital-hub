@@ -2076,5 +2076,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "planner-2027",
+    "name": "2027 Planner and Savings Kit",
+    "category": "Hustle Tools",
+    "price": 1500,
+    "tagline": "A full 2027 planner PDF with money pages, two saving tables and a short guide.",
+    "description": "A 28-page guide plus a separate 2027 planner PDF. See the year, plan monthly money, choose a savings table, record debt, plan weeks and review each quarter. Includes a year view, 12 months, weekly pages, two 52-week tables, debt and year-end pages. It isn't investment or debt advice.",
+    "whatsInside": [
+      "6 short chapters and a 7-day setup",
+      "Separate full 2027 planner PDF",
+      "12 month and money pages",
+      "A page for every Monday week",
+      "Two 52-week savings tables",
+      "Debt record and safe offer",
+      "Heavy-month bill plan",
+      "Quarter reviews",
+      "Year-end page",
+      "Quick sheets"
+    ],
+    "icon": "notebook",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/planner-2027/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-planner-2027",
+    "downloadUrl": "private:planner-2027/v1.zip",
+    "gallery": [
+      {
+        "src": "/products/planner-2027/look-inside-1600x1324.webp",
+        "alt": "Eight pages from 2027 Planner and Savings Kit"
+      },
+      {
+        "src": "/products/planner-2027/pages/p1-900x1278.webp",
+        "alt": "Page 1 of 2027 Planner and Savings Kit"
+      },
+      {
+        "src": "/products/planner-2027/pages/p6-900x1278.webp",
+        "alt": "Page 6 of 2027 Planner and Savings Kit"
+      },
+      {
+        "src": "/products/planner-2027/pages/p7-900x1278.webp",
+        "alt": "Page 7 of 2027 Planner and Savings Kit"
+      },
+      {
+        "src": "/products/planner-2027/pages/p9-900x1278.webp",
+        "alt": "Page 9 of 2027 Planner and Savings Kit"
+      },
+      {
+        "src": "/products/planner-2027/pages/p12-900x1278.webp",
+        "alt": "Page 12 of 2027 Planner and Savings Kit"
+      },
+      {
+        "src": "/products/planner-2027/pages/p13-900x1278.webp",
+        "alt": "Page 13 of 2027 Planner and Savings Kit"
+      },
+      {
+        "src": "/products/planner-2027/pages/p15-900x1278.webp",
+        "alt": "Page 15 of 2027 Planner and Savings Kit"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
