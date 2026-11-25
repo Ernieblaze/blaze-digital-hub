@@ -1751,5 +1751,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "glow-skin",
+    "name": "Glow Skin Routine",
+    "category": "Hustle Tools",
+    "price": 3000,
+    "tagline": "A gentle dark-skin routine for dryness, acne marks and sun, with no bleaching.",
+    "description": "A 34-page beginner skin-care guide for dark skin. Read labels, avoid mercury and hidden steroid products, build a cleanse-moisturise-sunscreen routine, patch test, care for dark spots, acne and body, and review fairly. Uses dated dermatology sources. It doesn't diagnose, bleach or promise a result, and a dermatologist must review it.",
+    "whatsInside": [
+      "8 chapters and a 28-day plan",
+      "Skin and product record",
+      "Dangerous cream signs",
+      "Morning and night routine",
+      "Sunscreen and grey-cast test",
+      "Dark-spot path",
+      "Acne and razor-bump checks",
+      "Body, hands and baby cautions",
+      "Monthly cost sum",
+      "Doctor and patch-test sheets"
+    ],
+    "icon": "palette",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/glow-skin/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-glow-skin",
+    "downloadUrl": "private:glow-skin/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/glow-skin/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Glow Skin Routine"
+      },
+      {
+        "src": "/products/glow-skin/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Glow Skin Routine"
+      },
+      {
+        "src": "/products/glow-skin/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Glow Skin Routine"
+      },
+      {
+        "src": "/products/glow-skin/pages/p11-900x1278.webp",
+        "alt": "Page 11 of Glow Skin Routine"
+      },
+      {
+        "src": "/products/glow-skin/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Glow Skin Routine"
+      },
+      {
+        "src": "/products/glow-skin/pages/p17-900x1278.webp",
+        "alt": "Page 17 of Glow Skin Routine"
+      },
+      {
+        "src": "/products/glow-skin/pages/p20-900x1278.webp",
+        "alt": "Page 20 of Glow Skin Routine"
+      },
+      {
+        "src": "/products/glow-skin/pages/p22-900x1278.webp",
+        "alt": "Page 22 of Glow Skin Routine"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
