@@ -970,5 +970,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "move-abroad",
+    "name": "Move Abroad Without an Agent",
+    "category": "Hustle Tools",
+    "price": 6000,
+    "tagline": "Choose a legal study or work route, check the rules and keep control of your file.",
+    "description": "A 41-page guide to planning study or skilled work abroad from Nigeria. Choose a route, read official rules, check schools and jobs, build documents, budget for application and arrival, check advisers and submit safely. Examples use dated UK, Canada and Germany sources. It isn't immigration advice and doesn't promise a visa.",
+    "whatsInside": [
+      "9 chapters and a 7-day plan",
+      "Study, work and points routes",
+      "Official-rule reading sheet",
+      "Seven-part document file",
+      "Full budget and stop line",
+      "School and course checks",
+      "Real-job and sponsor checks",
+      "Agent and scam questions",
+      "Application and refusal plan",
+      "Six planning sheets"
+    ],
+    "icon": "rocket",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/move-abroad/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-move-abroad",
+    "downloadUrl": "private:move-abroad/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/move-abroad/look-inside-1600x1324.webp",
+        "alt": "Eight pages from Move Abroad Without an Agent"
+      },
+      {
+        "src": "/products/move-abroad/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Move Abroad Without an Agent"
+      },
+      {
+        "src": "/products/move-abroad/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Move Abroad Without an Agent"
+      },
+      {
+        "src": "/products/move-abroad/pages/p12-900x1278.webp",
+        "alt": "Page 12 of Move Abroad Without an Agent"
+      },
+      {
+        "src": "/products/move-abroad/pages/p16-900x1278.webp",
+        "alt": "Page 16 of Move Abroad Without an Agent"
+      },
+      {
+        "src": "/products/move-abroad/pages/p18-900x1278.webp",
+        "alt": "Page 18 of Move Abroad Without an Agent"
+      },
+      {
+        "src": "/products/move-abroad/pages/p24-900x1278.webp",
+        "alt": "Page 24 of Move Abroad Without an Agent"
+      },
+      {
+        "src": "/products/move-abroad/pages/p27-900x1278.webp",
+        "alt": "Page 27 of Move Abroad Without an Agent"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
