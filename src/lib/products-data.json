@@ -1166,5 +1166,70 @@
       "author": "",
       "role": ""
     }
+  },
+  {
+    "slug": "cut-sew",
+    "name": "Cut and Sew for Beginners",
+    "category": "Hustle Tools",
+    "price": 5000,
+    "tagline": "Six beginner sewing projects with measurements, cut diagrams and fit checks.",
+    "description": "A 38-page visual sewing guide. Practise straight lines, take measurements and follow calculated layouts for a bag, pillowcase, elastic skirt, A-line skirt, half-circle skirt and simple boubou. Includes fit, repair and cost sheets. This is a design draft; the projects must be sewn and checked by an experienced tailor before publication.",
+    "whatsInside": [
+      "9 chapters and a first-week plan",
+      "Six measured beginner projects",
+      "Cutting diagrams with dimensions",
+      "Body-measurement drawing",
+      "Seam, ease and fold explanations",
+      "Waist and circle-skirt sums",
+      "Fit and machine fault checks",
+      "Fabric and price sheets",
+      "Safety notes",
+      "A clear testing list"
+    ],
+    "icon": "palette",
+    "cover": "from-orange-500 via-red-500 to-rose-600",
+    "image": "/products/cut-sew/poster-1600x1000.webp",
+    "badge": "New",
+    "paystackUrl": "https://paystack.shop/pay/REPLACE-cut-sew",
+    "downloadUrl": "private:cut-sew/v1.pdf",
+    "gallery": [
+      {
+        "src": "/products/cut-sew/look-inside-1600x1252.webp",
+        "alt": "Eight pages from Cut and Sew for Beginners"
+      },
+      {
+        "src": "/products/cut-sew/pages/p1-900x1278.webp",
+        "alt": "Page 1 of Cut and Sew for Beginners"
+      },
+      {
+        "src": "/products/cut-sew/pages/p8-900x1278.webp",
+        "alt": "Page 8 of Cut and Sew for Beginners"
+      },
+      {
+        "src": "/products/cut-sew/pages/p11-900x1278.webp",
+        "alt": "Page 11 of Cut and Sew for Beginners"
+      },
+      {
+        "src": "/products/cut-sew/pages/p14-900x1278.webp",
+        "alt": "Page 14 of Cut and Sew for Beginners"
+      },
+      {
+        "src": "/products/cut-sew/pages/p17-900x1278.webp",
+        "alt": "Page 17 of Cut and Sew for Beginners"
+      },
+      {
+        "src": "/products/cut-sew/pages/p20-900x1278.webp",
+        "alt": "Page 20 of Cut and Sew for Beginners"
+      },
+      {
+        "src": "/products/cut-sew/pages/p23-900x1278.webp",
+        "alt": "Page 23 of Cut and Sew for Beginners"
+      }
+    ],
+    "testimonial": {
+      "quote": "",
+      "author": "",
+      "role": ""
+    }
   }
 ]
